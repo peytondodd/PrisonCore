@@ -1,9 +1,11 @@
-package com.trig.vn.prison;
+package com.trig.vn.prison.economy;
 
 import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import com.trig.vn.prison.Prison;
 
 public class MineShop {
 
@@ -33,6 +35,7 @@ public class MineShop {
 				double value = getValue(item);
 				int a = getAmountOfItem(item, p);
 				double total = value * a;
+				total *= Multiplier.getMultiplier(p);
 				ItemStack i = item.clone();
 				i.setAmount(a);
 				p.getInventory().removeItem(i);

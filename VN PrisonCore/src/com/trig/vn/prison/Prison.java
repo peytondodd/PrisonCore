@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 
 public class Prison extends JavaPlugin {
