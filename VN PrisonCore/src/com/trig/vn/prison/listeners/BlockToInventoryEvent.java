@@ -2,6 +2,7 @@ package com.trig.vn.prison.listeners;
 
 import java.util.HashMap;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -28,6 +29,9 @@ public class BlockToInventoryEvent implements Listener {
 	
 	@EventHandler (ignoreCancelled = true)
 	public void onBlockBreak(BlockBreakEvent e) {
+		if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) {
+			return;
+		}
 		if(main.getBlockToInventoryWorlds().contains(e.getBlock().getWorld().getName())) {
 			Player p = e.getPlayer();
 			e.setCancelled(true);
