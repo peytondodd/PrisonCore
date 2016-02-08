@@ -26,6 +26,13 @@ public class Prison extends JavaPlugin {
 		RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
 		eco = rsp.getProvider();
 		Bukkit.getServer().getPluginManager().registerEvents(new BlockToInventoryEvent(this), this);
+		
+		loadBlockToInventoryWorlds();
+	}
+	
+	private void loadBlockToInventoryWorlds() {
+		if(!getDataFolder().exists()) { return; }
+		blockToInventoryWorlds = getConfig().getStringList("blocksToInventoryWorlds");
 	}
 	
 	public List<String> getBlockToInventoryWorlds() {
