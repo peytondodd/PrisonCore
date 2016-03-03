@@ -12,9 +12,8 @@ public class MineShop {
 	private String mineID;
 	private HashMap<ItemStack, Double> values = new HashMap<ItemStack, Double>();
 	
-	public MineShop(String mineID, HashMap<ItemStack, Double> values) {
+	public MineShop(String mineID) {
 		this.mineID = mineID;
-		this.values = values;
 	}
 	
 	public String getMineID() {

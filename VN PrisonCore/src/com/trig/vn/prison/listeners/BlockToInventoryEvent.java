@@ -38,9 +38,9 @@ public class BlockToInventoryEvent implements Listener {
 			Material type = e.getBlock().getType();
 			e.getBlock().setType(Material.AIR);
 			int amount = 1;
-			if(p.getItemInHand() != null) {
-				if(p.getItemInHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
-					amount = p.getItemInHand().getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
+			if(p.getInventory().getItemInMainHand() != null) {
+				if(p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
+					amount = p.getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS);
 				}
 			}
 			
