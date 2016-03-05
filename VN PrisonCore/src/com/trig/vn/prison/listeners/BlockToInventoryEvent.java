@@ -9,9 +9,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.ranks.PrisonPlayer;
 
 public class BlockToInventoryEvent implements Listener {
 
@@ -34,7 +36,17 @@ public class BlockToInventoryEvent implements Listener {
 		}
 		if(main.getBlockToInventoryWorlds().contains(e.getBlock().getWorld().getName())) {
 			Player p = e.getPlayer();
+			PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
+			Inventory inv = p.getInventory();;
 			e.setCancelled(true);
+			if(p.getInventory().firstEmpty() == -1) {
+				if(pp.getAlternativeInventory().firstEmpty() == -1) {
+					//both inventories are full
+					return;
+				} else {
+					inv = pp.getAlternativeInventory();
+				}
+			}
 			Material type = e.getBlock().getType();
 			e.getBlock().setType(Material.AIR);
 			int amount = 1;
@@ -47,10 +59,10 @@ public class BlockToInventoryEvent implements Listener {
 			if(blockConversions.containsKey(type)) {
 				ItemStack item = blockConversions.get(type).clone();
 				item.setAmount(amount);
-				p.getInventory().addItem(item);
+				inv.addItem(item);
 				return;
 			} 
-			p.getInventory().addItem(new ItemStack(type, amount));
+			inv.addItem(new ItemStack(type, amount));
 			return;
 		}
 	}
