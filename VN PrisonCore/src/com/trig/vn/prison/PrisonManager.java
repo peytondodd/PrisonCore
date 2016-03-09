@@ -3,6 +3,7 @@ package com.trig.vn.prison;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.ranks.PrisonPlayer;
@@ -46,5 +47,10 @@ public class PrisonManager {
 			}
 		}
 		return null;
+	}
+	
+	public void rankup(PrisonPlayer player) {
+		player.setRank(PrisonRank.getNextRank(player.getRank()));
+		Bukkit.getServer().broadcastMessage("Add rankup message here");
 	}
 }

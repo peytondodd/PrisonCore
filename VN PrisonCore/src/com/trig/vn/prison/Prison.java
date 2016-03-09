@@ -18,6 +18,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.trig.vn.db.DatabaseConfig;
+import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.ranks.PrisonRank;
@@ -86,11 +87,16 @@ public class Prison extends JavaPlugin {
 		loadMineShops();
 		loadRanks();
 		registerEvents();
+		registerCommands();
 		
 	}
 	
 	private void registerEvents() {
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
+	}
+	
+	private void registerCommands() {
+		this.getCommand("rankup").setExecutor(new CommandRankup(this));
 	}
 	
 	private void loadRanks() {

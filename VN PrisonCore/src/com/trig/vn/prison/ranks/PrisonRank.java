@@ -21,6 +21,15 @@ public class PrisonRank {
 		return value;
 	}
 	
+	public static boolean canRankup(PrisonPlayer player) {
+		double amount = PrisonRank.getNextRank(player.getRank()).getValue();
+		if(Prison.getEco().getBalance(player.getPlayer()) >= amount) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	
 	public static PrisonRank getNextRank(PrisonRank currentRank) {
 		for(int i = 0; i < Prison.getPrisonRanks().size(); i++) {
