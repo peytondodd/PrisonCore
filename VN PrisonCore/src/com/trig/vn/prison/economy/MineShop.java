@@ -47,6 +47,7 @@ public class MineShop {
 	private int getAmountOfItem(ItemStack item, Player p) {
 		int a = 0;
 		for(ItemStack itemstack : p.getInventory().getContents()) {
+			if(itemstack == null) { continue; }
 			if(itemstack.getType() == item.getType()) {
 				a += itemstack.getAmount();
 			}
