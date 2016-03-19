@@ -1,11 +1,5 @@
 package com.trig.vn.prison;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +15,7 @@ import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
+import com.trig.vn.prison.listeners.ClickSellSignEvent;
 import com.trig.vn.prison.ranks.PrisonRank;
 import com.trig.vn.prison.ranks.listeners.PlayerJoin;
 import com.trig.vn.prison.utils.ItemLoader;
@@ -58,7 +53,6 @@ public class Prison extends JavaPlugin {
 		RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
 		eco = rsp.getProvider();
 		core = (Core) Bukkit.getServer().getPluginManager().getPlugin("VNCore");
-		Bukkit.getServer().getPluginManager().registerEvents(new BlockToInventoryEvent(this), this);
 		
 //		if(!getDataFolder().exists()) { //Copy default config
 //			System.out.println("Creating config file...");
@@ -94,6 +88,8 @@ public class Prison extends JavaPlugin {
 	
 	private void registerEvents() {
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new BlockToInventoryEvent(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new ClickSellSignEvent(this), this);
 	}
 	
 	private void registerCommands() {
