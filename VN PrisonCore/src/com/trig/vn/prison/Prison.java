@@ -102,6 +102,7 @@ public class Prison extends JavaPlugin {
 			double value = getConfig().getDouble("ranks." + rank);
 			PrisonRank pr = new PrisonRank(rank, value);
 			prisonRanks.add(pr);
+			System.out.println("Loaded rank [" + rank + "] $" + value);
 		}
 	}
 	
@@ -128,6 +129,10 @@ public class Prison extends JavaPlugin {
 				shop.getValues().put(item, price);
 			}
 			mineShops.add(shop);
+			System.out.println("Loaded Mineshop [" + shop.getMineID() + "]");
+			for(ItemStack entry : shop.getValues().keySet()) {
+				System.out.println("   " + entry.getType() + ":" + entry.getData().getData() + " $" + shop.getValues().get(entry));
+			}
 		}
 		
 	}
