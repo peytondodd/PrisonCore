@@ -23,6 +23,7 @@ import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.ranks.PrisonRank;
 import com.trig.vn.prison.ranks.listeners.PlayerJoin;
+import com.trig.vn.prison.utils.ItemLoader;
 import com.vn.core.Core;
 import com.vn.core.sql.MySQL;
 
@@ -126,7 +127,7 @@ public class Prison extends JavaPlugin {
 		for(String s : getConfig().getConfigurationSection("shops").getKeys(false)) {
 			MineShop shop = new MineShop(s);
 			for(String subItem : getConfig().getConfigurationSection("shops." + s).getKeys(false)) {
-				ItemStack item = getConfig().getItemStack("shops." + s + "." + subItem + ".item");
+				ItemStack item = ItemLoader.loadItem(getConfig().getString("shops." + s + "." + subItem + ".item"));
 				double price = getConfig().getDouble("shops." + s + "." + subItem + ".price");
 				shop.getValues().put(item, price);
 			}
