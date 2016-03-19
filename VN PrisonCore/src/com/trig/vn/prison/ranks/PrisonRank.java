@@ -35,7 +35,7 @@ public class PrisonRank {
 	public static PrisonRank getNextRank(PrisonRank currentRank) {
 		for(int i = 0; i < Prison.getPrisonRanks().size(); i++) {
 			if(Prison.getPrisonRanks().get(i).getName().equalsIgnoreCase(currentRank.getName())) {
-				if(i == Prison.getPrisonRanks().size()) {
+				if(i + 1 >= Prison.getPrisonRanks().size()) {
 					return null;
 				}
 				return Prison.getPrisonRanks().get(i + 1);
