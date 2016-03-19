@@ -15,7 +15,7 @@ public class PrisonPlayer extends CraftPlayer {
 	
 	public PrisonPlayer(CraftServer server, EntityPlayer entity) {
 		super(server, entity);
-		altInv = Bukkit.getServer().createInventory(null, 53, "" + getName());
+		altInv = Bukkit.getServer().createInventory(null, 54, "" + getName());
 	}
 
 	public Player getPlayer() { //If you for some reason need a Bukkit Player
