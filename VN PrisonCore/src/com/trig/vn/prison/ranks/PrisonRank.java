@@ -11,6 +11,7 @@ public class PrisonRank {
 	
 	public PrisonRank(String rankName, double value) {
 		this.rankName = rankName;
+		this.value = value;
 	}
 	
 	public String getName() {
