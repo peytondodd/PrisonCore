@@ -59,27 +59,27 @@ public class Prison extends JavaPlugin {
 		core = (Core) Bukkit.getServer().getPluginManager().getPlugin("VNCore");
 		Bukkit.getServer().getPluginManager().registerEvents(new BlockToInventoryEvent(this), this);
 		
-		if(!getDataFolder().exists()) { //Copy default config
-			System.out.println("Creating config file...");
-			saveConfig(); //Create all the stuff we need
-			System.out.println("Starting to copy...");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(getResource("config.yml")));
-			try {
-				BufferedWriter writer = new BufferedWriter(new FileWriter(new File(getDataFolder() + "/config.yml")));
-				String line;
-				while((line = reader.readLine()) != null) {
-					writer.write(line);
-					writer.newLine();
-				}
-				reader.close();
-				writer.flush();
-				writer.close();
-				System.out.println("Configuration copy complete");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}
+//		if(!getDataFolder().exists()) { //Copy default config
+//			System.out.println("Creating config file...");
+//			saveConfig(); //Create all the stuff we need
+//			System.out.println("Starting to copy...");
+//			BufferedReader reader = new BufferedReader(new InputStreamReader(getResource("config.yml")));
+//			try {
+//				BufferedWriter writer = new BufferedWriter(new FileWriter(new File(getDataFolder() + "/config.yml")));
+//				String line;
+//				while((line = reader.readLine()) != null) {
+//					writer.write(line);
+//					writer.newLine();
+//				}
+//				reader.close();
+//				writer.flush();
+//				writer.close();
+//				System.out.println("Configuration copy complete");
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//			reloadConfig();
+//		}
 		
 		setupSQL();
 		core.registerSQLConnection(c);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.ranks.PrisonPlayer;
@@ -50,7 +51,15 @@ public class PrisonManager {
 	}
 	
 	public void rankup(PrisonPlayer player) {
-		player.setRank(PrisonRank.getNextRank(player.getRank()));
-		Bukkit.getServer().broadcastMessage("Add rankup message here");
+		PrisonRank current = player.getRank();
+		PrisonRank next = PrisonRank.getNextRank(current);
+		if(Prison.getEco().getBalance(player.getPlayer()) >= next.getValue()) { //The player has enough money
+			Prison.getEco().withdrawPlayer(player.getPlayer(), next.getValue());
+			player.setRank(PrisonRank.getNextRank(player.getRank()));
+			Bukkit.getServer().broadcastMessage("§6" + player.getName() + " §7has ranked up to §" + next.getName());
+		} else {
+			player.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
+			return;
+		}
 	}
 }
