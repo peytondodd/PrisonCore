@@ -48,7 +48,7 @@ public class MineShop {
 		int a = 0;
 		for(ItemStack itemstack : p.getInventory().getContents()) {
 			if(itemstack == null) { continue; }
-			if(itemstack.getType() == item.getType()) {
+			if(itemstack.getType() == item.getType() && itemstack.getData().getData() == item.getData().getData()) {
 				a += itemstack.getAmount();
 			}
 		}
