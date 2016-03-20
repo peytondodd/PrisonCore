@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 
 import com.trig.vn.prison.Prison;
 
@@ -36,6 +37,8 @@ public class MineShop {
 			double total = value * a;
 			total *= Multiplier.getMultiplier(p);
 			ItemStack i = item.clone();
+			MaterialData data = item.getData();
+			i.setData(data);
 			i.setAmount(a);
 			p.getInventory().removeItem(i);
 			Prison.getEco().depositPlayer(p, total);
