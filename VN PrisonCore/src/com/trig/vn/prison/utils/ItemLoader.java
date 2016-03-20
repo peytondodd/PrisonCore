@@ -11,6 +11,9 @@ public class ItemLoader {
 			String[] parts = item.split(":");
 			int itemId = Integer.parseInt(parts[0]);
 			int magic = Integer.parseInt(parts[1]);
+			System.out.println("Parsed item: ");
+			System.out.println("Item ID: " + itemId);
+			System.out.println("Data Value: " + magic);
 			itemstack = new ItemStack(itemId);
 			MaterialData data = itemstack.getData();
 			data.setData((byte) magic);

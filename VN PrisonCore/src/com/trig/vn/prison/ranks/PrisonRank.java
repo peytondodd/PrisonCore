@@ -1,5 +1,7 @@
 package com.trig.vn.prison.ranks;
 
+import org.bukkit.ChatColor;
+
 import com.trig.vn.prison.Prison;
 
 
@@ -23,7 +25,12 @@ public class PrisonRank {
 	}
 	
 	public static boolean canRankup(PrisonPlayer player) {
-		double amount = PrisonRank.getNextRank(player.getRank()).getValue();
+		PrisonRank next = PrisonRank.getNextRank(player.getRank());
+		if(next == null) {
+			player.sendMessage(ChatColor.RED + "You are currently the highest rank!");
+			return false;
+		}
+		double amount = next.getValue();
 		if(Prison.getEco().getBalance(player.getPlayer()) >= amount) {
 			return true;
 		} else {
