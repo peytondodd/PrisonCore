@@ -30,17 +30,16 @@ public class MineShop {
 	
 	public void sell(Player p) {
 		for(ItemStack item : values.keySet()) {
-			if(p.getInventory().containsAtLeast(item, 1)) {
-				double value = getValue(item);
-				int a = getAmountOfItem(item, p);
-				double total = value * a;
-				total *= Multiplier.getMultiplier(p);
-				ItemStack i = item.clone();
-				i.setAmount(a);
-				p.getInventory().removeItem(i);
-				Prison.getEco().depositPlayer(p, total);
-				p.sendMessage("§a$" + total + " §7 was added to your account for selling " + item.getType());
-			}
+			int a = getAmountOfItem(item, p);
+			if(a <= 0) { continue; }
+			double value = getValue(item);
+			double total = value * a;
+			total *= Multiplier.getMultiplier(p);
+			ItemStack i = item.clone();
+			i.setAmount(a);
+			p.getInventory().removeItem(i);
+			Prison.getEco().depositPlayer(p, total);
+			p.sendMessage("§a$" + total + " §7 was added to your account for selling " + item.getType());
 		}
 	}
 	
