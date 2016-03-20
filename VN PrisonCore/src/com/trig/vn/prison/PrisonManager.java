@@ -56,7 +56,7 @@ public class PrisonManager {
 		if(Prison.getEco().getBalance(player.getPlayer()) >= next.getValue()) { //The player has enough money
 			Prison.getEco().withdrawPlayer(player.getPlayer(), next.getValue());
 			player.setRank(PrisonRank.getNextRank(player.getRank()));
-			Bukkit.getServer().broadcastMessage("§6" + player.getName() + " §7has ranked up to §" + next.getName());
+			Bukkit.getServer().broadcastMessage("§6" + player.getName() + " §7has ranked up to §" + player.getRank().getName());
 		} else {
 			player.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
 			return;
