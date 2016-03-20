@@ -7,13 +7,13 @@ public class ItemLoader {
 
 	public static ItemStack loadItem(String item) {
 		ItemStack itemstack = null;
-		if(item.contains(":")) {
+		if(item.contains("\\:")) {
 			String[] parts = item.split(":");
 			int itemId = Integer.parseInt(parts[0]);
 			int magic = Integer.parseInt(parts[1]);
-			System.out.println("Parsed item: ");
-			System.out.println("Item ID: " + itemId);
-			System.out.println("Data Value: " + magic);
+//			System.out.println("Parsed item: ");
+//			System.out.println("Item ID: " + itemId);
+//			System.out.println("Data Value: " + magic);
 			itemstack = new ItemStack(itemId);
 			MaterialData data = itemstack.getData();
 			data.setData((byte) magic);
