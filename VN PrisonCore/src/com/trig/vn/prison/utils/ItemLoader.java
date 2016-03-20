@@ -8,8 +8,8 @@ public class ItemLoader {
 	public static ItemStack loadItem(String item) {
 		System.out.println("Loading item: " + item);
 		ItemStack itemstack = null;
-		if(item.contains("_")) {
-			String[] parts = item.split("_");
+		if(item.contains(":")) {
+			String[] parts = item.split("\\:");
 			int itemId = Integer.parseInt(parts[0]);
 			int magic = Integer.parseInt(parts[1]);
 			System.out.println("Parsed item: ");
