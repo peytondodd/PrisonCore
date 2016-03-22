@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.trig.vn.prison.Prison;
-import com.trig.vn.prison.ranks.PrisonPlayer;
+import com.trig.vn.prison.PrisonPlayer;
 
 public class PlayerJoin implements Listener {
 

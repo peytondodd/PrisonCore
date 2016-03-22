@@ -3,6 +3,7 @@ package com.trig.vn.prison.ranks;
 import org.bukkit.ChatColor;
 
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.PrisonPlayer;
 
 
 
