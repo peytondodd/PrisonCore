@@ -6,3 +6,5 @@ depend: [VNDB]
 commands:
   rankup:
     description: Rankup command
+  achievement:
+    description: Main achievement command
