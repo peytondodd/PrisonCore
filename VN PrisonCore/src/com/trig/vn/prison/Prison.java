@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
+import net.minecraft.server.v1_9_R1.EntityPlayer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_9_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.trig.vn.db.DatabaseConfig;
+import com.trig.vn.prison.commands.CommandAchievement;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.eggs.ClickEggEvent;
@@ -20,8 +25,8 @@ import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.kingdoms.KingdomManager;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.listeners.ClickSellSignEvent;
+import com.trig.vn.prison.listeners.PlayerJoin;
 import com.trig.vn.prison.ranks.PrisonRank;
-import com.trig.vn.prison.ranks.listeners.PlayerJoin;
 import com.trig.vn.prison.utils.ItemLoader;
 import com.vn.core.Core;
 import com.vn.core.sql.MySQL;
@@ -68,7 +73,7 @@ public class Prison extends JavaPlugin {
 		loadEasterEggs();
 		registerEvents();
 		registerCommands();
-		
+		setupPlayers(); //In case of /reload, we need to pretend players just logged in.
 	}
 	
 	private void registerEvents() {
@@ -80,6 +85,13 @@ public class Prison extends JavaPlugin {
 	
 	private void registerCommands() {
 		this.getCommand("rankup").setExecutor(new CommandRankup(this));
+		this.getCommand("achievement").setExecutor(new CommandAchievement(this));
+	}
+	
+	private void setupPlayers() {
+		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+			getPrisonManager().setupPlayer(p);
+		}
 	}
 	
 	private void loadRanks() {

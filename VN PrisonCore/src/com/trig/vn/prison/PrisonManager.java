@@ -3,8 +3,12 @@ package com.trig.vn.prison;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.server.v1_9_R1.EntityPlayer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.craftbukkit.v1_9_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.ranks.PrisonRank;
@@ -60,5 +64,15 @@ public class PrisonManager {
 			player.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
 			return;
 		}
+	}
+	
+	public void setupPlayer(Player p) {
+		if(getPrisonPlayer(p) != null) {
+			return;
+		}
+		EntityPlayer player = ((CraftPlayer) p).getHandle();
+		CraftServer server = (CraftServer) Bukkit.getServer();
+		PrisonPlayer pp = new PrisonPlayer(server, player);
+		handleLogin(pp);
 	}
 }
