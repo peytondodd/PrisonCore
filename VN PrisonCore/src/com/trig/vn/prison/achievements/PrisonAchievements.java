@@ -18,6 +18,11 @@ public class PrisonAchievements {
 	
 	public void init() { //MUST be called after achievements are loaded into array
 		inv = Bukkit.createInventory(null, 54, "§aAchievements");
+		update();
+	}
+	
+	public void update() {
+		inv.clear();
 		for(Achievement achievement : possibleAchievements) {
 			Material mat = Material.REDSTONE_BLOCK; //Default to redstone block
 			if(achievements.contains(achievement)) {
@@ -27,6 +32,8 @@ public class PrisonAchievements {
 			ItemMeta meta = item.getItemMeta();
 			meta.setDisplayName(achievement.getName());
 			meta.setLore(achievement.getLore());
+			item.setItemMeta(meta);
+			inv.addItem(item);
 		}
 	}
 	
