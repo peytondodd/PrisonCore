@@ -13,7 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.trig.vn.prison.Prison;
-import com.trig.vn.prison.ranks.PrisonPlayer;
+import com.trig.vn.prison.PrisonPlayer;
 
 public class BlockToInventoryEvent implements Listener {
 
