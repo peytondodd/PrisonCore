@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
+import com.trig.vn.prison.kingdoms.KingdomManager;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.listeners.ClickSellSignEvent;
 import com.trig.vn.prison.ranks.PrisonRank;
@@ -30,6 +31,7 @@ public class Prison extends JavaPlugin {
 	private static Economy eco;
 	private static Prison instance;
 	private PrisonManager manager;
+	private KingdomManager kingdom;
 	private DatabaseManager dbm;
 	
 	private Core core;
@@ -46,6 +48,7 @@ public class Prison extends JavaPlugin {
 		instance = this;
 		setup();
 		manager = new PrisonManager(this);
+		kingdom = new KingdomManager(this);
 		dbm = new DatabaseManager(this);
 	}
 	
@@ -151,6 +154,10 @@ public class Prison extends JavaPlugin {
 	
 	public PrisonManager getPrisonManager() {
 		return manager;
+	}
+	
+	public KingdomManager getKingdomManager() {
+		return kingdom;
 	}
 	
 	public DatabaseManager getDatabaseManager() {
