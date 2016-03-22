@@ -25,8 +25,8 @@ public class ClickEggEvent implements Listener {
 				if(EasterEgg.isEasterEgg(e.getClickedBlock().getLocation())) {
 					EasterEgg egg = EasterEgg.getEasterEgg(e.getClickedBlock().getLocation());
 					PrisonPlayer player = main.getPrisonManager().getPrisonPlayer(e.getPlayer());
-					if(!player.getAchievements().hasAchievement(egg.getName())) {
-						player.getAchievements().unlockAchievement(egg.getName());
+					if(!player.getAchievements().hasAchievement(egg)) {
+						player.getAchievements().unlockAchievement(egg);
 						player.sendMessage("§a§lYou have unlocked the achievement: §6§l" + egg.getName());
 					}
 				}

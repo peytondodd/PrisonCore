@@ -5,17 +5,16 @@ import java.util.List;
 
 import org.bukkit.Location;
 
-public class EasterEgg {
+import com.trig.vn.prison.achievements.Achievement;
+import com.trig.vn.prison.achievements.PrisonAchievements;
+
+public class EasterEgg extends Achievement {
 
 	private static List<EasterEgg> eggs = new ArrayList<EasterEgg>();
-	
 	private Location loc;
-	private String name;
-	private List<String> lore = new ArrayList<String>();
 	
-	public EasterEgg(String name, List<String> lore, Location loc) {
-		this.name = name;
-		this.lore = lore;
+	public EasterEgg(String name, List<String> lore, Location loc, int id) {
+		super(name, lore, id);
 		this.loc = loc;
 	}
 	
@@ -23,16 +22,9 @@ public class EasterEgg {
 		return loc;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	public List<String> getLore() {
-		return lore;
-	}
-	
 	public static void addEasterEgg(EasterEgg egg) {
 		eggs.add(egg);
+		PrisonAchievements.addPossibleAchievement(egg);
 	}
 	
 	public static boolean isEasterEgg(Location loc) {

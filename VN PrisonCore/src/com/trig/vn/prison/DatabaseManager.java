@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 
 import org.bukkit.Bukkit;
 
+import com.trig.vn.prison.achievements.PrisonAchievements;
+
 public class DatabaseManager {
 
 	private Prison main;
@@ -30,5 +32,21 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 		return Prison.getPrisonRanks().get(0).getName(); //If they don't have a rank, they do now.
+	}
+	
+	public void loadAchievements(PrisonPlayer p) {
+		try {
+			PreparedStatement statement = c.prepareStatement("SELECT * FROM t_achievements WHERE uuid=?");
+			statement.setString(1, p.getUniqueId().toString());
+			ResultSet results = statement.executeQuery();
+			while(results.next()) {
+				int id = results.getInt("id");
+				p.getAchievements().unlockAchievement(PrisonAchievements.getAchievement(id));
+			}
+			results.close();
+			statement.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -17,6 +17,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.trig.vn.db.DatabaseConfig;
+import com.trig.vn.prison.achievements.PrisonAchievements;
 import com.trig.vn.prison.commands.CommandAchievement;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
@@ -114,7 +115,8 @@ public class Prison extends JavaPlugin {
 				int z = getConfig().getInt("eggs." + s + ".location.z");
 				Location loc = new Location(Bukkit.getServer().getWorld(worldName), x, y, z);
 				List<String> lore = getConfig().getStringList("eggs." + s + ".lore");
-				EasterEgg.addEasterEgg(new EasterEgg(name, lore, loc));
+				int id = Integer.parseInt(s);
+				EasterEgg.addEasterEgg(new EasterEgg(name, lore, loc, id));
 			}
 		}
 	}
