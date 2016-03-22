@@ -9,5 +9,5 @@ public class KingdomManager {
 	public KingdomManager(Prison main) {
 		this.main = main;
 	}
-	//Test5
+	//Added RSS feed
 }
