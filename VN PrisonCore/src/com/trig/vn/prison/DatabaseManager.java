@@ -39,9 +39,13 @@ public class DatabaseManager {
 			PreparedStatement statement = c.prepareStatement("SELECT * FROM t_achievements WHERE uuid=?");
 			statement.setString(1, p.getUniqueId().toString());
 			ResultSet results = statement.executeQuery();
+			if(results == null) {
+				statement.close();
+				return;
+			}
 			while(results.next()) {
 				int id = results.getInt("id");
-				p.getAchievements().unlockAchievement(PrisonAchievements.getAchievement(id));
+				p.getAchievements().addAchievement(PrisonAchievements.getAchievement(id));
 			}
 			results.close();
 			statement.close();
