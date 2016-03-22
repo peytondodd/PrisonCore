@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import com.trig.vn.prison.ranks.PrisonPlayer;
 import com.trig.vn.prison.ranks.PrisonRank;
 
 public class PrisonManager {
@@ -56,7 +55,7 @@ public class PrisonManager {
 		if(Prison.getEco().getBalance(player.getPlayer()) >= next.getValue()) { //The player has enough money
 			Prison.getEco().withdrawPlayer(player.getPlayer(), next.getValue());
 			player.setRank(PrisonRank.getNextRank(player.getRank()));
-			Bukkit.getServer().broadcastMessage("§6" + player.getName() + " §7has ranked up to §" + player.getRank().getName());
+			Bukkit.getServer().broadcastMessage("§e" + player.getName() + " §7has ranked up to §e§l" + player.getRank().getName() + "§7!");
 		} else {
 			player.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
 			return;
