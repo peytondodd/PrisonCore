@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
-import com.trig.vn.prison.ranks.PrisonPlayer;
+import com.trig.vn.prison.PrisonPlayer;
 import com.trig.vn.prison.ranks.PrisonRank;
 
 public class CommandRankup implements CommandExecutor {
