@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
+import com.trig.vn.prison.eggs.ClickEggEvent;
 import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.kingdoms.KingdomManager;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
@@ -74,6 +75,7 @@ public class Prison extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new BlockToInventoryEvent(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new ClickSellSignEvent(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new ClickEggEvent(this), this);
 	}
 	
 	private void registerCommands() {
