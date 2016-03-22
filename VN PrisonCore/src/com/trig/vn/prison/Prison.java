@@ -7,6 +7,7 @@ import java.util.List;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
+import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.kingdoms.KingdomManager;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.listeners.ClickSellSignEvent;
@@ -57,33 +59,12 @@ public class Prison extends JavaPlugin {
 		eco = rsp.getProvider();
 		core = (Core) Bukkit.getServer().getPluginManager().getPlugin("VNCore");
 		
-//		if(!getDataFolder().exists()) { //Copy default config
-//			System.out.println("Creating config file...");
-//			saveConfig(); //Create all the stuff we need
-//			System.out.println("Starting to copy...");
-//			BufferedReader reader = new BufferedReader(new InputStreamReader(getResource("config.yml")));
-//			try {
-//				BufferedWriter writer = new BufferedWriter(new FileWriter(new File(getDataFolder() + "/config.yml")));
-//				String line;
-//				while((line = reader.readLine()) != null) {
-//					writer.write(line);
-//					writer.newLine();
-//				}
-//				reader.close();
-//				writer.flush();
-//				writer.close();
-//				System.out.println("Configuration copy complete");
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//			reloadConfig();
-//		}
-		
 		setupSQL();
 		core.registerSQLConnection(c);
 		loadBlockToInventoryWorlds();
 		loadMineShops();
 		loadRanks();
+		loadEasterEggs();
 		registerEvents();
 		registerCommands();
 		
@@ -106,6 +87,21 @@ public class Prison extends JavaPlugin {
 			PrisonRank pr = new PrisonRank(rank, value);
 			prisonRanks.add(pr);
 			System.out.println("Loaded rank [" + rank + "] $" + value);
+		}
+	}
+	
+	private void loadEasterEggs() {
+		if(getDataFolder().exists()) {
+			for(String s : getConfig().getConfigurationSection("eggs").getKeys(false)) {
+				String name = getConfig().getString("eggs." + s + ".name");
+				String worldName = getConfig().getString("eggs." + s + ".location.world");
+				int x = getConfig().getInt("eggs." + s + ".location.x");
+				int y = getConfig().getInt("eggs." + s + ".location.y");
+				int z = getConfig().getInt("eggs." + s + ".location.z");
+				Location loc = new Location(Bukkit.getServer().getWorld(worldName), x, y, z);
+				List<String> lore = getConfig().getStringList("eggs." + s + ".lore");
+				EasterEgg.addEasterEgg(new EasterEgg(name, lore, loc));
+			}
 		}
 	}
 	
