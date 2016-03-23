@@ -8,11 +8,13 @@ import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
 import org.bukkit.inventory.Inventory;
 
 import com.trig.vn.prison.achievements.PrisonAchievements;
+import com.trig.vn.prison.kingdoms.KingdomRank;
 import com.trig.vn.prison.ranks.PrisonRank;
 
 public class PrisonPlayer extends CraftPlayer {
 
 	private PrisonRank rank;
+	private KingdomRank kingdomRank;
 	private Inventory altInv;
 	private PrisonAchievements achievements = new PrisonAchievements();
 	
@@ -33,6 +35,14 @@ public class PrisonPlayer extends CraftPlayer {
 
 	public void setRank(PrisonRank rank) {
 		this.rank = rank;
+	}
+	
+	public void setKingdomRank(KingdomRank kingdomRank) {
+		this.kingdomRank = kingdomRank;
+	}
+	
+	public KingdomRank getKingdomRank() {
+		return kingdomRank;
 	}
 	
 	public Inventory getAlternativeInventory() {
