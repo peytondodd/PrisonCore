@@ -28,6 +28,8 @@ public class PrisonAchievements {
 			if(achievements.contains(achievement)) {
 				mat = Material.EMERALD_BLOCK;
 			}
+			//Currently, every achievement is added to the inventory.
+			//To only show unlocked achievements, place them within the if statement.
 			ItemStack item = new ItemStack(mat);
 			ItemMeta meta = item.getItemMeta();
 			meta.setDisplayName(achievement.getName());
@@ -60,6 +62,16 @@ public class PrisonAchievements {
 	
 	public static List<Achievement> getPossibleAchievements() {
 		return possibleAchievements;
+	}
+	
+	public static int nextAvailableAchievementId() {
+		int highest = -1;
+		for(Achievement a : possibleAchievements) {
+			if(a.getId() > highest) {
+				highest = a.getId();
+			}
+		}
+		return highest++;
 	}
 	
 	public static Achievement getAchievement(String name) {

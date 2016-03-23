@@ -7,11 +7,13 @@ public class Achievement {
 	private String name;
 	private List<String> lore;
 	private int id;
+	private AchievementCategory category;
 	
 	
-	public Achievement(String name, List<String> lore, int id) {
+	public Achievement(String name, List<String> lore, AchievementCategory category, int id) {
 		this.name = name;
 		this.lore = lore;
+		this.category = category;
 		this.id = id;
 	}
 
@@ -30,5 +32,7 @@ public class Achievement {
 		return id;
 	}
 	
-	
+	public AchievementCategory getCategory() {
+		return category;
+	}
 }

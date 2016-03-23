@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Location;
 
 import com.trig.vn.prison.achievements.Achievement;
+import com.trig.vn.prison.achievements.AchievementCategory;
 import com.trig.vn.prison.achievements.PrisonAchievements;
 
 public class EasterEgg extends Achievement {
@@ -14,7 +15,7 @@ public class EasterEgg extends Achievement {
 	private Location loc;
 	
 	public EasterEgg(String name, List<String> lore, Location loc, int id) {
-		super(name, lore, id);
+		super(name, lore, AchievementCategory.EASTER_EGG, id);
 		this.loc = loc;
 	}
 	
