@@ -22,6 +22,10 @@ public class PrisonPlayer extends CraftPlayer {
 		Prison.instance().getDatabaseManager().loadAchievements(this);
 		achievements.init();
 	}
+	
+	public void openAchievements() {
+		openInventory(achievements.getGUI());
+	}
 
 	public PrisonRank getRank() {
 		return rank;

@@ -41,6 +41,10 @@ public class PrisonAchievements {
 		return achievements.contains(a);
 	}
 	
+	public Inventory getGUI() {
+		return inv;
+	}
+	
 	public void unlockAchievement(Achievement achievement) { //Should only be used when a player actually unlocks an achievement
 		achievements.add(achievement); 						 //As it forces the inventory to refresh.
 		update();
