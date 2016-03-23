@@ -12,9 +12,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class PrisonAchievements {
 
-	private static List<Achievement> possibleAchievements = new ArrayList<Achievement>(); //TODO optimize by only using achievement hash
-	private List<Achievement> achievements = new ArrayList<Achievement>();
-	private Inventory inv;
+	private static List<Achievement> possibleAchievements = new ArrayList<Achievement>(); //Global list of achievements
+	private List<Achievement> achievements = new ArrayList<Achievement>(); //Unlocked achievements for player
+	private Inventory inv; //GUI
 	
 	public void init() { //MUST be called after achievements are loaded into array
 		inv = Bukkit.createInventory(null, 54, "§aAchievements");
