@@ -28,9 +28,19 @@ public class CommandAchievement implements CommandExecutor {
 				Player p = (Player) sender;
 				String name = args[0];
 				Player other = Bukkit.getServer().getPlayer(name);
-				PrisonPlayer op = main.getPrisonManager().getPrisonPlayer(other);
-				p.openInventory(op.getAchievements().getGUI());
-				return true;
+				if(other != null) {					
+					PrisonPlayer op = main.getPrisonManager().getPrisonPlayer(other);
+					if(op != null) {						
+						p.openInventory(op.getAchievements().getGUI());
+						return true;
+					} else {
+						p.sendMessage("§3§lError! §cPrisonPlayer for " + other.getName() + " could not be found.");
+						return true;
+					}
+				} else {
+					p.sendMessage("§7Could not find §c" + args[0]);
+					return true;
+				}
 			}
 			
 		}
