@@ -1,5 +1,8 @@
 package com.trig.vn.prison.ranks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 
 import com.trig.vn.prison.Prison;
@@ -8,6 +11,7 @@ import com.trig.vn.prison.PrisonPlayer;
 
 
 public class PrisonRank {
+	private static List<PrisonRank> prisonRanks = new ArrayList<PrisonRank>();
 	
 	private String rankName; //The name of the rank
 	private double value; //How much the rank costs
@@ -41,26 +45,43 @@ public class PrisonRank {
 	
 	
 	public static PrisonRank getNextRank(PrisonRank currentRank) {
-		for(int i = 0; i < Prison.getPrisonRanks().size(); i++) {
-			if(Prison.getPrisonRanks().get(i).getName().equalsIgnoreCase(currentRank.getName())) {
-				if(i + 1 > Prison.getPrisonRanks().size()) {
+		for(int i = 0; i < getPrisonRanks().size(); i++) {
+			if(getPrisonRanks().get(i).getName().equalsIgnoreCase(currentRank.getName())) {
+				if(i + 1 > getPrisonRanks().size()) {
 					return null;
 				}
-				return Prison.getPrisonRanks().get(i + 1);
+				return getPrisonRanks().get(i + 1);
 			}
 		}
 		return null;
 	}
 	
 	public static PrisonRank getPreviousRank(PrisonRank currentRank) {
-		for(int i = 0; i < Prison.getPrisonRanks().size(); i++) {
-			if(Prison.getPrisonRanks().get(i).getName().equalsIgnoreCase(currentRank.getName())) {
+		for(int i = 0; i < getPrisonRanks().size(); i++) {
+			if(getPrisonRanks().get(i).getName().equalsIgnoreCase(currentRank.getName())) {
 				if(i == 0) {
 					return null;
 				}
-				return Prison.getPrisonRanks().get(i - 1);
+				return getPrisonRanks().get(i - 1);
 			}
 		}
 		return null;
+	}
+	
+	public static void addPrisonRank(PrisonRank rank) {
+		prisonRanks.add(rank);
+	}
+	
+	public static PrisonRank getPrisonRank(String rank) {
+		for(PrisonRank pr : prisonRanks) {
+			if(pr.getName().equalsIgnoreCase(rank)) {
+				return pr;
+			}
+		}
+		return null;
+	}
+	
+	public static List<PrisonRank> getPrisonRanks() {
+		return prisonRanks;
 	}
 }

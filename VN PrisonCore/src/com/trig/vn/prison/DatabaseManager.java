@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import org.bukkit.Bukkit;
 
 import com.trig.vn.prison.achievements.PrisonAchievements;
+import com.trig.vn.prison.ranks.PrisonRank;
 
 public class DatabaseManager {
 
@@ -31,7 +32,7 @@ public class DatabaseManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return Prison.getPrisonRanks().get(0).getName(); //If they don't have a rank, they do now.
+		return PrisonRank.getPrisonRanks().get(0).getName(); //If they don't have a rank, they do now.
 	}
 	
 	public void loadAchievements(PrisonPlayer p) {

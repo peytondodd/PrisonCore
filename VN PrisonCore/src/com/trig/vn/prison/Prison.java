@@ -36,7 +36,7 @@ public class Prison extends JavaPlugin {
 
 	private List<String> blockToInventoryWorlds = new ArrayList<String>();
 	private List<MineShop> mineShops = new ArrayList<MineShop>();
-	private static List<PrisonRank> prisonRanks = new ArrayList<PrisonRank>();
+	
 	private static Economy eco;
 	private static Prison instance;
 	private PrisonManager manager;
@@ -100,7 +100,7 @@ public class Prison extends JavaPlugin {
 		for(String rank : getConfig().getConfigurationSection("ranks").getKeys(false)) {
 			double value = getConfig().getDouble("ranks." + rank);
 			PrisonRank pr = new PrisonRank(rank, value);
-			prisonRanks.add(pr);
+			PrisonRank.addPrisonRank(pr);
 			System.out.println("Loaded rank [" + rank + "] $" + value);
 		}
 	}
@@ -191,18 +191,5 @@ public class Prison extends JavaPlugin {
 	
 	public static Prison instance() {
 		return instance;
-	}
-	
-	public static PrisonRank getPrisonRank(String name) {
-		for(PrisonRank rank : prisonRanks) {
-			if(rank.getName().equalsIgnoreCase(name)) {
-				return rank;
-			}
-		}
-		return null;
-	}
-	
-	public static List<PrisonRank> getPrisonRanks() {
-		return prisonRanks;
 	}
 }
