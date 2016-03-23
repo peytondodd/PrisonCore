@@ -9,7 +9,6 @@ public class Achievement {
 	private int id;
 	private AchievementCategory category;
 	
-	
 	public Achievement(String name, List<String> lore, AchievementCategory category, int id) {
 		this.name = name;
 		this.lore = lore;
@@ -17,16 +16,13 @@ public class Achievement {
 		this.id = id;
 	}
 
-
 	public String getName() {
 		return name;
 	}
 
-
 	public List<String> getLore() {
 		return lore;
 	}
-
 
 	public int getId() {
 		return id;
