@@ -5,19 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
-import net.minecraft.server.v1_9_R1.EntityPlayer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_9_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.trig.vn.db.DatabaseConfig;
-import com.trig.vn.prison.achievements.PrisonAchievements;
 import com.trig.vn.prison.commands.CommandAchievement;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
