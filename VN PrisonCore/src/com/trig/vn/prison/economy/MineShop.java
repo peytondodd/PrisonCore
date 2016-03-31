@@ -2,11 +2,12 @@ package com.trig.vn.prison.economy;
 
 import java.util.HashMap;
 
-import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.PrisonPlayer;
 
 public class MineShop {
 
@@ -29,26 +30,36 @@ public class MineShop {
 		return values.get(item);
 	}
 	
-	public void sell(Player p) {
+	public void sell(PrisonPlayer p) {
 		for(ItemStack item : values.keySet()) {
-			int a = getAmountOfItem(item, p);
-			if(a <= 0) { continue; }
-			double value = getValue(item);
-			double total = value * a;
-			total *= Multiplier.getMultiplier(p);
-			ItemStack i = item.clone();
-			MaterialData data = item.getData();
-			i.setData(data);
-			i.setAmount(a);
-			p.getInventory().removeItem(i);
-			Prison.getEco().depositPlayer(p, total);
-			p.sendMessage("§a$" + total + " §7 was added to your account for selling " + item.getType());
+			for(int i = 1; i <= 2; i++) { //Loop through two inventories
+				int a = 0;
+				switch(i) {
+				case 1:
+					a = getAmountOfItem(item, p.getInventory());
+					break;
+				case 2:
+					a = getAmountOfItem(item, p.getAlternativeInventory());
+					break;
+				}
+				if(a <= 0) { continue; }
+				double value = getValue(item);
+				double total = value * a;
+				total *= Multiplier.getMultiplier(p);
+				ItemStack it = item.clone();
+				MaterialData data = item.getData();
+				it.setData(data);
+				it.setAmount(a);
+				p.getInventory().removeItem(it);
+				Prison.getEco().depositPlayer(p, total);
+				p.sendMessage("§a$" + total + " §7 was added to your account for selling " + item.getType());
+			}
 		}
 	}
 	
-	private int getAmountOfItem(ItemStack item, Player p) {
+	private int getAmountOfItem(ItemStack item, Inventory inv) {
 		int a = 0;
-		for(ItemStack itemstack : p.getInventory().getContents()) {
+		for(ItemStack itemstack : inv.getContents()) {
 			if(itemstack == null) { continue; }
 			if(itemstack.getType() == item.getType() && itemstack.getData().getData() == item.getData().getData()) {
 				a += itemstack.getAmount();

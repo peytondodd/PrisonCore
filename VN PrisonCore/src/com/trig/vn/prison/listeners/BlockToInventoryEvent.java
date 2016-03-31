@@ -39,6 +39,7 @@ public class BlockToInventoryEvent implements Listener {
 			PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
 			Inventory inv = p.getInventory();;
 			e.setCancelled(true);
+			//We need to find out which inventory to place the block in.
 			if(p.getInventory().firstEmpty() == -1) {
 				if(pp.getAlternativeInventory().firstEmpty() == -1) {
 					//both inventories are full

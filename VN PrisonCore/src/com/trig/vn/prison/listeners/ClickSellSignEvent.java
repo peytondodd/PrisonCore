@@ -9,6 +9,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.PrisonPlayer;
 
 public class ClickSellSignEvent implements Listener {
 
@@ -22,12 +23,13 @@ public class ClickSellSignEvent implements Listener {
 	public void onClick(PlayerInteractEvent e) {
 		if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			Player p = e.getPlayer();
+			PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
 			if(e.getClickedBlock().getType() == Material.SIGN || e.getClickedBlock().getType() == Material.SIGN_POST || e.getClickedBlock().getType() == Material.WALL_SIGN) {
 				Sign sign = (Sign) e.getClickedBlock().getState();
 				if(sign.getLine(0).equalsIgnoreCase("§2§lSELL")) {
 					e.setCancelled(true);
 					String mineID = sign.getLine(1);
-					main.getMineShop(mineID).sell(p);
+					main.getMineShop(mineID).sell(pp);
 					//TODO test this
 					return;
 				}

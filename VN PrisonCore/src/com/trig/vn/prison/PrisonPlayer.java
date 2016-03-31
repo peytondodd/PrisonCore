@@ -16,13 +16,15 @@ public class PrisonPlayer extends CraftPlayer {
 	private PrisonRank rank;
 	private KingdomRank kingdomRank;
 	private Inventory altInv;
+	private int backpackSize = 9;
 	private PrisonAchievements achievements = new PrisonAchievements();
 	
 	public PrisonPlayer(CraftServer server, EntityPlayer entity) {
 		super(server, entity);
-		altInv = Bukkit.getServer().createInventory(null, 54, "" + getName());
 		Prison.instance().getDatabaseManager().loadAchievements(this);
 		achievements.init();
+		backpackSize = Prison.instance().getDatabaseManager().getBackpackSize(this);
+		altInv = Bukkit.getServer().createInventory(null, backpackSize, "" + getName());
 	}
 	
 	public void openAchievements() {

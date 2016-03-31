@@ -21,7 +21,7 @@ public class DatabaseManager {
 	
 	public String getPrisonRankName(String uuid) {
 		try {
-			PreparedStatement statement = c.prepareStatement("SELECT * FROM t_ranks WHERE uuid=?");
+			PreparedStatement statement = c.prepareStatement("SELECT * FROM t_players WHERE uuid=?");
 			statement.setString(1, uuid);
 			ResultSet results = statement.executeQuery();
 			results.next();
@@ -53,5 +53,21 @@ public class DatabaseManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int getBackpackSize(PrisonPlayer p) {
+		try {
+			PreparedStatement statement = c.prepareStatement("SELECT * FROM t_players WHERE uuid=?");
+			statement.setString(1, p.getUniqueId().toString());
+			ResultSet results = statement.executeQuery();
+			results.next();
+			int slots = results.getInt("backpack");
+			results.close();
+			statement.close();
+			return slots;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 9;
 	}
 }
