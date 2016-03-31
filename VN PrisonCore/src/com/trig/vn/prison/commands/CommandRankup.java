@@ -23,7 +23,7 @@ public class CommandRankup implements CommandExecutor {
 				Player p = (Player) sender;
 				PrisonPlayer player = main.getPrisonManager().getPrisonPlayer(p);	
 				if(PrisonRank.canRankup(player)) {
-					main.getPrisonManager().rankup(player);
+					player.rankup();
 				}
 			}
 		}

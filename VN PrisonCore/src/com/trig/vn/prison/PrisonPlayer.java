@@ -3,6 +3,7 @@ package com.trig.vn.prison;
 import net.minecraft.server.v1_9_R1.EntityPlayer;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_9_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
 import org.bukkit.inventory.Inventory;
@@ -53,6 +54,19 @@ public class PrisonPlayer extends CraftPlayer {
 	
 	public PrisonAchievements getAchievements() {
 		return achievements;
+	}
+	
+	public void rankup() {
+		PrisonRank current = this.getRank();
+		PrisonRank next = PrisonRank.getNextRank(current);
+		if(Prison.getEco().getBalance(this.getPlayer()) >= next.getValue()) { //The player has enough money
+			Prison.getEco().withdrawPlayer(this.getPlayer(), next.getValue());
+			this.setRank(PrisonRank.getNextRank(this.getRank()));
+			Bukkit.getServer().broadcastMessage("§e" + this.getName() + " §7has ranked up to §e§l" + this.getRank().getName() + "§7!");
+		} else {
+			this.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
+			return;
+		}
 	}
 	
 }

@@ -53,19 +53,6 @@ public class PrisonManager {
 		return null;
 	}
 	
-	public void rankup(PrisonPlayer player) {
-		PrisonRank current = player.getRank();
-		PrisonRank next = PrisonRank.getNextRank(current);
-		if(Prison.getEco().getBalance(player.getPlayer()) >= next.getValue()) { //The player has enough money
-			Prison.getEco().withdrawPlayer(player.getPlayer(), next.getValue());
-			player.setRank(PrisonRank.getNextRank(player.getRank()));
-			Bukkit.getServer().broadcastMessage("§e" + player.getName() + " §7has ranked up to §e§l" + player.getRank().getName() + "§7!");
-		} else {
-			player.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
-			return;
-		}
-	}
-	
 	public void setupPlayer(Player p) {
 		if(getPrisonPlayer(p) != null) {
 			return;
