@@ -68,6 +68,10 @@ public class PrisonRank {
 		return null;
 	}
 	
+	public static PrisonRank getDefaultRank() {
+		return getPrisonRanks().get(0);
+	}
+	
 	public static void addPrisonRank(PrisonRank rank) {
 		prisonRanks.add(rank);
 	}

@@ -30,9 +30,14 @@ public class PrisonManager {
 		}
 		prisonPlayers.add(player);
 		//Get rank
-		String rank = main.getDatabaseManager().getPrisonRankName(player.getUniqueId().toString());
-		PrisonRank prank = PrisonRank.getPrisonRank(rank);
-		player.setRank(prank);
+		try {			
+			String rank = main.getDatabaseManager().getPrisonRankName(player.getUniqueId().toString());
+			
+			PrisonRank prank = PrisonRank.getPrisonRank(rank);
+			player.setRank(prank);
+		} catch (Exception e) {
+			main.getDatabaseManager().registerPlayer(player);
+		}
 	}
 	
 	public PrisonPlayer getPrisonPlayer(Player p) {

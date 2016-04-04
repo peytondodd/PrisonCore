@@ -70,4 +70,17 @@ public class DatabaseManager {
 		}
 		return 9;
 	}
+	
+	public void registerPlayer(PrisonPlayer p) {
+		try {
+			PreparedStatement statement = c.prepareStatement("INSERT IGNORE INTO t_players (uuid, rank, backpack) VALUES (?, ?, ?)");
+			statement.setString(1, p.getUniqueId().toString());
+			statement.setString(2, PrisonRank.getDefaultRank().getName());
+			statement.setInt(3, 9);
+			statement.executeUpdate();
+			statement.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
