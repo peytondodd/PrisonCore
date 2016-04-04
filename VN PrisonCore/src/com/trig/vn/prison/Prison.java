@@ -106,19 +106,20 @@ public class Prison extends JavaPlugin {
 	
 	private void loadEasterEggs() {
 		if(getDataFolder().exists()) {
-			for(String s : getConfig().getConfigurationSection("eggs").getKeys(false)) {
-				String name = getConfig().getString("eggs." + s + ".name");
-				
-				if(name == null) { continue; }
-				
-				String worldName = getConfig().getString("eggs." + s + ".location.world");
-				int x = getConfig().getInt("eggs." + s + ".location.x");
-				int y = getConfig().getInt("eggs." + s + ".location.y");
-				int z = getConfig().getInt("eggs." + s + ".location.z");
-				Location loc = new Location(Bukkit.getServer().getWorld(worldName), x, y, z);
-				List<String> lore = getConfig().getStringList("eggs." + s + ".lore");
-				int id = Integer.parseInt(s);
-				EasterEgg.addEasterEgg(new EasterEgg(name, lore, loc, id));
+			try {				
+				for(String s : getConfig().getConfigurationSection("eggs").getKeys(false)) {
+					String name = getConfig().getString("eggs." + s + ".name");
+					String worldName = getConfig().getString("eggs." + s + ".location.world");
+					int x = getConfig().getInt("eggs." + s + ".location.x");
+					int y = getConfig().getInt("eggs." + s + ".location.y");
+					int z = getConfig().getInt("eggs." + s + ".location.z");
+					Location loc = new Location(Bukkit.getServer().getWorld(worldName), x, y, z);
+					List<String> lore = getConfig().getStringList("eggs." + s + ".lore");
+					int id = Integer.parseInt(s);
+					EasterEgg.addEasterEgg(new EasterEgg(name, lore, loc, id));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
