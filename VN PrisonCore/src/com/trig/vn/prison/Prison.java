@@ -8,9 +8,6 @@ import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -18,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.commands.CommandAchievement;
+import com.trig.vn.prison.commands.CommandBackpack;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.eggs.ClickEggEvent;
@@ -86,6 +84,7 @@ public class Prison extends JavaPlugin {
 	private void registerCommands() {
 		this.getCommand("rankup").setExecutor(new CommandRankup(this));
 		this.getCommand("achievement").setExecutor(new CommandAchievement(this));
+		this.getCommand("backpack").setExecutor(new CommandBackpack(this));
 	}
 	
 	private void setupPlayers() {

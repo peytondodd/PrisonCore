@@ -2,13 +2,16 @@ package com.trig.vn.prison.listeners;
 
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Shulker;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -37,12 +40,14 @@ public class BlockToInventoryEvent implements Listener {
 		if(main.getBlockToInventoryWorlds().contains(e.getBlock().getWorld().getName())) {
 			Player p = e.getPlayer();
 			PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
-			Inventory inv = p.getInventory();;
+			Inventory inv = p.getInventory();
 			e.setCancelled(true);
 			//We need to find out which inventory to place the block in.
 			if(p.getInventory().firstEmpty() == -1) {
 				if(pp.getAlternativeInventory().firstEmpty() == -1) {
 					//both inventories are full
+					pp.sendTitle("§c§lWarning", "§4Full Inventory");
+					
 					return;
 				} else {
 					inv = pp.getAlternativeInventory();

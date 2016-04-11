@@ -8,3 +8,5 @@ commands:
     description: Rankup command
   achievement:
     description: Main achievement command
+  backpack:
+    description: View what is in your backpack
