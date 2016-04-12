@@ -6,7 +6,6 @@ import java.util.List;
 import net.minecraft.server.v1_9_R1.EntityPlayer;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_9_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -32,7 +31,6 @@ public class PrisonManager {
 		//Get rank
 		try {			
 			String rank = main.getDatabaseManager().getPrisonRankName(player.getUniqueId().toString());
-			
 			PrisonRank prank = PrisonRank.getPrisonRank(rank);
 			player.setRank(prank);
 		} catch (Exception e) {

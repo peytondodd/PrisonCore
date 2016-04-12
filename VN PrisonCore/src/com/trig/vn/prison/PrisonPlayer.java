@@ -4,9 +4,12 @@ import net.minecraft.server.v1_9_R1.EntityPlayer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_9_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.trig.vn.prison.achievements.PrisonAchievements;
 import com.trig.vn.prison.kingdoms.KingdomRank;
@@ -15,6 +18,7 @@ import com.trig.vn.prison.ranks.PrisonRank;
 public class PrisonPlayer extends CraftPlayer {
 
 	private PrisonRank rank;
+	private final Inventory warpGui;
 	private KingdomRank kingdomRank;
 	private Inventory altInv;
 	private int backpackSize = 9;
@@ -26,6 +30,7 @@ public class PrisonPlayer extends CraftPlayer {
 		achievements.init();
 		backpackSize = Prison.instance().getDatabaseManager().getBackpackSize(this);
 		altInv = Bukkit.getServer().createInventory(null, backpackSize, "" + getName());
+		warpGui = Bukkit.getServer().createInventory(null, 54, "§6Locations");
 	}
 	
 	public void openAchievements() {
@@ -67,6 +72,22 @@ public class PrisonPlayer extends CraftPlayer {
 			this.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
 			return;
 		}
+	}
+	
+	private void updateWarps() {
+		warpGui.clear();
+		for(PrisonRank rank : PrisonRank.getPrisonRanks()) {			
+			ItemStack warp = new ItemStack(Material.EMERALD_BLOCK);
+			ItemMeta meta = warp.getItemMeta();
+			meta.setDisplayName("§a§l" + rank.getName());
+			warp.setItemMeta(meta);
+			warpGui.addItem(warp);
+		}
+		
+	}
+	
+	public void openWarpGUI() {
+		this.openInventory(warpGui);
 	}
 	
 }

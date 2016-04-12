@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.trig.npchandler.NPCHandler;
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.utils.Constant;
 
 public class CommandPrison implements CommandExecutor {
 
@@ -34,7 +35,7 @@ public class CommandPrison implements CommandExecutor {
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("caravan")) {
-				NPCHandler.instance().createDummyVillager(p.getLocation(), "§2§lCaravan Driver");
+				NPCHandler.instance().createDummyVillager(p.getLocation(), Constant.CARAVAN_DRIVER);
 				p.sendMessage("§6Spawned caravan driver at your location.");
 				return true;
 			}
