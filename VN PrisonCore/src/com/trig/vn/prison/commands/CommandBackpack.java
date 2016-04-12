@@ -18,24 +18,26 @@ public class CommandBackpack implements CommandExecutor {
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if(!(sender instanceof Player)) {
-			sender.sendMessage("Cannot use this command from console!");
-			return true;
-		}
-		if(args.length == 0) { //Open their own backpack
-			Player player = (Player) sender;
-			PrisonPlayer p = main.getPrisonManager().getPrisonPlayer(player);
-			p.openInventory(p.getAlternativeInventory());
-			return true;
-		}
-		//ADMIN command - check another player's backpack
-		if(args.length == 1) {
-			String playerName = args[0];
-			Player self = (Player) sender;
-			Player other = Bukkit.getServer().getPlayer(playerName);
-			PrisonPlayer o = main.getPrisonManager().getPrisonPlayer(other);
-			self.openInventory(o.getAlternativeInventory());
-			return true;
+		if(cmd.getName().equalsIgnoreCase("backpack")) {			
+			if(!(sender instanceof Player)) {
+				sender.sendMessage("Cannot use this command from console!");
+				return true;
+			}
+			if(args.length == 0) { //Open their own backpack
+				Player player = (Player) sender;
+				PrisonPlayer p = main.getPrisonManager().getPrisonPlayer(player);
+				p.openInventory(p.getAlternativeInventory());
+				return true;
+			}
+			//ADMIN command - check another player's backpack
+			if(args.length == 1) {
+				String playerName = args[0];
+				Player self = (Player) sender;
+				Player other = Bukkit.getServer().getPlayer(playerName);
+				PrisonPlayer o = main.getPrisonManager().getPrisonPlayer(other);
+				self.openInventory(o.getAlternativeInventory());
+				return true;
+			}
 		}
 		return true;
 	}
