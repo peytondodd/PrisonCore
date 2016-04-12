@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.earth2me.essentials.Essentials;
 import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.commands.CommandAchievement;
 import com.trig.vn.prison.commands.CommandBackpack;
@@ -40,6 +41,8 @@ public class Prison extends JavaPlugin {
 	private KingdomManager kingdom;
 	private DatabaseManager dbm;
 	
+	private Essentials essentials;
+	
 	private Core core;
 	
 	private MySQL sql;
@@ -62,6 +65,7 @@ public class Prison extends JavaPlugin {
 		RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
 		eco = rsp.getProvider();
 		core = (Core) Bukkit.getServer().getPluginManager().getPlugin("VNCore");
+		essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 		
 		setupSQL();
 		core.registerSQLConnection(c);
@@ -176,6 +180,10 @@ public class Prison extends JavaPlugin {
 	
 	public DatabaseManager getDatabaseManager() {
 		return dbm;
+	}
+	
+	public Essentials getEssentials() {
+		return essentials;
 	}
 	
 	public MineShop getMineShop(String id) {
