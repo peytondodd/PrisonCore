@@ -2,7 +2,7 @@ name: PrisonCore
 author: Trig
 version: 1
 main: com.trig.vn.prison.Prison
-depend: [VNDB]
+depend: [VNDB, NPCHandler, Essentials]
 commands:
   rankup:
     description: Rankup command
@@ -10,3 +10,5 @@ commands:
     description: Main achievement command
   backpack:
     description: View what is in your backpack
+  prison:
+    description: VN Prison admin commands

@@ -14,9 +14,11 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.earth2me.essentials.Essentials;
+import com.trig.npchandler.NPCHandler;
 import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.commands.CommandAchievement;
 import com.trig.vn.prison.commands.CommandBackpack;
+import com.trig.vn.prison.commands.CommandPrison;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.eggs.ClickEggEvent;
@@ -42,6 +44,7 @@ public class Prison extends JavaPlugin {
 	private DatabaseManager dbm;
 	
 	private Essentials essentials;
+	private NPCHandler npchandler;
 	
 	private Core core;
 	
@@ -67,6 +70,7 @@ public class Prison extends JavaPlugin {
 		core = (Core) Bukkit.getServer().getPluginManager().getPlugin("VNCore");
 		essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 		
+		
 		setupSQL();
 		core.registerSQLConnection(c);
 		loadBlockToInventoryWorlds();
@@ -89,6 +93,7 @@ public class Prison extends JavaPlugin {
 		this.getCommand("rankup").setExecutor(new CommandRankup(this));
 		this.getCommand("achievement").setExecutor(new CommandAchievement(this));
 		this.getCommand("backpack").setExecutor(new CommandBackpack(this));
+		this.getCommand("prison").setExecutor(new CommandPrison(this));
 	}
 	
 	private void setupPlayers() {
@@ -120,6 +125,7 @@ public class Prison extends JavaPlugin {
 					List<String> lore = getConfig().getStringList("eggs." + s + ".lore");
 					int id = Integer.parseInt(s);
 					EasterEgg.addEasterEgg(new EasterEgg(name, lore, loc, id));
+					
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
