@@ -37,7 +37,14 @@ public class CaravanDriver implements Listener {
 	@EventHandler
 	public void clickWarp(InventoryClickEvent e) {
 		if(e.getInventory().getName().equalsIgnoreCase(Constant.WARP_GUI_NAME)) {
-			if(e.getCurrentItem() == null) { return; }
+			if(e.getCurrentItem() == null) { 
+				e.setCancelled(true);
+				return; 
+			}
+			if(e.getCurrentItem().getItemMeta() == null || e.getCurrentItem().getItemMeta().getDisplayName() == null) { 
+				e.setCancelled(true);
+				return; 
+			}
 			Player p = (Player) e.getWhoClicked();
 			e.setCancelled(true);
 			String warpName = e.getCurrentItem().getItemMeta().getDisplayName();
