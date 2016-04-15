@@ -4,9 +4,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-import com.trig.npchandler.NPCHandler;
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.utils.Constant;
 
@@ -35,7 +38,11 @@ public class CommandPrison implements CommandExecutor {
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("caravan")) {
-				NPCHandler.instance().createDummyVillager(p.getLocation(), Constant.CARAVAN_DRIVER);
+				//NPCHandler.instance().createDummyVillager(p.getLocation(), Constant.CARAVAN_DRIVER);
+				Villager v = (Villager) p.getWorld().spawnEntity(p.getLocation(), EntityType.VILLAGER);
+				v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, Integer.MAX_VALUE));
+				v.setCustomName(Constant.CARAVAN_DRIVER);
+				v.setCustomNameVisible(true);
 				p.sendMessage("§6Spawned caravan driver at your location.");
 				return true;
 			}
