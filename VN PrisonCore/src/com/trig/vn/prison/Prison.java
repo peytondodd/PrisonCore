@@ -27,6 +27,7 @@ import com.trig.vn.prison.kingdoms.KingdomManager;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.listeners.CaravanDriver;
 import com.trig.vn.prison.listeners.ClickSellSignEvent;
+import com.trig.vn.prison.listeners.LeaveCastle;
 import com.trig.vn.prison.listeners.PlayerJoin;
 import com.trig.vn.prison.ranks.PrisonRank;
 import com.trig.vn.prison.utils.Constant;
@@ -91,6 +92,7 @@ public class Prison extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new ClickSellSignEvent(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new ClickEggEvent(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new CaravanDriver(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new LeaveCastle(this), this);
 	}
 	
 	private void registerCommands() {
