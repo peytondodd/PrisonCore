@@ -29,6 +29,12 @@ public class PrisonRank {
 		return value;
 	}
 	
+	public boolean isAheadOf(PrisonRank rank) {
+		int slot = prisonRanks.indexOf(rank);
+		int current = prisonRanks.indexOf(this);
+		return (current > slot);
+	}
+	
 	public static boolean canRankup(PrisonPlayer player) {
 		PrisonRank next = PrisonRank.getNextRank(player.getRank());
 		if(next == null) {

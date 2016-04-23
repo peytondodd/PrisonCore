@@ -76,7 +76,10 @@ public class PrisonPlayer extends CraftPlayer {
 	
 	private void updateWarps() {
 		warpGui.clear();
-		for(PrisonRank rank : PrisonRank.getPrisonRanks()) {			
+		for(PrisonRank rank : PrisonRank.getPrisonRanks()) {
+			if(!this.getRank().isAheadOf(rank)) { 
+				continue;
+			}
 			ItemStack warp = new ItemStack(Material.EMERALD_BLOCK);
 			ItemMeta meta = warp.getItemMeta();
 			meta.setDisplayName("§a§l" + rank.getName());
@@ -87,6 +90,7 @@ public class PrisonPlayer extends CraftPlayer {
 	}
 	
 	public void openWarpGUI() {
+		updateWarps();
 		this.openInventory(warpGui);
 	}
 	

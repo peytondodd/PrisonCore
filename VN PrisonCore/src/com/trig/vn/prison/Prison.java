@@ -29,6 +29,7 @@ import com.trig.vn.prison.listeners.CaravanDriver;
 import com.trig.vn.prison.listeners.ClickSellSignEvent;
 import com.trig.vn.prison.listeners.PlayerJoin;
 import com.trig.vn.prison.ranks.PrisonRank;
+import com.trig.vn.prison.utils.Constant;
 import com.trig.vn.prison.utils.ItemLoader;
 import com.vn.core.Core;
 import com.vn.core.sql.MySQL;
@@ -74,6 +75,7 @@ public class Prison extends JavaPlugin {
 		
 		setupSQL();
 		core.registerSQLConnection(c);
+		Constant.init();
 		loadBlockToInventoryWorlds();
 		loadMineShops();
 		loadRanks();

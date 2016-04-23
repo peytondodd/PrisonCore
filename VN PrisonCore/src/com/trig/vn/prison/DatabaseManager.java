@@ -72,6 +72,7 @@ public class DatabaseManager {
 	}
 	
 	public void registerPlayer(PrisonPlayer p) {
+		System.out.println("Registering player: " + p.getName() + " (" + p.getUniqueId().toString() + ")");
 		try {
 			PreparedStatement statement = c.prepareStatement("INSERT IGNORE INTO t_players (uuid, rank, backpack) VALUES (?, ?, ?)");
 			statement.setString(1, p.getUniqueId().toString());
