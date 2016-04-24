@@ -14,6 +14,10 @@ public class RegionManager {
 		return regions.get(name);
 	}
 	
+	public static void cleanup() {
+		regions.clear();
+	}
+	
 	public static void addRegion(String name, Region region) {
 		regions.put(name, region);
 	}

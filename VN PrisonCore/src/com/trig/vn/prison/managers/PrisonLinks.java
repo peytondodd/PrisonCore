@@ -15,6 +15,10 @@ public class PrisonLinks {
 		links.add(w);
 	}
 	
+	public static void cleanup() {
+		links.clear();
+	}
+	
 	public static List<PrisonWarp> getLinks() {
 		return links;
 	}

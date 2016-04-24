@@ -72,7 +72,7 @@ public class CommandPrison implements CommandExecutor {
 					String rg = args[1];
 					Location loc = p.getLocation();
 					main.saveLocation(rg, loc);
-					p.sendMessage("§Created location at your current position.");
+					p.sendMessage("§aCreated location at your current position.");
 					return true;
 				} else {
 					p.sendMessage("§4Invalid usage! Use §6/prison location <name>");

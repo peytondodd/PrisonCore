@@ -87,6 +87,10 @@ public class Prison extends JavaPlugin {
 		setupSQL();
 		core.registerSQLConnection(c);
 		Constant.init();
+		//In case of a reload, we don't want to have double values
+		LocationManager.cleanup();
+		RegionManager.cleanup();
+		PrisonLinks.cleanup();
 		loadBlockToInventoryWorlds();
 		loadMineShops();
 		loadRanks();

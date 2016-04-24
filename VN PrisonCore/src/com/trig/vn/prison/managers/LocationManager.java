@@ -12,6 +12,10 @@ private static HashMap<String, Location> locations = new HashMap<String, Locatio
 		return locations.get(name);
 	}
 	
+	public static void cleanup() {
+		locations.clear();
+	}
+	
 	public static void addLocation(String name, Location loc) {
 		locations.put(name, loc);
 	}

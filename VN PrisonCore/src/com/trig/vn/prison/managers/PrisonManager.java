@@ -32,11 +32,12 @@ public class PrisonManager {
 		prisonPlayers.add(player);
 		//Get rank
 		try {			
+			main.getDatabaseManager().registerPlayer(player);
 			String rank = main.getDatabaseManager().getPrisonRankName(player.getUniqueId().toString());
 			PrisonRank prank = PrisonRank.getPrisonRank(rank);
 			player.setRank(prank);
 		} catch (Exception e) {
-			main.getDatabaseManager().registerPlayer(player);
+			e.printStackTrace();
 		}
 	}
 	
