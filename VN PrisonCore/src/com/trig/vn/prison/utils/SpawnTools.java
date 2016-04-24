@@ -13,7 +13,7 @@ public class SpawnTools {
 	public static void lightningCircle() {
 		temp = 100;
 		iterations = 0;
-		final Location center = new Location(Bukkit.getServer().getWorld("prison"), -60, 60, -60);
+		final Location center = new Location(Bukkit.getServer().getWorld("prison"), -60, 141, -60);
 		for(int i = 0; i < 50; i++) {
 			iterations++;
 			Bukkit.getServer().getScheduler().runTaskLater(Prison.instance(), new Runnable() {
