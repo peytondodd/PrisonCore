@@ -17,6 +17,7 @@ import com.trig.vn.prison.managers.RegionManager;
 import com.trig.vn.prison.objects.PrisonWarp;
 import com.trig.vn.prison.utils.Constant;
 import com.trig.vn.prison.utils.RegionConverter;
+import com.trig.vn.prison.utils.SpawnTools;
 import com.vn.core.utils.Region;
 
 public class CommandPrison implements CommandExecutor {
@@ -103,6 +104,10 @@ public class CommandPrison implements CommandExecutor {
 					p.sendMessage("§4Invalid usage! Use §6/prison link <name> <region-name> <location-name>");
 					return true;
 				}
+			}
+			if(args[0].equalsIgnoreCase("test")) {
+				SpawnTools.lightningCircle();
+				p.sendMessage("Created lightning");
 			}
 		}
 		return true;
