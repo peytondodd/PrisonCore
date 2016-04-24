@@ -1,5 +1,6 @@
 package com.trig.vn.prison.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -12,9 +13,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.PrisonPlayer;
 import com.trig.vn.prison.managers.LocationManager;
 import com.trig.vn.prison.managers.RegionManager;
 import com.trig.vn.prison.objects.PrisonWarp;
+import com.trig.vn.prison.ranks.PrisonRank;
 import com.trig.vn.prison.utils.Constant;
 import com.trig.vn.prison.utils.RegionConverter;
 import com.trig.vn.prison.utils.SpawnTools;
@@ -52,6 +55,36 @@ public class CommandPrison implements CommandExecutor {
 				v.setCustomNameVisible(true);
 				p.sendMessage("§6Spawned caravan driver at your location.");
 				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("setrank")) {
+				if(args.length == 3) {
+					String playerName = args[1];
+					String rank = args[2];
+					Player other = Bukkit.getServer().getPlayer(playerName);
+					if(other != null) {
+						PrisonRank r = PrisonRank.getPrisonRank(rank);
+						if(r != null) {
+							PrisonPlayer po = main.getPrisonManager().getPrisonPlayer(other);
+							if(po != null) {
+								po.setRank(r);
+								main.getDatabaseManager().updateRank(po);
+								p.sendMessage("§7Changed §6" + other.getName() + "§7's rank to §6" + r.getName());
+								po.sendMessage("§7Your rank was set to §6" + r.getName() + " §7by §6" + p.getName());
+								return true;
+							} else {
+								p.sendMessage("§cCould not find PrisonPlayer for " + other.getName());
+								return true;
+							}
+						} else {
+							p.sendMessage("§cThere is no rank with the name §6" + rank);
+							return true;
+						}
+					} else {
+						p.sendMessage("§cCould not find " + playerName);
+						return true;
+					}
+				}
 			}
 			
 			if(args[0].equalsIgnoreCase("region")) {

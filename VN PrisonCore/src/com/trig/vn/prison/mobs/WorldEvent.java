@@ -44,6 +44,11 @@ public class WorldEvent {
 		bar.show();
 		bar.setProgress(1);
 		inProgress = true;
+		start();
+	}
+	
+	private static void start() {
+		
 	}
 	
 	public static void cleanup() {
