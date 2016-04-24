@@ -22,7 +22,7 @@ public class SpawnTools {
 					center.getWorld().strikeLightningEffect(new Location(center.getWorld(), center.getX() + temp, center.getY(), center.getZ()));
 					temp -= 2;
 				}
-			}, 2 * iterations);
+			}, 3 * iterations);
 		}
 		
 	}
