@@ -122,45 +122,59 @@ public class Prison extends JavaPlugin {
 	}
 	
 	private void loadRegions() {
-		for(String s : getConfig().getConfigurationSection("regions").getKeys(false)) {
-			String world = getConfig().getString("regions." + s + ".world");
-			int minX = getConfig().getInt("regions." + s + ".min.x");
-			int minY = getConfig().getInt("regions." + s + ".min.y");
-			int minZ = getConfig().getInt("regions." + s + ".min.z");
-			
-			int maxX = getConfig().getInt("regions." + s + ".max.x");
-			int maxY = getConfig().getInt("regions." + s + ".max.y");
-			int maxZ = getConfig().getInt("regions." + s + ".max.z");
-			
-			World w = Bukkit.getServer().getWorld(world);
-			Location min = new Location(w, minX, minY, minZ);
-			Location max = new Location(w, maxX, maxY, maxZ);
-			Region r = new Region(min, max);
-			RegionManager.addRegion(s, r);
+		try {
+			for(String s : getConfig().getConfigurationSection("regions").getKeys(false)) {
+				String world = getConfig().getString("regions." + s + ".world");
+				int minX = getConfig().getInt("regions." + s + ".min.x");
+				int minY = getConfig().getInt("regions." + s + ".min.y");
+				int minZ = getConfig().getInt("regions." + s + ".min.z");
+				
+				int maxX = getConfig().getInt("regions." + s + ".max.x");
+				int maxY = getConfig().getInt("regions." + s + ".max.y");
+				int maxZ = getConfig().getInt("regions." + s + ".max.z");
+				
+				World w = Bukkit.getServer().getWorld(world);
+				Location min = new Location(w, minX, minY, minZ);
+				Location max = new Location(w, maxX, maxY, maxZ);
+				Region r = new Region(min, max);
+				RegionManager.addRegion(s, r);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 	}
 	
 	private void loadLocations() {
-		for(String s : getConfig().getConfigurationSection("locations").getKeys(false)) {
-			String world = getConfig().getString("locations." + s + ".world");
-			double x = getConfig().getDouble("locations." + s + ".x");
-			double y = getConfig().getDouble("locations." + s + ".y");
-			double z = getConfig().getDouble("locations." + s + ".z");
-			float yaw = (float) getConfig().getDouble("locations." + s + ".yaw");
-			float pitch = (float) getConfig().getDouble("locations." + s + ".pitch");
-			
-			World w = Bukkit.getServer().getWorld(world);
-			Location loc = new Location(w, x, y, z, yaw, pitch);
-			LocationManager.addLocation(s, loc);
+		try {
+			for(String s : getConfig().getConfigurationSection("locations").getKeys(false)) {
+				String world = getConfig().getString("locations." + s + ".world");
+				double x = getConfig().getDouble("locations." + s + ".x");
+				double y = getConfig().getDouble("locations." + s + ".y");
+				double z = getConfig().getDouble("locations." + s + ".z");
+				float yaw = (float) getConfig().getDouble("locations." + s + ".yaw");
+				float pitch = (float) getConfig().getDouble("locations." + s + ".pitch");
+				
+				World w = Bukkit.getServer().getWorld(world);
+				Location loc = new Location(w, x, y, z, yaw, pitch);
+				LocationManager.addLocation(s, loc);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 	}
 	
 	private void loadLinks() {
-		for(String s : getConfig().getConfigurationSection("links").getKeys(false)) {
-			String region = getConfig().getString("links." + s + ".region");
-			String location = getConfig().getString("links." + s + ".location");
-			PrisonWarp warp = new PrisonWarp(region, location);
-			PrisonLinks.addWarp(warp);
+		try {
+			for(String s : getConfig().getConfigurationSection("links").getKeys(false)) {
+				String region = getConfig().getString("links." + s + ".region");
+				String location = getConfig().getString("links." + s + ".location");
+				PrisonWarp warp = new PrisonWarp(region, location);
+				PrisonLinks.addWarp(warp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
