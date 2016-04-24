@@ -42,7 +42,7 @@ public class PrisonRank {
 	public static boolean canRankup(PrisonPlayer player) {
 		PrisonRank next = PrisonRank.getNextRank(player.getRank());
 		if(next == null) {
-			player.sendMessage(ChatColor.RED + "You are currently the highest rank!");
+			player.sendMessage(ChatColor.GOLD + "You are already the highest rank!");
 			return false;
 		}
 		double amount = next.getValue();
