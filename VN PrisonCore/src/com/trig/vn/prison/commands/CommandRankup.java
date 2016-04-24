@@ -28,6 +28,10 @@ public class CommandRankup implements CommandExecutor {
 				if(PrisonRank.canRankup(player)) {
 					player.rankup();
 				} else {
+					if(PrisonRank.isFinalRank(player.getRank())) {
+						player.sendMessage("§6You are already the highest rank!");
+						return true;
+					}
 					PrisonRank next = PrisonRank.getNextRank(player.getRank());
 					player.sendMessage("§7Your next rank §6[§8" + next.getName() + "§6] §7costs §a$" + format.format(next.getValue()));
 					return true;

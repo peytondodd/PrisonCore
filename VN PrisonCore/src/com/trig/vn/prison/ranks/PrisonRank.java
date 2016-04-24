@@ -35,6 +35,10 @@ public class PrisonRank {
 		return (current > slot);
 	}
 	
+	public boolean equals(PrisonRank other) {
+		return rankName.equalsIgnoreCase(other.getName());
+	}
+	
 	public static boolean canRankup(PrisonPlayer player) {
 		PrisonRank next = PrisonRank.getNextRank(player.getRank());
 		if(next == null) {
@@ -53,13 +57,17 @@ public class PrisonRank {
 	public static PrisonRank getNextRank(PrisonRank currentRank) {
 		for(int i = 0; i < getPrisonRanks().size(); i++) {
 			if(getPrisonRanks().get(i).getName().equalsIgnoreCase(currentRank.getName())) {
-				if(i + 1 > getPrisonRanks().size()) {
+				if(i + 1 >= getPrisonRanks().size()) {
 					return null;
 				}
 				return getPrisonRanks().get(i + 1);
 			}
 		}
 		return null;
+	}
+	
+	public static boolean isFinalRank(PrisonRank rank) {
+		return (prisonRanks.get(prisonRanks.size() - 1).equals(rank));
 	}
 	
 	public static PrisonRank getPreviousRank(PrisonRank currentRank) {
