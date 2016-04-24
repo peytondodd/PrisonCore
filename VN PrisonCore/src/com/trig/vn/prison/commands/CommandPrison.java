@@ -50,7 +50,7 @@ public class CommandPrison implements CommandExecutor {
 			if(args[0].equalsIgnoreCase("caravan")) {
 				//NPCHandler.instance().createDummyVillager(p.getLocation(), Constant.CARAVAN_DRIVER);
 				Villager v = (Villager) p.getWorld().spawnEntity(p.getLocation(), EntityType.VILLAGER);
-				v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 233, Integer.MAX_VALUE));
+				v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 133));
 				v.setCustomName(Constant.CARAVAN_DRIVER);
 				v.setCustomNameVisible(true);
 				p.sendMessage("§6Spawned caravan driver at your location.");
