@@ -26,7 +26,7 @@ public class CommandBackpack implements CommandExecutor {
 			if(args.length == 0) { //Open their own backpack
 				Player player = (Player) sender;
 				PrisonPlayer p = main.getPrisonManager().getPrisonPlayer(player);
-				p.openInventory(p.getAlternativeInventory());
+				player.openInventory(p.getAlternativeInventory());
 				return true;
 			}
 			//ADMIN command - check another player's backpack
