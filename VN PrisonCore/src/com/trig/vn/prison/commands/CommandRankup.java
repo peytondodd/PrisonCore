@@ -1,5 +1,7 @@
 package com.trig.vn.prison.commands;
 
+import java.text.DecimalFormat;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,6 +14,7 @@ import com.trig.vn.prison.ranks.PrisonRank;
 public class CommandRankup implements CommandExecutor {
 
 	private Prison main;
+	private DecimalFormat format = new DecimalFormat("#,###.##");
 	
 	public CommandRankup(Prison main) {
 		this.main = main;
@@ -25,7 +28,7 @@ public class CommandRankup implements CommandExecutor {
 				if(PrisonRank.canRankup(player)) {
 					player.rankup();
 				} else {
-					player.sendMessage("§7Your next rank costs §a$" + PrisonRank.getNextRank(player.getRank()).getValue());
+					player.sendMessage("§7Your next rank costs §a$" + format.format(PrisonRank.getNextRank(player.getRank()).getValue()));
 					return true;
 				}
 			}
