@@ -32,7 +32,7 @@ public class PrisonRank {
 	public boolean isAheadOf(PrisonRank rank) {
 		int slot = prisonRanks.indexOf(rank);
 		int current = prisonRanks.indexOf(this);
-		return (current > slot);
+		return (current >= slot);
 	}
 	
 	public boolean equals(PrisonRank other) {
