@@ -1,4 +1,4 @@
-package com.trig.vn.prison;
+package com.trig.vn.prison.managers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,8 @@ import org.bukkit.craftbukkit.v1_9_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.PrisonPlayer;
 import com.trig.vn.prison.ranks.PrisonRank;
 
 public class PrisonManager {

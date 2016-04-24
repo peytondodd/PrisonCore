@@ -1,6 +1,7 @@
 package com.trig.vn.prison.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,7 +12,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.managers.LocationManager;
+import com.trig.vn.prison.managers.RegionManager;
+import com.trig.vn.prison.objects.PrisonWarp;
 import com.trig.vn.prison.utils.Constant;
+import com.trig.vn.prison.utils.RegionConverter;
+import com.vn.core.utils.Region;
 
 public class CommandPrison implements CommandExecutor {
 
@@ -45,6 +51,58 @@ public class CommandPrison implements CommandExecutor {
 				v.setCustomNameVisible(true);
 				p.sendMessage("§6Spawned caravan driver at your location.");
 				return true;
+			}
+			
+			if(args[0].equalsIgnoreCase("region")) {
+				if(args.length == 2) {
+					String rg = args[1];
+					Region r = RegionConverter.getRegionFromSelection(main.getWorldEdit().getSelection(p));
+					main.saveRegion(rg, r);
+					p.sendMessage("§aCreated region §6" + rg);
+					p.sendMessage("§6§lMIN: §7X: " + r.getMin().getX() + "  Y: " + r.getMin().getY() + "  Z: " + r.getMin().getZ());
+					p.sendMessage("§6§lMAX: §7X: " + r.getMax().getX() + "  Y: " + r.getMax().getY() + "  Z: " + r.getMax().getZ());
+					return true;
+				} else {
+					p.sendMessage("§4Invalid usage! Use §6/prison region <name>");
+					return true;
+				}
+			}
+			if(args[0].equalsIgnoreCase("location")) {
+				if(args.length == 2) {
+					String rg = args[1];
+					Location loc = p.getLocation();
+					main.saveLocation(rg, loc);
+					p.sendMessage("§Created location at your current position.");
+					return true;
+				} else {
+					p.sendMessage("§4Invalid usage! Use §6/prison location <name>");
+					return true;
+				}
+			}
+			
+			if(args[0].equalsIgnoreCase("link")) {
+				if(args.length == 4) {
+					String name = args[1];
+					String region = args[2];
+					String location = args[3];
+					if(RegionManager.getRegion(region) != null) {
+						if(LocationManager.getLocation(location) != null) {
+							PrisonWarp warp = new PrisonWarp(region, location);
+							main.saveLink(name, warp);
+							p.sendMessage("§aSaved link §6" + name + " §7[" + region + "->" + location + "]");
+							return true;
+						} else {
+							p.sendMessage("§4The location §6" + location + " §4could not be found.");
+							return true;
+						}
+					} else {
+						p.sendMessage("§4The region §6" + region + " §4could not be found.");
+						return true;
+					}
+				} else {
+					p.sendMessage("§4Invalid usage! Use §6/prison link <name> <region-name> <location-name>");
+					return true;
+				}
 			}
 		}
 		return true;

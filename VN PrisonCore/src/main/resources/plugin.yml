@@ -2,7 +2,7 @@ name: PrisonCore
 author: Trig
 version: 1
 main: com.trig.vn.prison.Prison
-depend: [VNDB, NPCHandler, Essentials]
+depend: [VNDB, NPCHandler, Essentials, WorldEdit]
 commands:
   rankup:
     description: Rankup command
