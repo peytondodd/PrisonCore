@@ -15,7 +15,7 @@ public class SpawnTools {
 	private static int temp = 100;
 	private static int iterations = 0;
 	
-	public static void lightningCircle() {
+	public static void lightningLine() {
 		temp = 100;
 		iterations = 0;
 		final Location center = new Location(Bukkit.getServer().getWorld("prison"), -60, 141, -60);
@@ -38,5 +38,19 @@ public class SpawnTools {
 		}
 		bar.show();
 		bar.setProgress(1);
+	}
+	
+	public static void lightningCircle(Location center, int radius) {
+		int x;
+		int y = center.getBlockY();
+		int z;
+		
+		for(double i = 0.0; i < 360.0; i += 0.1) {
+			double angle = i * Math.PI / 180;
+			x = (int)(center.getX() + radius * Math.cos(angle));
+			z = (int)(center.getZ() + radius * Math.sin(angle));
+			
+			center.getWorld().strikeLightningEffect(new Location(center.getWorld(), x, y, z));
+		}
 	}
 }
