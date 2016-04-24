@@ -71,6 +71,18 @@ public class DatabaseManager {
 		return 9;
 	}
 	
+	public void updateRank(PrisonPlayer p) {
+		try {
+			PreparedStatement statement = c.prepareStatement("UPDATE t_players SET rank=? WHERE uuid=?");
+			statement.setString(1, p.getRank().getName());
+			statement.setString(2, p.getUniqueId().toString());
+			statement.executeUpdate();
+			statement.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void registerPlayer(PrisonPlayer p) {
 		//System.out.println("Registering player: " + p.getName() + " (" + p.getUniqueId().toString() + ")");
 		try {

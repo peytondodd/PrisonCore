@@ -68,6 +68,7 @@ public class PrisonPlayer extends CraftPlayer {
 			Prison.getEco().withdrawPlayer(this.getPlayer(), next.getValue());
 			this.setRank(PrisonRank.getNextRank(this.getRank()));
 			Bukkit.getServer().broadcastMessage("§e" + this.getName() + " §7has ranked up to §e§l" + this.getRank().getName() + "§7!");
+			Prison.instance().getDatabaseManager().updateRank(this);
 		} else {
 			this.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
 			return;

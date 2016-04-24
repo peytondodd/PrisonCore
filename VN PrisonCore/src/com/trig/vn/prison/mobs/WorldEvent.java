@@ -21,6 +21,7 @@ public class WorldEvent {
 	private static long startTime = 0L;
 	private static WorldEventLocation loc;
 	private static BossBar bar;
+	private static boolean inProgress = false;
 	
 	public static void init() {
 		cleanup();
@@ -42,16 +43,36 @@ public class WorldEvent {
 		}
 		bar.show();
 		bar.setProgress(1);
-		
+		inProgress = true;
 	}
 	
 	public static void cleanup() {
 		loc = null;
+		bar.hide();
+		bar.removeAll();
+		bar = null;
+		inProgress = false;
 		for(Entity e : entities) {
 			if(e.isValid()) {
 				e.remove();
 			}
 		}
+	}
+	
+	public static void givePlayerBar(Player p) {
+		if(bar != null) {
+			bar.addPlayer(p);
+		}
+	}
+	
+	public static void removePlayerBar(Player p) {
+		if(bar != null) {
+			bar.removePlayer(p);
+		}
+	}
+	
+	public static boolean inProgress() {
+		return inProgress;
 	}
 
 }

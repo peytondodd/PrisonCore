@@ -24,6 +24,9 @@ public class CommandRankup implements CommandExecutor {
 				PrisonPlayer player = main.getPrisonManager().getPrisonPlayer(p);	
 				if(PrisonRank.canRankup(player)) {
 					player.rankup();
+				} else {
+					player.sendMessage("§7Your next rank costs §a$" + PrisonRank.getNextRank(player.getRank()).getValue());
+					return true;
 				}
 			}
 		}

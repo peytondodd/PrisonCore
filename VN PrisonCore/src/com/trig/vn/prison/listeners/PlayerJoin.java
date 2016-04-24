@@ -5,6 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.mobs.WorldEvent;
 
 public class PlayerJoin implements Listener {
 
@@ -17,5 +18,9 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		main.getPrisonManager().setupPlayer(e.getPlayer());
+		
+		if(WorldEvent.inProgress() && e.getPlayer().getLocation().getWorld().getName().equalsIgnoreCase("prison")) {
+			WorldEvent.givePlayerBar(e.getPlayer());
+		}
 	}
 }
