@@ -106,8 +106,8 @@ public class CommandPrison implements CommandExecutor {
 				}
 			}
 			if(args[0].equalsIgnoreCase("test")) {
-				SpawnTools.lightningCircle();
-				p.sendMessage("Created lightning");
+				SpawnTools.test();
+				p.sendMessage("Executed test");
 			}
 		}
 		return true;

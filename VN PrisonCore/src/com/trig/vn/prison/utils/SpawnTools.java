@@ -2,6 +2,11 @@ package com.trig.vn.prison.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
+import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
 
@@ -24,6 +29,14 @@ public class SpawnTools {
 				}
 			}, 5 * iterations);
 		}
-		
+	}
+	
+	public static void test() {
+		BossBar bar = Bukkit.getServer().createBossBar("§6King's Soul", BarColor.GREEN, BarStyle.SEGMENTED_6, BarFlag.CREATE_FOG, BarFlag.DARKEN_SKY);
+		for(Player p : Bukkit.getServer().getWorld("prison").getPlayers()) {
+			bar.addPlayer(p);
+		}
+		bar.show();
+		bar.setProgress(1);
 	}
 }
