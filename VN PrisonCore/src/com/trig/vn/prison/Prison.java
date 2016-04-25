@@ -177,6 +177,9 @@ public class Prison extends JavaPlugin {
 				String location = getConfig().getString("links." + s + ".location");
 				PrisonWarp warp = new PrisonWarp(region, location);
 				PrisonLinks.addWarp(warp);
+				if(getConfig().contains("links." + s + ".permission")) {
+					warp.setPermission(getConfig().getString("links." + s + ".permission"));
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

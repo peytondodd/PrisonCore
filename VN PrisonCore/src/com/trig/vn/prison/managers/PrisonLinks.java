@@ -41,6 +41,19 @@ public class PrisonLinks {
 		}
 	}
 	
+	public static boolean canLink(String region, Player p) {
+		for(PrisonWarp warp : links) {
+			if(warp.getRegion().equalsIgnoreCase(region)) {
+				if(warp.getPermission() != null) {
+					return (p.hasPermission(warp.getPermission()));
+				} else {
+					return true;
+				}
+			}
+		}
+		return true;
+	}
+	
 	public static PrisonWarp getLinkForRegion(String region) {
 		if(linkValid(region)) {
 			for(PrisonWarp warp : links) {
