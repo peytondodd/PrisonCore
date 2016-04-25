@@ -90,9 +90,14 @@ public class PrisonPlayer extends CraftPlayer {
 	}
 	
 	public void updateRank() {
-		PrisonRank previous = PrisonRank.getPreviousRank(rank);
-		PermissionsEx.getUser(this).removeGroup(previous.getName());
-		PermissionsEx.getUser(this).addGroup(rank.getName());
+		try {
+			//TODO Store an instance of the player's ACTUAL last rank. /setrank command will mess up perms
+			PrisonRank previous = PrisonRank.getPreviousRank(rank);
+			PermissionsEx.getUser(this).removeGroup(previous.getName());
+			PermissionsEx.getUser(this).addGroup(rank.getName());			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void updateWarps() {

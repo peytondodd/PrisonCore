@@ -23,7 +23,7 @@ public class PlayerLinkEvent implements Listener {
 		if((rg = RegionManager.getPlayerRegion(e.getPlayer())) != null) {
 			if(PrisonLinks.linkValid(rg)) {
 				PrisonLinks.link(rg, e.getPlayer());
-				System.out.println("Linking " + e.getPlayer().getName() + " [" + rg + "->" + PrisonLinks.getLinkForRegion(rg).getLocation() + "]");
+				//System.out.println("Linking " + e.getPlayer().getName() + " [" + rg + "->" + PrisonLinks.getLinkForRegion(rg).getLocation() + "]");
 				return;
 			}
 		}
