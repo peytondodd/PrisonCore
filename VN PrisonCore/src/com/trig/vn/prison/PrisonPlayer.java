@@ -49,10 +49,7 @@ public class PrisonPlayer extends CraftPlayer {
 	}
 
 	public void setRank(PrisonRank rank) {
-		PrisonRank current = PrisonRank.getPrisonRank(getRank().getName());
-		PermissionsEx.getUser(this).removeGroup(current.getName());
 		this.rank = rank;
-		PermissionsEx.getUser(this).addGroup(rank.getName());
 	}
 	
 	public void setKingdomRank(KingdomRank kingdomRank) {
@@ -83,12 +80,19 @@ public class PrisonPlayer extends CraftPlayer {
 			this.setRank(PrisonRank.getNextRank(this.getRank()));
 			Bukkit.getServer().broadcastMessage("§e" + this.getName() + " §7has ranked up to §e§l" + this.getRank().getName() + "§7!");
 			Prison.instance().getDatabaseManager().updateRank(this);
-			PermissionsEx.getUser(this).removeGroup(current.getName());
-			PermissionsEx.getUser(this).addGroup(getRank().getName());
+			updateRank();
+//			PermissionsEx.getUser(this).removeGroup(current.getName());
+//			PermissionsEx.getUser(this).addGroup(getRank().getName());
 		} else {
 			this.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
 			return;
 		}
+	}
+	
+	public void updateRank() {
+		PrisonRank previous = PrisonRank.getPreviousRank(rank);
+		PermissionsEx.getUser(this).removeGroup(previous.getName());
+		PermissionsEx.getUser(this).addGroup(rank.getName());
 	}
 	
 	private void updateWarps() {

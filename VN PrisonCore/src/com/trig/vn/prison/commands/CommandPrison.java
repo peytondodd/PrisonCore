@@ -80,6 +80,7 @@ public class CommandPrison implements CommandExecutor {
 							if(po != null) {
 								po.setRank(r);
 								main.getDatabaseManager().updateRank(po);
+								po.updateRank();
 								p.sendMessage("§7Changed §6" + other.getName() + "§7's rank to §6" + r.getName());
 								po.sendMessage("§7Your rank was set to §6" + r.getName() + " §7by §6" + p.getName());
 								return true;
