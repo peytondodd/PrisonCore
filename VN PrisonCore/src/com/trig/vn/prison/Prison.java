@@ -14,8 +14,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import ru.tehkode.permissions.bukkit.PermissionsEx;
-
 import com.earth2me.essentials.Essentials;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.trig.npchandler.NPCHandler;
@@ -30,9 +28,10 @@ import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.kingdoms.KingdomManager;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.listeners.CaravanDriver;
+import com.trig.vn.prison.listeners.ChangeWorld;
 import com.trig.vn.prison.listeners.ClickSellSignEvent;
-import com.trig.vn.prison.listeners.PlayerLinkEvent;
 import com.trig.vn.prison.listeners.PlayerJoin;
+import com.trig.vn.prison.listeners.PlayerLinkEvent;
 import com.trig.vn.prison.managers.LocationManager;
 import com.trig.vn.prison.managers.PrisonLinks;
 import com.trig.vn.prison.managers.PrisonManager;
@@ -111,6 +110,7 @@ public class Prison extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new ClickEggEvent(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new CaravanDriver(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLinkEvent(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new ChangeWorld(), this);
 	}
 	
 	private void registerCommands() {
