@@ -3,6 +3,8 @@ package com.trig.vn.prison.listeners;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.mobs.WorldEvent;
@@ -21,6 +23,7 @@ public class PlayerJoin implements Listener {
 		
 		if(WorldEvent.inProgress() && e.getPlayer().getLocation().getWorld().getName().equalsIgnoreCase("prison")) {
 			WorldEvent.givePlayerBar(e.getPlayer());
+			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1, Integer.MAX_VALUE));
 		}
 	}
 }
