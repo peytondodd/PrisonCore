@@ -34,23 +34,27 @@ public class MineShop {
 		for(ItemStack item : values.keySet()) {
 			for(int i = 1; i <= 2; i++) { //Loop through two inventories
 				int a = 0;
-				switch(i) {
-				case 1:
-					a = getAmountOfItem(item, p.getInventory());
-					break;
-				case 2:
-					a = getAmountOfItem(item, p.getAlternativeInventory());
-					break;
-				}
-				if(a <= 0) { continue; }
-				double value = getValue(item);
-				double total = value * a;
-				total *= Multiplier.getMultiplier(p);
 				ItemStack it = item.clone();
 				MaterialData data = item.getData();
 				it.setData(data);
-				it.setAmount(a);
-				p.getInventory().removeItem(it);
+				switch(i) {
+				case 1:
+					a = getAmountOfItem(item, p.getInventory());
+					if(a <= 0) { continue; }
+					it.setAmount(a);
+					p.getInventory().removeItem(it);
+					break;
+				case 2:
+					a = getAmountOfItem(item, p.getAlternativeInventory());
+					if(a <= 0) { continue; }
+					it.setAmount(a);
+					p.getAlternativeInventory().removeItem(it);
+					break;
+				}
+				double value = getValue(item);
+				double total = value * a;
+				total *= Multiplier.getMultiplier(p);
+				
 				Prison.getEco().depositPlayer(p, total);
 				p.sendMessage("§a$" + total + " §7was added to your account for selling " + item.getType());
 			}
