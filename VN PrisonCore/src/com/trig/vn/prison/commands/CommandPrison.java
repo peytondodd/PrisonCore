@@ -151,7 +151,7 @@ public class CommandPrison implements CommandExecutor {
 				}
 			}
 			if(args[0].equalsIgnoreCase("test")) {
-				SpawnTools.test();
+				SpawnTools.lightningCircle(new Location(p.getWorld(), -60, 141, -60), 20);
 				p.sendMessage("Executed test");
 			}
 		}
