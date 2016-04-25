@@ -11,6 +11,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import ru.tehkode.permissions.bukkit.PermissionsEx;
+
 import com.trig.vn.prison.achievements.PrisonAchievements;
 import com.trig.vn.prison.kingdoms.KingdomRank;
 import com.trig.vn.prison.ranks.PrisonRank;
@@ -47,7 +49,10 @@ public class PrisonPlayer extends CraftPlayer {
 	}
 
 	public void setRank(PrisonRank rank) {
+		PrisonRank current = PrisonRank.getPrisonRank(getRank().getName());
+		PermissionsEx.getUser(this).removeGroup(current.getName());
 		this.rank = rank;
+		PermissionsEx.getUser(this).addGroup(rank.getName());
 	}
 	
 	public void setKingdomRank(KingdomRank kingdomRank) {
@@ -71,13 +76,15 @@ public class PrisonPlayer extends CraftPlayer {
 	}
 	
 	public void rankup() {
-		PrisonRank current = this.getRank();
+		PrisonRank current = PrisonRank.getPrisonRank(this.getRank().getName());
 		PrisonRank next = PrisonRank.getNextRank(current);
 		if(Prison.getEco().getBalance(this.getPlayer()) >= next.getValue()) { //The player has enough money
 			Prison.getEco().withdrawPlayer(this.getPlayer(), next.getValue());
 			this.setRank(PrisonRank.getNextRank(this.getRank()));
 			Bukkit.getServer().broadcastMessage("§e" + this.getName() + " §7has ranked up to §e§l" + this.getRank().getName() + "§7!");
 			Prison.instance().getDatabaseManager().updateRank(this);
+			PermissionsEx.getUser(this).removeGroup(current.getName());
+			PermissionsEx.getUser(this).addGroup(getRank().getName());
 		} else {
 			this.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
 			return;

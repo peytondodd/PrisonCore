@@ -14,6 +14,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ru.tehkode.permissions.bukkit.PermissionsEx;
+
 import com.earth2me.essentials.Essentials;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.trig.npchandler.NPCHandler;
@@ -83,7 +85,6 @@ public class Prison extends JavaPlugin {
 		core = (Core) Bukkit.getServer().getPluginManager().getPlugin("VNCore");
 		essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 		worldEdit = (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
-		
 		setupSQL();
 		core.registerSQLConnection(c);
 		Constant.init();
