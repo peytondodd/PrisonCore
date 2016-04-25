@@ -25,6 +25,7 @@ public class PrisonPlayer extends CraftPlayer {
 	private PrisonAchievements achievements = new PrisonAchievements();
 	
 	private long lastTitle = 0L;
+	private boolean titles = true;
 	
 	public PrisonPlayer(CraftServer server, EntityPlayer entity) {
 		super(server, entity);
@@ -96,6 +97,14 @@ public class PrisonPlayer extends CraftPlayer {
 			warpGui.addItem(warp);
 		}
 		
+	}
+	
+	public boolean canSeeTitles() {
+		return titles;
+	}
+	
+	public void toggleTitles() {
+		titles = !titles;
 	}
 	
 	public void setLastTitle(long lastTitle) {

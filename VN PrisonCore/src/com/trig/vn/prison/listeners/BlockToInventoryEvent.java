@@ -48,9 +48,11 @@ public class BlockToInventoryEvent implements Listener {
 			if(p.getInventory().firstEmpty() == -1) {
 				if(pp.getAlternativeInventory().firstEmpty() == -1) {
 					//both inventories are full
-					if(System.currentTimeMillis() - pp.getLastTitle() >= TITLE_DELAY) {						
-						pp.sendTitle("§c§lWarning", "§4Full Inventory");
-						pp.setLastTitle(System.currentTimeMillis());
+					if(pp.canSeeTitles()) {						
+						if(System.currentTimeMillis() - pp.getLastTitle() >= TITLE_DELAY) {						
+							pp.sendTitle("§c§lWarning", "§4Full Inventory");
+							pp.setLastTitle(System.currentTimeMillis());
+						}
 					}
 				} else {
 					inv = pp.getAlternativeInventory();

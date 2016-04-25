@@ -36,6 +36,17 @@ public class CommandPrison implements CommandExecutor {
 				sender.sendMessage("Command not available from console.");
 				return true;
 			}
+			if(args[0].equalsIgnoreCase("titles")) {
+				Player p = (Player) sender;
+				PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
+				pp.toggleTitles();
+				if(pp.canSeeTitles()) {					
+					pp.sendMessage("§7Titles are now §6on!");
+				} else {
+					pp.sendMessage("§7Titles are now §6off!");
+				}
+				return true;
+			}
 			if(!sender.hasPermission("vn.admin")) {
 				sender.sendMessage(ChatColor.RED + "This command is for admins only.");
 				return true;
