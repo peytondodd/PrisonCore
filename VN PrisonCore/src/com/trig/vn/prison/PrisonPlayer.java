@@ -24,6 +24,8 @@ public class PrisonPlayer extends CraftPlayer {
 	private int backpackSize = 9;
 	private PrisonAchievements achievements = new PrisonAchievements();
 	
+	private long lastTitle = 0L;
+	
 	public PrisonPlayer(CraftServer server, EntityPlayer entity) {
 		super(server, entity);
 		Prison.instance().getDatabaseManager().loadAchievements(this);
@@ -31,6 +33,8 @@ public class PrisonPlayer extends CraftPlayer {
 		backpackSize = Prison.instance().getDatabaseManager().getBackpackSize(this);
 		altInv = Bukkit.getServer().createInventory(null, backpackSize, "" + getName());
 		warpGui = Bukkit.getServer().createInventory(null, 54, "§6Locations");
+		
+		lastTitle = System.currentTimeMillis();
 	}
 	
 	public void openAchievements() {
@@ -61,6 +65,10 @@ public class PrisonPlayer extends CraftPlayer {
 		return achievements;
 	}
 	
+	public long getLastTitle() {
+		return lastTitle;
+	}
+	
 	public void rankup() {
 		PrisonRank current = this.getRank();
 		PrisonRank next = PrisonRank.getNextRank(current);
@@ -88,6 +96,10 @@ public class PrisonPlayer extends CraftPlayer {
 			warpGui.addItem(warp);
 		}
 		
+	}
+	
+	public void setLastTitle(long lastTitle) {
+		this.lastTitle = lastTitle;
 	}
 	
 	public void openWarpGUI() {

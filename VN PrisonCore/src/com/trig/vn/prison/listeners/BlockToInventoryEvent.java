@@ -23,6 +23,8 @@ public class BlockToInventoryEvent implements Listener {
 	private Prison main;
 	private static HashMap<Material, ItemStack> blockConversions = new HashMap<Material, ItemStack>();
 	
+	private static final long TITLE_DELAY = 3000;
+	
 	public BlockToInventoryEvent(Prison main) {
 		this.main = main;
 		blockConversions.put(Material.REDSTONE_ORE, new ItemStack(Material.REDSTONE));
@@ -46,7 +48,10 @@ public class BlockToInventoryEvent implements Listener {
 			if(p.getInventory().firstEmpty() == -1) {
 				if(pp.getAlternativeInventory().firstEmpty() == -1) {
 					//both inventories are full
-					pp.sendTitle("§c§lWarning", "§4Full Inventory");
+					if(System.currentTimeMillis() - pp.getLastTitle() >= TITLE_DELAY) {						
+						pp.sendTitle("§c§lWarning", "§4Full Inventory");
+						pp.setLastTitle(System.currentTimeMillis());
+					}
 				} else {
 					inv = pp.getAlternativeInventory();
 				}
