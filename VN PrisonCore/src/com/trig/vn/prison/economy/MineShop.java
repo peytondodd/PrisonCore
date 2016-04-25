@@ -52,7 +52,7 @@ public class MineShop {
 				it.setAmount(a);
 				p.getInventory().removeItem(it);
 				Prison.getEco().depositPlayer(p, total);
-				p.sendMessage("§a$" + total + " §7 was added to your account for selling " + item.getType());
+				p.sendMessage("§a$" + total + " §7was added to your account for selling " + item.getType());
 			}
 		}
 	}
