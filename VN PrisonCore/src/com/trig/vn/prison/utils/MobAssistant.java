@@ -1,17 +1,22 @@
 package com.trig.vn.prison.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 public class MobAssistant {
 
-	public static void spawnMassEntity(Location center, double radius, int amount, EntityType type) {
+	public static List<Entity> spawnMassEntity(Location center, double radius, int amount, EntityType type) {
+		List<Entity> entities = new ArrayList<Entity>();
 		for(int i = 0; i < amount; i++) {
 			Location loc = randomLocation(center, radius);
-			loc.getWorld().spawnEntity(loc, type);
+			entities.add(loc.getWorld().spawnEntity(loc, type));
 		}
+		return entities;
 	}
 	
 	public static Location randomLocation(Location center, double radius) {

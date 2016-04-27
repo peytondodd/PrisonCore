@@ -16,6 +16,7 @@ import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
 import com.trig.vn.prison.managers.LocationManager;
 import com.trig.vn.prison.managers.RegionManager;
+import com.trig.vn.prison.mobs.WorldEvent;
 import com.trig.vn.prison.objects.PrisonWarp;
 import com.trig.vn.prison.ranks.PrisonRank;
 import com.trig.vn.prison.utils.Constant;
@@ -153,6 +154,16 @@ public class CommandPrison implements CommandExecutor {
 			if(args[0].equalsIgnoreCase("test")) {
 				SpawnTools.lightningCircle(new Location(p.getWorld(), -60, 141, -60), 20);
 				p.sendMessage("Executed test");
+			}
+			if(args[0].equalsIgnoreCase("startevent")) {
+				p.sendMessage("§5Starting World Event...");
+				WorldEvent.init();
+				return true;
+			}
+			if(args[0].equalsIgnoreCase("stopevent")) {
+				p.sendMessage("§5Stopping World Event...");
+				WorldEvent.stop();
+				return true;
 			}
 		}
 		return true;

@@ -5,23 +5,30 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.utils.MobAssistant;
 
 public class WorldEvent {
 	
 	private static Prison main = Prison.instance();
 	private static List<Entity> entities = new ArrayList<Entity>(); //We'll need to keep track of everything so we can cleanup later
 	private static long startTime = 0L;
+	private static final long RUNTIME = 60000 * 10; //10 Minutes
 	private static WorldEventLocation loc;
+	private static Location center;
+	private static Location bossLoc;
 	private static BossBar bar;
 	private static boolean inProgress = false;
+	private static final double DRAIN_RATE = 0.0001;
 	
 	public static void init() {
 		cleanup();
@@ -44,24 +51,71 @@ public class WorldEvent {
 		bar.show();
 		bar.setProgress(1);
 		inProgress = true;
+		switch(loc) {
+		case CEMETARY:
+			center = new Location(Bukkit.getServer().getWorld("prison"), 312, 135, -20);
+			bossLoc = new Location(Bukkit.getServer().getWorld("prison"), 396, 134, -19);
+			break;
+		case LAKE:
+			
+			break;
+		}
 		start();
 	}
 	
 	private static void start() {
+		Bukkit.getServer().broadcastMessage("§6§lA World Event has started at §5§l" + loc.toString());
+		Thread damageThread = new Thread() {
+			public void run() {
+				if(inProgress && !over()) {	
+					//TODO check boss health
+					bar.setProgress(bar.getProgress() - (DRAIN_RATE * entities.size()));
+					try {
+						Thread.sleep(5000);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
 		
+		Thread mobThread = new Thread() {
+			public void run() {
+				if(inProgress && !over()) {					
+					entities.addAll(MobAssistant.spawnMassEntity(center, 30, 25, EntityType.ZOMBIE));
+					entities.addAll(MobAssistant.spawnMassEntity(center, 30, 25, EntityType.SKELETON));
+					try {
+						Thread.sleep(60000 * 2);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
 	}
 	
 	public static void cleanup() {
+		System.out.println("Cleaning up World Event...");
 		loc = null;
 		bar.hide();
 		bar.removeAll();
 		bar = null;
+		center = null;
+		bossLoc = null;
 		inProgress = false;
+		System.out.println("Clearing " + entities.size() + " entities.");
 		for(Entity e : entities) {
 			if(e.isValid()) {
 				e.remove();
 			}
 		}
+		System.out.println("Cleanup done.");
+	}
+	
+	public static void stop() {
+		inProgress = false;
+		System.out.println("Stopped World Event.");
+		cleanup();
 	}
 	
 	public static void givePlayerBar(Player p) {
@@ -78,6 +132,20 @@ public class WorldEvent {
 	
 	public static boolean inProgress() {
 		return inProgress;
+	}
+	
+	private static boolean over() {
+		if(bar.getProgress() <= 0) {
+			return true;
+		}
+		if(timeElapsed() >= RUNTIME) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static long timeElapsed() {
+		return System.currentTimeMillis() - startTime;
 	}
 
 }
