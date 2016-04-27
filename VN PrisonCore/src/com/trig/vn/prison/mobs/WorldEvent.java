@@ -92,6 +92,9 @@ public class WorldEvent {
 				}
 			}
 		};
+		
+		mobThread.start();
+		damageThread.start();
 	}
 	
 	public static void cleanup() {
