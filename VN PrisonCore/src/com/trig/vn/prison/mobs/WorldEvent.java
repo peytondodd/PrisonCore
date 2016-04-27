@@ -1,6 +1,7 @@
 package com.trig.vn.prison.mobs;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -28,7 +29,7 @@ public class WorldEvent {
 	private static Location bossLoc;
 	private static BossBar bar;
 	private static boolean inProgress = false;
-	private static final double DRAIN_RATE = 0.001;
+	private static final double DRAIN_RATE = 0.0001;
 	
 	public static void init() {
 		//cleanup();
@@ -67,7 +68,8 @@ public class WorldEvent {
 		Bukkit.getServer().broadcastMessage("§6§lA World Event has started at §5§l" + loc.toString());
 		Thread damageThread = new Thread() {
 			public void run() {
-				while(inProgress && !over()) {	
+				while(inProgress && !over()) {
+					verifyEntities();
 					//TODO check boss health
 					bar.setProgress(bar.getProgress() - (DRAIN_RATE * entities.size()));
 					System.out.println("Damaging King for " + (DRAIN_RATE * entities.size()));
@@ -114,6 +116,16 @@ public class WorldEvent {
 			}
 		}
 		System.out.println("Cleanup done.");
+	}
+	
+	private static void verifyEntities() {
+		Iterator<Entity> it = entities.iterator();
+		while(it.hasNext()) {
+			Entity e = it.next();
+			if(e.isDead()) {
+				it.remove();
+			}
+		}
 	}
 	
 	public static void stop() {
