@@ -31,7 +31,7 @@ public class WorldEvent {
 	private static final double DRAIN_RATE = 0.0001;
 	
 	public static void init() {
-		cleanup();
+		//cleanup();
 		startTime = System.currentTimeMillis();
 		Random rand = new Random();
 		int n = rand.nextInt(2) + 1;
