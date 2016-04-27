@@ -82,8 +82,8 @@ public class WorldEvent {
 		Thread mobThread = new Thread() {
 			public void run() {
 				if(inProgress && !over()) {					
-					entities.addAll(MobAssistant.spawnMassEntity(center, 30, 25, EntityType.ZOMBIE));
-					entities.addAll(MobAssistant.spawnMassEntity(center, 30, 25, EntityType.SKELETON));
+					MobAssistant.syncMassEntity(center, 30, 25, EntityType.ZOMBIE);
+					MobAssistant.syncMassEntity(center, 30, 25, EntityType.SKELETON);
 					try {
 						Thread.sleep(60000 * 2);
 					} catch (InterruptedException e) {
@@ -145,6 +145,10 @@ public class WorldEvent {
 			return true;
 		}
 		return false;
+	}
+	
+	public static void addEntity(Entity e) {
+		entities.add(e);
 	}
 	
 	public static long timeElapsed() {

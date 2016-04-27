@@ -4,19 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
+import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.mobs.WorldEvent;
+
 public class MobAssistant {
 
-	public static List<Entity> spawnMassEntity(Location center, double radius, int amount, EntityType type) {
-		List<Entity> entities = new ArrayList<Entity>();
+	public static void spawnMassEntity(Location center, double radius, int amount, EntityType type) {
 		for(int i = 0; i < amount; i++) {
 			Location loc = randomLocation(center, radius);
-			entities.add(loc.getWorld().spawnEntity(loc, type));
+			WorldEvent.addEntity(loc.getWorld().spawnEntity(loc, type));
 		}
-		return entities;
+	}
+	
+	public static void syncMassEntity(final Location center, final double radius, final int amount, final EntityType type) {
+		Bukkit.getServer().getScheduler().runTask(Prison.instance(), new Runnable() {
+			public void run() {
+				spawnMassEntity(center, radius, amount, type);
+			}
+		});
 	}
 	
 	public static Location randomLocation(Location center, double radius) {
