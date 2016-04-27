@@ -29,7 +29,7 @@ public class WorldEvent {
 	private static Location bossLoc;
 	private static BossBar bar;
 	private static boolean inProgress = false;
-	private static final double DRAIN_RATE = 0.0001;
+	private static final double DRAIN_RATE = 0.00015;
 	
 	public static void init() {
 		//cleanup();
@@ -88,7 +88,7 @@ public class WorldEvent {
 					MobAssistant.syncMassEntity(center, 30, 25, EntityType.ZOMBIE);
 					MobAssistant.syncMassEntity(center, 30, 25, EntityType.SKELETON);
 					try {
-						Thread.sleep(60000 * 1);
+						Thread.sleep(60010 * 1); //There is a delay to avoid concurrentmod
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
