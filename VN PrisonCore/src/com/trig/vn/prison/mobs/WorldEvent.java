@@ -70,6 +70,7 @@ public class WorldEvent {
 				if(inProgress && !over()) {	
 					//TODO check boss health
 					bar.setProgress(bar.getProgress() - (DRAIN_RATE * entities.size()));
+					System.out.println("Damaging King for " + (DRAIN_RATE * entities.size()));
 					try {
 						Thread.sleep(5000);
 					} catch (Exception e) {
