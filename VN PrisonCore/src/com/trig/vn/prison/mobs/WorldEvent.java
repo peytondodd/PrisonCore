@@ -28,7 +28,7 @@ public class WorldEvent {
 	private static Location bossLoc;
 	private static BossBar bar;
 	private static boolean inProgress = false;
-	private static final double DRAIN_RATE = 0.0001;
+	private static final double DRAIN_RATE = 0.001;
 	
 	public static void init() {
 		//cleanup();
