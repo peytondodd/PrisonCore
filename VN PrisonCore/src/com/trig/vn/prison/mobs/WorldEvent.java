@@ -67,7 +67,7 @@ public class WorldEvent {
 		Bukkit.getServer().broadcastMessage("§6§lA World Event has started at §5§l" + loc.toString());
 		Thread damageThread = new Thread() {
 			public void run() {
-				if(inProgress && !over()) {	
+				while(inProgress && !over()) {	
 					//TODO check boss health
 					bar.setProgress(bar.getProgress() - (DRAIN_RATE * entities.size()));
 					System.out.println("Damaging King for " + (DRAIN_RATE * entities.size()));
@@ -82,7 +82,7 @@ public class WorldEvent {
 		
 		Thread mobThread = new Thread() {
 			public void run() {
-				if(inProgress && !over()) {					
+				while(inProgress && !over()) {					
 					MobAssistant.syncMassEntity(center, 30, 25, EntityType.ZOMBIE);
 					MobAssistant.syncMassEntity(center, 30, 25, EntityType.SKELETON);
 					try {
