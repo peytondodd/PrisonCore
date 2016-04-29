@@ -27,6 +27,7 @@ import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.eggs.ClickEggEvent;
 import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.kingdoms.KingdomManager;
+import com.trig.vn.prison.listeners.BloatChatEvent;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.listeners.CaravanDriver;
 import com.trig.vn.prison.listeners.ChangeWorld;
@@ -112,6 +113,7 @@ public class Prison extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new CaravanDriver(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLinkEvent(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new ChangeWorld(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new BloatChatEvent(this), this);
 	}
 	
 	private void registerCommands() {

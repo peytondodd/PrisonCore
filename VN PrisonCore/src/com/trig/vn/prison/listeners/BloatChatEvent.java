@@ -5,11 +5,12 @@ import java.util.List;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.trig.vn.prison.Prison;
 
-public class BloatChatEvent {
+public class BloatChatEvent implements Listener {
 
 	private static List<Player> bloat = new ArrayList<Player>();
 	
