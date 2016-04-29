@@ -31,7 +31,7 @@ public class WorldEvent {
 	private static Location bossLoc;
 	private static BossBar bar;
 	private static boolean inProgress = false;
-	private static final double DRAIN_RATE = 0.00015;
+	private static final double DRAIN_RATE = 0.0003;
 	
 	private static Thread damageThread;
 	private static Thread mobThread;
@@ -76,7 +76,11 @@ public class WorldEvent {
 				while(inProgress()) {
 					verifyEntities();
 					//TODO check boss health
-					bar.setProgress(bar.getProgress() - (DRAIN_RATE * entities.size()));
+					if(bar.getProgress() - (DRAIN_RATE * entities.size()) <= 0) {
+						bar.setProgress(0.0);
+					} else {						
+						bar.setProgress(bar.getProgress() - (DRAIN_RATE * entities.size()));
+					}
 					System.out.println("Damaging King for " + (DRAIN_RATE * entities.size()));
 					try {
 						Thread.sleep(5000);
@@ -108,13 +112,15 @@ public class WorldEvent {
 	private static void win() {
 		damageThread.stop();
 		mobThread.stop();
+		
+		stop();
 	}
 	
 	private static void lose() {
 		damageThread.stop();
 		mobThread.stop();
 		SpawnTools.lightning();
-		
+		stop();
 	}
 	
 	public static void cleanup() {
@@ -166,6 +172,9 @@ public class WorldEvent {
 	}
 	
 	public static boolean inProgress() {
+		if(inProgress == false) {
+			return false;
+		}
 		if(bar.getProgress() <= 0.0) {
 			return (inProgress = false);
 		}
