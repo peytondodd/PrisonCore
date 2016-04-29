@@ -67,7 +67,6 @@ public class CommandPrison implements CommandExecutor {
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("caravan")) {
-				//NPCHandler.instance().createDummyVillager(p.getLocation(), Constant.CARAVAN_DRIVER);
 				Villager v = (Villager) p.getWorld().spawnEntity(p.getLocation(), EntityType.VILLAGER);
 				v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 133));
 				v.setCustomName(Constant.CARAVAN_DRIVER);
@@ -183,7 +182,7 @@ public class CommandPrison implements CommandExecutor {
 			}
 			
 			if(args[0].equalsIgnoreCase("test")) {
-				SpawnTools.lightningCircle(new Location(p.getWorld(), -60, 141, -60), 20);
+				
 				p.sendMessage("Executed test");
 			}
 			if(args[0].equalsIgnoreCase("startevent")) {
