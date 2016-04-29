@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.listeners.BloatChatEvent;
 import com.trig.vn.prison.ranks.PrisonRank;
 
 public class PrisonManager {
@@ -67,5 +68,15 @@ public class PrisonManager {
 		CraftServer server = (CraftServer) Bukkit.getServer();
 		PrisonPlayer pp = new PrisonPlayer(server, player);
 		handleLogin(pp);
+	}
+	
+	public void unregisterPlayer(PrisonPlayer p) {
+		prisonPlayers.remove(p);
+		BloatChatEvent.removeBloat(p);
+	}
+	
+	public void unregisterPlayer(Player p) {
+		PrisonPlayer pp = getPrisonPlayer(p);
+		unregisterPlayer(pp);
 	}
 }

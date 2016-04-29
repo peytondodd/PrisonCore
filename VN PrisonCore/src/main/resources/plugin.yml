@@ -12,3 +12,5 @@ commands:
     description: View what is in your backpack
   prison:
     description: VN Prison admin commands
+  bloat:
+    description: Bloat your chat

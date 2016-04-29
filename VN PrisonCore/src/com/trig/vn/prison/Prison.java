@@ -20,6 +20,7 @@ import com.trig.npchandler.NPCHandler;
 import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.commands.CommandAchievement;
 import com.trig.vn.prison.commands.CommandBackpack;
+import com.trig.vn.prison.commands.CommandBloat;
 import com.trig.vn.prison.commands.CommandPrison;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.economy.MineShop;
@@ -118,6 +119,7 @@ public class Prison extends JavaPlugin {
 		this.getCommand("achievement").setExecutor(new CommandAchievement(this));
 		this.getCommand("backpack").setExecutor(new CommandBackpack(this));
 		this.getCommand("prison").setExecutor(new CommandPrison(this));
+		this.getCommand("bloat").setExecutor(new CommandBloat());
 	}
 	
 	private void setupPlayers() {
