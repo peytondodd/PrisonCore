@@ -11,6 +11,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -30,6 +31,9 @@ public class WorldEvent {
 	private static BossBar bar;
 	private static boolean inProgress = false;
 	private static final double DRAIN_RATE = 0.00015;
+	
+	private static Thread damageThread;
+	private static Thread mobThread;
 	
 	public static void init() {
 		//cleanup();
@@ -66,9 +70,9 @@ public class WorldEvent {
 	
 	private static void start() {
 		Bukkit.getServer().broadcastMessage("§6§lA World Event has started at §5§l" + loc.toString());
-		Thread damageThread = new Thread() {
+		damageThread = new Thread() {
 			public void run() {
-				while(inProgress && !over()) {
+				while(inProgress()) {
 					verifyEntities();
 					//TODO check boss health
 					bar.setProgress(bar.getProgress() - (DRAIN_RATE * entities.size()));
@@ -76,21 +80,21 @@ public class WorldEvent {
 					try {
 						Thread.sleep(5000);
 					} catch (Exception e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 				}
 			}
 		};
 		
-		Thread mobThread = new Thread() {
+		mobThread = new Thread() {
 			public void run() {
-				while(inProgress && !over()) {					
+				while(inProgress()) {					
 					MobAssistant.syncMassEntity(center, 30, 25, EntityType.ZOMBIE);
 					MobAssistant.syncMassEntity(center, 30, 25, EntityType.SKELETON);
 					try {
 						Thread.sleep(60010 * 1); //There is a delay to avoid concurrentmod
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 				}
 			}
@@ -98,6 +102,16 @@ public class WorldEvent {
 		
 		mobThread.start();
 		damageThread.start();
+	}
+	
+	private static void win() {
+		damageThread.stop();
+		mobThread.stop();
+	}
+	
+	private static void lose() {
+		damageThread.stop();
+		mobThread.stop();
 	}
 	
 	public static void cleanup() {
@@ -108,6 +122,8 @@ public class WorldEvent {
 		bar = null;
 		center = null;
 		bossLoc = null;
+		damageThread.stop();
+		mobThread.stop();
 		inProgress = false;
 		System.out.println("Clearing " + entities.size() + " entities.");
 		for(Entity e : entities) {
@@ -147,17 +163,17 @@ public class WorldEvent {
 	}
 	
 	public static boolean inProgress() {
-		return inProgress;
+		if(bar.getProgress() <= 0.0) {
+			return (inProgress = false);
+		}
+		if(!timeLimit()) {
+			return (inProgress = false);
+		}
+		return (inProgress = true);
 	}
 	
-	private static boolean over() {
-		if(bar.getProgress() <= 0) {
-			return true;
-		}
-		if(timeElapsed() >= RUNTIME) {
-			return true;
-		}
-		return false;
+	private static boolean timeLimit() {
+		return timeElapsed() <= RUNTIME;
 	}
 	
 	public static void addEntity(Entity e) {
