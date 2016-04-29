@@ -31,6 +31,15 @@ public class SpawnTools {
 		}
 	}
 	
+	public static void lightning() {
+		lightningLine();
+		Bukkit.getServer().getScheduler().runTaskLater(Prison.instance(), new Runnable() {
+			public void run() {
+				lightningCircle();
+			}
+		}, 20 * 6);
+	}
+	
 	public static void test() {
 		BossBar bar = Bukkit.getServer().createBossBar("§6King's Soul", BarColor.GREEN, BarStyle.SEGMENTED_6, BarFlag.CREATE_FOG, BarFlag.DARKEN_SKY);
 		for(Player p : Bukkit.getServer().getWorld("prison").getPlayers()) {
@@ -40,7 +49,9 @@ public class SpawnTools {
 		bar.setProgress(1);
 	}
 	
-	public static void lightningCircle(final Location center, final int radius) {
+	public static void lightningCircle() {
+		final int radius = 50;
+		final Location center = new Location(Bukkit.getServer().getWorld("prison"), -60, 141, -60);
 		final int y = center.getBlockY();
 		int iterations = 0;
 		for(double i = 0.0; i < 360.0; i += 15) {

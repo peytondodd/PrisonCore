@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.utils.MobAssistant;
+import com.trig.vn.prison.utils.SpawnTools;
 
 public class WorldEvent {
 	
@@ -112,6 +113,8 @@ public class WorldEvent {
 	private static void lose() {
 		damageThread.stop();
 		mobThread.stop();
+		SpawnTools.lightning();
+		
 	}
 	
 	public static void cleanup() {
