@@ -58,7 +58,6 @@ public class Prison extends JavaPlugin {
 	private DatabaseManager dbm;
 	
 	private Essentials essentials;
-	private NPCHandler npchandler;
 	private WorldEditPlugin worldEdit;
 	
 	private Core core;
@@ -80,6 +79,10 @@ public class Prison extends JavaPlugin {
 		
 	}
 	
+	public void onDisable(){
+		manager.cleanup();
+	}
+	
 	private void setup() {
 		RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
 		eco = rsp.getProvider();
@@ -93,6 +96,7 @@ public class Prison extends JavaPlugin {
 		LocationManager.cleanup();
 		RegionManager.cleanup();
 		PrisonLinks.cleanup();
+		BloatChatEvent.clear();
 		loadBlockToInventoryWorlds();
 		loadMineShops();
 		loadRanks();
@@ -287,6 +291,17 @@ public class Prison extends JavaPlugin {
 		reloadConfig();
 		
 		PrisonLinks.addWarp(warp);
+	}
+	
+	public void saveEasterEgg(EasterEgg egg) {
+		getConfig().set("eggs." + egg.getId() + ".name", egg.getName());
+		getConfig().set("eggs." + egg.getId() + ".location.world", egg.getLocation().getWorld().getName());
+		getConfig().set("eggs." + egg.getId() + ".location.x", egg.getLocation().getBlockX());
+		getConfig().set("eggs." + egg.getId() + ".location.y", egg.getLocation().getBlockY());
+		getConfig().set("eggs." + egg.getId() + ".location.z", egg.getLocation().getBlockY());
+		getConfig().set("eggs." + egg.getId() + ".lore", egg.getLore());
+		saveConfig();
+		reloadConfig();
 	}
 	
 	public List<String> getBlockToInventoryWorlds() {

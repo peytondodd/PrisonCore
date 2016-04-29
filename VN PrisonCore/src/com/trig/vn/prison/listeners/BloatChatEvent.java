@@ -46,4 +46,8 @@ public class BloatChatEvent implements Listener {
 			return true;
 		}
 	}
+	
+	public static void clear() {
+		bloat.clear();
+	}
 }

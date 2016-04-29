@@ -42,6 +42,10 @@ public class PrisonManager {
 		}
 	}
 	
+	public void cleanup() {
+		prisonPlayers.clear();
+	}
+	
 	public PrisonPlayer getPrisonPlayer(Player p) {
 		for(PrisonPlayer player : prisonPlayers) {
 			if(player.getUniqueId().toString().equalsIgnoreCase(p.getUniqueId().toString())) {

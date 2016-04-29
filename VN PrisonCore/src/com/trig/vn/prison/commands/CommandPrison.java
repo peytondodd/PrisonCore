@@ -1,8 +1,13 @@
 package com.trig.vn.prison.commands;
 
+import java.util.Arrays;
+import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,6 +19,8 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.achievements.PrisonAchievements;
+import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.managers.LocationManager;
 import com.trig.vn.prison.managers.RegionManager;
 import com.trig.vn.prison.mobs.WorldEvent;
@@ -151,6 +158,30 @@ public class CommandPrison implements CommandExecutor {
 					return true;
 				}
 			}
+			if(args[0].equalsIgnoreCase("egg")) {
+				if(args.length == 2) {
+					String name = args[1];
+					Block b = p.getTargetBlock((Set<Material>)null, 3);
+					if(b == null || b.getType() == Material.AIR) {
+						p.sendMessage("§cCould not find a block within 3m.");
+						return true;
+					}
+					
+					if(b.getType() == Material.DRAGON_EGG) {
+						Location loc = b.getLocation();
+						EasterEgg egg = new EasterEgg(name, Arrays.asList(""), loc, PrisonAchievements.nextAvailableAchievementId());
+						main.saveEasterEgg(egg);
+						EasterEgg.addEasterEgg(egg);
+						p.sendMessage("§7Created easter egg with name §6" + name);
+						p.sendMessage("§7Lore must be set in config.");
+						return true;
+					} else {
+						p.sendMessage("§cSelected block is not a dragon egg!");
+						return true;
+					}
+				}
+			}
+			
 			if(args[0].equalsIgnoreCase("test")) {
 				SpawnTools.lightningCircle(new Location(p.getWorld(), -60, 141, -60), 20);
 				p.sendMessage("Executed test");
