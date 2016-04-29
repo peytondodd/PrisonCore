@@ -70,6 +70,7 @@ public class WorldEvent {
 	}
 	
 	private static void start() {
+		entities.clear();
 		Bukkit.getServer().broadcastMessage("§6§lA World Event has started at §5§l" + loc.toString());
 		damageThread = new Thread() {
 			public void run() {
@@ -87,6 +88,12 @@ public class WorldEvent {
 					} catch (Exception e) {
 						//e.printStackTrace();
 					}
+				}
+				
+				if(bar.getProgress() <= 0.0) {
+					lose();
+				} else {
+					win();
 				}
 			}
 		};
@@ -147,7 +154,7 @@ public class WorldEvent {
 		Iterator<Entity> it = entities.iterator();
 		while(it.hasNext()) {
 			Entity e = it.next();
-			if(e.isDead()) {
+			if(e.isDead() || !e.isValid()) {
 				it.remove();
 			}
 		}
