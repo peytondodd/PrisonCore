@@ -215,6 +215,9 @@ public class Prison extends JavaPlugin {
 					int z = getConfig().getInt("eggs." + s + ".location.z");
 					Location loc = new Location(Bukkit.getServer().getWorld(worldName), x, y, z);
 					List<String> lore = getConfig().getStringList("eggs." + s + ".lore");
+					for(String l : lore) {
+						l = l.replaceAll("&", "§");
+					}
 					int id = Integer.parseInt(s);
 					EasterEgg.addEasterEgg(new EasterEgg(name, lore, loc, id));
 					
