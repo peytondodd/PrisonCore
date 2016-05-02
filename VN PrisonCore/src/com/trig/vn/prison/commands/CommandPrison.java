@@ -178,6 +178,9 @@ public class CommandPrison implements CommandExecutor {
 						p.sendMessage("§cSelected block is not a dragon egg!");
 						return true;
 					}
+				} else {
+					p.sendMessage("§4Invalid usage! §6Use /prison egg <name>");
+					return true;
 				}
 			}
 			
