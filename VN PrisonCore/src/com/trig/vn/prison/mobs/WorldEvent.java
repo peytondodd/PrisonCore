@@ -117,15 +117,11 @@ public class WorldEvent {
 	}
 	
 	private static void win() {
-		damageThread.stop();
-		mobThread.stop();
 		
 		stop();
 	}
 	
 	private static void lose() {
-		damageThread.stop();
-		mobThread.stop();
 		SpawnTools.lightning();
 		stop();
 	}
@@ -138,8 +134,6 @@ public class WorldEvent {
 		bar = null;
 		center = null;
 		bossLoc = null;
-		damageThread.stop();
-		mobThread.stop();
 		inProgress = false;
 		System.out.println("Clearing " + entities.size() + " entities.");
 		for(Entity e : entities) {
@@ -164,6 +158,8 @@ public class WorldEvent {
 		inProgress = false;
 		System.out.println("Stopped World Event.");
 		cleanup();
+		mobThread.stop();
+		damageThread.stop();
 	}
 	
 	public static void givePlayerBar(Player p) {
