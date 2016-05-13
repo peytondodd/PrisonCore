@@ -56,6 +56,7 @@ public class BlockToInventoryEvent implements Listener {
 				}
 			}
 			Material type = e.getBlock().getType();
+			byte magic = e.getBlock().getData();
 			e.getBlock().setType(Material.AIR);
 			int amount = 1;
 			if(p.getInventory().getItemInMainHand() != null) {
@@ -70,7 +71,7 @@ public class BlockToInventoryEvent implements Listener {
 				inv.addItem(item);
 				return;
 			} 
-			inv.addItem(new ItemStack(type, amount));
+			inv.addItem(new ItemStack(type, amount, magic));
 			return;
 		}
 	}
