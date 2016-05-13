@@ -10,6 +10,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.trig.vn.prison.utils.Constant;
+
 public class PrisonAchievements {
 
 	private static List<Achievement> possibleAchievements = new ArrayList<Achievement>(); //Global list of achievements
@@ -17,7 +19,7 @@ public class PrisonAchievements {
 	private Inventory inv; //GUI
 	
 	public void init() { //MUST be called after achievements are loaded into array
-		inv = Bukkit.createInventory(null, 54, "§aAchievements");
+		inv = Bukkit.createInventory(null, 54, Constant.ACHIEVEMENT_GUI_NAME);
 		update();
 	}
 	

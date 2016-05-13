@@ -28,6 +28,7 @@ import com.trig.vn.prison.eggs.ClickEggEvent;
 import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.kingdoms.KingdomManager;
 import com.trig.vn.prison.listeners.BloatChatEvent;
+import com.trig.vn.prison.listeners.BlockAchievementGUI;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.listeners.CaravanDriver;
 import com.trig.vn.prison.listeners.ChangeWorld;
@@ -118,6 +119,7 @@ public class Prison extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerLinkEvent(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new ChangeWorld(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new BloatChatEvent(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new BlockAchievementGUI(), this);
 	}
 	
 	private void registerCommands() {
@@ -246,7 +248,14 @@ public class Prison extends JavaPlugin {
 		for(String s : getConfig().getConfigurationSection("shops").getKeys(false)) {
 			MineShop shop = new MineShop(s);
 			for(String subItem : getConfig().getConfigurationSection("shops." + s).getKeys(false)) {
-				ItemStack item = ItemLoader.loadItem(getConfig().getString("shops." + s + "." + subItem + ".item"));
+				//ItemStack item = ItemLoader.loadItem(getConfig().getString("shops." + s + "." + subItem + ".item"));
+				ItemStack item = null;
+				try {
+					item = essentials.getItemDb().get(getConfig().getString("shops." + s + "." + subItem + ".item"));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				double price = getConfig().getDouble("shops." + s + "." + subItem + ".price");
 				shop.getValues().put(item, price);
 			}

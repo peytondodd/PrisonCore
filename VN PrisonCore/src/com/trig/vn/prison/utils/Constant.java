@@ -11,6 +11,7 @@ public class Constant {
 
 	public static final String CARAVAN_DRIVER = "§2§lCaravan Driver";
 	public static final String WARP_GUI_NAME = "§6Locations";
+	public static final String ACHIEVEMENT_GUI_NAME = "§aAchievements";
 	
 	public static final Location OUTSIDE_CASTLE = new Location(null, -61, 141, 147);
 	public static final Location INSIDE_CASTLE = new Location(null, -60, 141, 127);
