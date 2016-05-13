@@ -45,4 +45,8 @@ public class EasterEgg extends Achievement {
 		}
 		return null;
 	}
+	
+	public static void clear() {
+		eggs.clear();
+	}
 }

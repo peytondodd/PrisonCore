@@ -76,6 +76,10 @@ public class PrisonAchievements {
 		return highest++;
 	}
 	
+	public static void clear() {
+		possibleAchievements.clear();
+	}
+	
 	public static Achievement getAchievement(String name) {
 		for(Achievement a : possibleAchievements) {
 			if(a.getName().equalsIgnoreCase(name)) {

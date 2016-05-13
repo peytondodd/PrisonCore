@@ -66,6 +66,13 @@ public class CommandPrison implements CommandExecutor {
 				p.sendMessage(ChatColor.RED + "No arguments specified.");
 				return true;
 			}
+			
+			if(args[0].equalsIgnoreCase("reload")) {
+				main.refreshConfig();
+				p.sendMessage("§6Config reloaded.");
+				return true;
+			}
+			
 			if(args[0].equalsIgnoreCase("caravan")) {
 				Villager v = (Villager) p.getWorld().spawnEntity(p.getLocation(), EntityType.VILLAGER);
 				v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 133));

@@ -18,6 +18,7 @@ import com.earth2me.essentials.Essentials;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.trig.npchandler.NPCHandler;
 import com.trig.vn.db.DatabaseConfig;
+import com.trig.vn.prison.achievements.PrisonAchievements;
 import com.trig.vn.prison.commands.CommandAchievement;
 import com.trig.vn.prison.commands.CommandBackpack;
 import com.trig.vn.prison.commands.CommandBloat;
@@ -207,6 +208,7 @@ public class Prison extends JavaPlugin {
 	}
 	
 	private void loadEasterEggs() {
+		
 		if(getDataFolder().exists()) {
 			try {				
 				for(String s : getConfig().getConfigurationSection("eggs").getKeys(false)) {
@@ -230,6 +232,27 @@ public class Prison extends JavaPlugin {
 		}
 	}
 	
+	private void resetEasterEggs() {
+		EasterEgg.clear();
+	}
+	
+	private void resetAchievements() {
+		PrisonAchievements.clear();
+	}
+	
+	public void refreshConfig() {
+		reloadConfig();
+		resetEasterEggs();
+		resetAchievements();
+		loadMineShops();
+		loadBlockToInventoryWorlds();
+		loadEasterEggs();
+		loadLinks();
+		loadLocations();
+		loadRanks();
+		loadRegions();
+	}
+	
 	private void setupSQL() {
 		try {
 			sql = new MySQL(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
@@ -241,10 +264,12 @@ public class Prison extends JavaPlugin {
 	}
 	
 	private void loadBlockToInventoryWorlds() {
+		blockToInventoryWorlds.clear();
 		blockToInventoryWorlds = getConfig().getStringList("blocksToInventoryWorlds");
 	}
 	
 	private void loadMineShops() {
+		mineShops.clear();
 		for(String s : getConfig().getConfigurationSection("shops").getKeys(false)) {
 			MineShop shop = new MineShop(s);
 			for(String subItem : getConfig().getConfigurationSection("shops." + s).getKeys(false)) {
