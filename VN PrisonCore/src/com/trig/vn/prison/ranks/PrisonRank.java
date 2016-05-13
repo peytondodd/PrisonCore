@@ -8,7 +8,12 @@ import org.bukkit.ChatColor;
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
 
-
+/*
+ * TODO
+ * Redo config so that ranks 1-20 will be under a section named "Kingdom 1" or something
+ * Create more than one PrisonRank list, for each kingdom
+ * Modify rankup to check next rank in current kingdom
+ */
 
 public class PrisonRank {
 	private static List<PrisonRank> prisonRanks = new ArrayList<PrisonRank>();
