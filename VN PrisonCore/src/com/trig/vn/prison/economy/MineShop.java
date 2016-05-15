@@ -53,10 +53,12 @@ public class MineShop {
 				}
 				double value = getValue(item);
 				double total = value * a;
-				total *= Multiplier.getMultiplier(p);
+				total *= Multiplier.getMultiplier();
 				
 				Prison.getEco().depositPlayer(p, total);
-				p.sendMessage("§a$" + total + " §7was added to your account for selling " + item.getType());
+				//p.sendMessage("§a$" + total + " §7was added to your account for selling " + item.getType());
+				p.sendMessage("§7Sold " + a + " " + Prison.getEssentials().getItemDb().name(item) + " @ $" + value + "ea. for a total of §a$" + total);
+				
 			}
 		}
 	}

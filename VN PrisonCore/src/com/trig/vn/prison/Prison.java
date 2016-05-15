@@ -59,7 +59,7 @@ public class Prison extends JavaPlugin {
 	private KingdomManager kingdom;
 	private DatabaseManager dbm;
 	
-	private Essentials essentials;
+	private static Essentials essentials;
 	private WorldEditPlugin worldEdit;
 	
 	private Core core;
@@ -365,7 +365,7 @@ public class Prison extends JavaPlugin {
 		return dbm;
 	}
 	
-	public Essentials getEssentials() {
+	public static Essentials getEssentials() {
 		return essentials;
 	}
 	
