@@ -5,13 +5,28 @@ import org.bukkit.entity.Player;
 public class Multiplier {
 
 	private static double multiplier = 0.0;
+	private static long multiplierDuration = 0L;
+	private static long startTime = 0L;
 	
-	public static void setMultiplier(double multiplierX) {
+	public static void setMultiplier(double multiplierX, long duration) {
 		multiplier = multiplierX;
+		startTime = System.currentTimeMillis();
+		multiplierDuration = duration;
 	}
 	
 	public static double getMultiplier() {
 		return multiplier;
+	}
+	
+	public static long getMultiplierDuration() {
+		return multiplierDuration;
+	}
+	
+	public static void checkMultiplier() {
+		if(System.currentTimeMillis() > startTime + multiplierDuration) {
+			multiplier = 0.0;
+			multiplierDuration = 0L;
+		}
 	}
 //	public static double getMultiplier(Player p) {
 //		if(p.hasPermission("vn.prison.multiplier.1.8")) {

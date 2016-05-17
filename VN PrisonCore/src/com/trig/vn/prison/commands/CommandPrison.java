@@ -17,9 +17,11 @@ import org.bukkit.entity.Villager;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.trig.ct.ClockTimer;
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
 import com.trig.vn.prison.achievements.PrisonAchievements;
+import com.trig.vn.prison.economy.Multiplier;
 import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.managers.LocationManager;
 import com.trig.vn.prison.managers.RegionManager;
@@ -60,6 +62,16 @@ public class CommandPrison implements CommandExecutor {
 				return true;
 			}
 			
+			//Console Commands
+			if(args[0].equalsIgnoreCase("startmultiplier")) {
+				double value = Double.parseDouble(args[1]);
+				long duration = Long.parseLong(args[2]);
+				Multiplier.setMultiplier(value, duration);
+				Bukkit.getServer().broadcastMessage("§6§lA sell multiplier of §a§l" + value + " §6§lhas been activated for §a§l" + ClockTimer.formatTimeMillis(duration, false));
+				return true;
+			}
+			
+			//Player commands
 			Player p = (Player) sender;
 			
 			if(args.length == 0) {

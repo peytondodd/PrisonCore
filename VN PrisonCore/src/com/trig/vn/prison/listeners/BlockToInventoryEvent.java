@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.block.BlockState;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -38,6 +39,9 @@ public class BlockToInventoryEvent implements Listener {
 		}
 		if(main.getBlockToInventoryWorlds().contains(e.getBlock().getWorld().getName())) {
 			Player p = e.getPlayer();
+			if(p.getGameMode() != GameMode.SURVIVAL) {
+				return;
+			}
 			PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
 			Inventory inv = p.getInventory();
 			e.setCancelled(true);
@@ -58,6 +62,8 @@ public class BlockToInventoryEvent implements Listener {
 			Material type = e.getBlock().getType();
 			byte magic = e.getBlock().getData();
 			e.getBlock().setType(Material.AIR);
+			BlockState state = e.getBlock().getState();
+			state.update(true);
 			int amount = 1;
 			if(p.getInventory().getItemInMainHand() != null) {
 				if(p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) {
