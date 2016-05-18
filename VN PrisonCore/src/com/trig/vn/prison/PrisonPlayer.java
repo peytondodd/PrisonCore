@@ -35,8 +35,6 @@ public class PrisonPlayer extends CraftPlayer {
 	
 	private Scoreboard scoreboard;
 	private Objective obj;
-	private Score currentRank;
-	private Score money;
 	
 	private long lastTitle = 0L;
 	private boolean titles = true;
@@ -62,10 +60,25 @@ public class PrisonPlayer extends CraftPlayer {
 		obj = scoreboard.registerNewObjective("gui", "dummy");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 		obj.setDisplayName("§cVitality §fNetwork");
-		currentRank = obj.getScore("§6Rank: §b" + rank.getName());
+		Score currentRank = obj.getScore("§6Rank: §b" + rank.getName());
 		currentRank.setScore(40);
-		money = obj.getScore("§6Money: §b$" + moneyFormat.format(Prison.getEco().getBalance(this)));
-		money.setScore(39);
+		PrisonRank next = PrisonRank.getNextRank(rank);
+		if(next != null) {
+			Score nextRank = obj.getScore("§5Next Rank: §b" + next.getName());
+			nextRank.setScore(39);
+			
+			Score progress = obj.getScore("§6Progress to rankup: §b" + moneyFormat.format(((Prison.getEco().getBalance(this) / next.getValue()) * 100)) + "%");
+			progress.setScore(38);
+		} else {
+			Score nextRank = obj.getScore("§5Next Rank: §bNone");
+			nextRank.setScore(39);
+			
+			Score progress = obj.getScore("§6Progress to rankup: §b100%");
+			progress.setScore(38);
+		}
+		
+		Score money = obj.getScore("§6Money: §b$" + moneyFormat.format(Prison.getEco().getBalance(this)));
+		money.setScore(37);
 	}
 	
 	public void showScoreboard() {
