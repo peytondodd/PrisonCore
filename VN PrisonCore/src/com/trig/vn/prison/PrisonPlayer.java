@@ -58,9 +58,10 @@ public class PrisonPlayer extends CraftPlayer {
 	}
 	
 	public void updateScoreboard() { //Must always be called after all variables are initialized
-		currentRank = obj.getScore("§6§lRank: §b§l" + rank.getName());
+		
+		currentRank = obj.getScore("§6Rank: §b" + rank.getName());
 		currentRank.setScore(40);
-		money = obj.getScore("§6§lMoney: §b§l$" + moneyFormat.format(Prison.getEco().getBalance(this)));
+		money = obj.getScore("§6Money: §b$" + moneyFormat.format(Prison.getEco().getBalance(this)));
 		money.setScore(39);
 	}
 	
