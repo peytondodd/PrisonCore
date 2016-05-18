@@ -25,7 +25,7 @@ import com.trig.vn.prison.ranks.PrisonRank;
 
 public class PrisonPlayer extends CraftPlayer {
 
-	private static DecimalFormat moneyFormat = new DecimalFormat("#,###.#");
+	private static DecimalFormat moneyFormat = new DecimalFormat("#,###");
 	private PrisonRank rank;
 	private final Inventory warpGui;
 	private KingdomRank kingdomRank;
