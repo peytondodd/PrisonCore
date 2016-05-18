@@ -52,18 +52,14 @@ public class PrisonPlayer extends CraftPlayer {
 		
 		lastTitle = System.currentTimeMillis();
 		scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
-		obj = scoreboard.registerNewObjective("gui", "dummy");
-		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-		obj.setDisplayName("§cVitality §fNetwork");
-	}
-	
-	public void initScoreboard() {
-		
+
 	}
 	
 	public void updateScoreboard() { //Must always be called after all variables are initialized
 		obj.unregister();
 		obj = scoreboard.registerNewObjective("gui", "dummy");
+		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+		obj.setDisplayName("§cVitality §fNetwork");
 		currentRank = obj.getScore("§6Rank: §b" + rank.getName());
 		currentRank.setScore(40);
 		money = obj.getScore("§6Money: §b$" + moneyFormat.format(Prison.getEco().getBalance(this)));
