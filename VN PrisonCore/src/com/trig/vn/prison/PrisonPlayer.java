@@ -25,7 +25,7 @@ import com.trig.vn.prison.ranks.PrisonRank;
 
 public class PrisonPlayer extends CraftPlayer {
 
-	private static DecimalFormat moneyFormat = new DecimalFormat("#,###.##");
+	private static DecimalFormat moneyFormat = new DecimalFormat("#,###.#");
 	private PrisonRank rank;
 	private final Inventory warpGui;
 	private KingdomRank kingdomRank;
@@ -57,8 +57,13 @@ public class PrisonPlayer extends CraftPlayer {
 		obj.setDisplayName("§cVitality §fNetwork");
 	}
 	
-	public void updateScoreboard() { //Must always be called after all variables are initialized
+	public void initScoreboard() {
 		
+	}
+	
+	public void updateScoreboard() { //Must always be called after all variables are initialized
+		obj.unregister();
+		obj = scoreboard.registerNewObjective("gui", "dummy");
 		currentRank = obj.getScore("§6Rank: §b" + rank.getName());
 		currentRank.setScore(40);
 		money = obj.getScore("§6Money: §b$" + moneyFormat.format(Prison.getEco().getBalance(this)));
