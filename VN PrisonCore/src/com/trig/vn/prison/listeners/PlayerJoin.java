@@ -31,6 +31,7 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
 		main.getPrisonManager().unregisterPlayer(e.getPlayer());
+		
 		System.out.println("Unregistered " + e.getPlayer().getName());
 	}
 }

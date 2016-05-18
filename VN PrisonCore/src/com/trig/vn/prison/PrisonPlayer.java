@@ -1,5 +1,7 @@
 package com.trig.vn.prison;
 
+import java.text.DecimalFormat;
+
 import net.minecraft.server.v1_9_R2.EntityPlayer;
 
 import org.bukkit.Bukkit;
@@ -10,6 +12,10 @@ import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
 
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
@@ -19,6 +25,7 @@ import com.trig.vn.prison.ranks.PrisonRank;
 
 public class PrisonPlayer extends CraftPlayer {
 
+	private static DecimalFormat moneyFormat = new DecimalFormat("#,###.##");
 	private PrisonRank rank;
 	private final Inventory warpGui;
 	private KingdomRank kingdomRank;
@@ -26,8 +33,14 @@ public class PrisonPlayer extends CraftPlayer {
 	private int backpackSize = 9;
 	private PrisonAchievements achievements = new PrisonAchievements();
 	
+	private Scoreboard scoreboard;
+	private Objective obj;
+	private Score currentRank;
+	private Score money;
+	
 	private long lastTitle = 0L;
 	private boolean titles = true;
+	private boolean useScoreboard = true;
 	
 	public PrisonPlayer(CraftServer server, EntityPlayer entity) {
 		super(server, entity);
@@ -38,6 +51,30 @@ public class PrisonPlayer extends CraftPlayer {
 		warpGui = Bukkit.getServer().createInventory(null, 54, "§6Locations");
 		
 		lastTitle = System.currentTimeMillis();
+		scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
+		obj = scoreboard.registerNewObjective("gui", "dummy");
+		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+		obj.setDisplayName("§cVitality §fNetwork");
+		
+		showScoreboard();
+		updateScoreboard();
+	}
+	
+	public void updateScoreboard() {
+		currentRank = obj.getScore("§6§lRank: §b§l" + rank.getName());
+		currentRank.setScore(40);
+		money = obj.getScore("§6§lMoney: §b§l$" + moneyFormat.format(Prison.getEco().getBalance(this)));
+		money.setScore(39);
+	}
+	
+	public void showScoreboard() {
+		this.setScoreboard(scoreboard);
+		this.useScoreboard = true;
+	}
+	
+	public void hideScoreboard() {
+		this.setScoreboard(Bukkit.getServer().getScoreboardManager().getMainScoreboard());
+		this.useScoreboard = false;
 	}
 	
 	public void openAchievements() {
@@ -70,6 +107,28 @@ public class PrisonPlayer extends CraftPlayer {
 	
 	public long getLastTitle() {
 		return lastTitle;
+	}
+	
+	public boolean isUseScoreboard() {
+		return useScoreboard;
+	}
+	
+	public void toggleScoreboard() {
+		useScoreboard = !useScoreboard;
+		if(useScoreboard) {
+			showScoreboard();
+		} else {
+			hideScoreboard();
+		}
+	}
+	
+	public void toggleScoreboard(boolean useScoreboard) {
+		this.useScoreboard = useScoreboard;
+		if(useScoreboard) {
+			showScoreboard();
+		} else {
+			hideScoreboard();
+		}
 	}
 	
 	public void rankup() {

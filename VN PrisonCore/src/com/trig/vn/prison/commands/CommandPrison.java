@@ -57,6 +57,18 @@ public class CommandPrison implements CommandExecutor {
 				}
 				return true;
 			}
+			
+			if(args[0].equalsIgnoreCase("scoreboard")) {
+				Player p = (Player) sender;
+				PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
+				pp.toggleScoreboard();
+				if(pp.isUseScoreboard()) {					
+					pp.sendMessage("§7Scoreboards are now §6on!");
+				} else {
+					pp.sendMessage("§7Scoreboards are now §6off!");
+				}
+			}
+			
 			if(!sender.hasPermission("vn.admin")) {
 				sender.sendMessage(ChatColor.RED + "This command is for admins only.");
 				return true;

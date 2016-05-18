@@ -109,6 +109,8 @@ public class Prison extends JavaPlugin {
 		registerEvents();
 		registerCommands();
 		setupPlayers(); //In case of /reload, we need to pretend players just logged in.
+		
+		manager.scoreboardLoop();
 	}
 	
 	private void registerEvents() {

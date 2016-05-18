@@ -46,6 +46,18 @@ public class PrisonManager {
 		prisonPlayers.clear();
 	}
 	
+	public void scoreboardLoop() {
+		Bukkit.getServer().getScheduler().runTaskTimer(main, new Runnable() {
+			public void run() {
+				for(PrisonPlayer p : prisonPlayers) {
+					if(p.isUseScoreboard()) {
+						p.updateScoreboard();
+					}
+				}
+			}
+		}, 20, 20);
+	}
+	
 	public PrisonPlayer getPrisonPlayer(Player p) {
 		for(PrisonPlayer player : prisonPlayers) {
 			if(player.getUniqueId().toString().equalsIgnoreCase(p.getUniqueId().toString())) {

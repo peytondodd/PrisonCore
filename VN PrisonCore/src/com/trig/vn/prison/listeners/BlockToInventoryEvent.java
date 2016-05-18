@@ -32,16 +32,13 @@ public class BlockToInventoryEvent implements Listener {
 		blockConversions.put(Material.COAL_ORE, new ItemStack(Material.COAL));
 	}
 	
-	@EventHandler (ignoreCancelled = true)
+	@EventHandler (ignoreCancelled = false)
 	public void onBlockBreak(BlockBreakEvent e) {
 		if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) {
 			return;
 		}
 		if(main.getBlockToInventoryWorlds().contains(e.getBlock().getWorld().getName())) {
 			Player p = e.getPlayer();
-			if(p.getGameMode() != GameMode.SURVIVAL) {
-				return;
-			}
 			PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
 			Inventory inv = p.getInventory();
 			e.setCancelled(true);
