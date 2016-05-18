@@ -37,6 +37,9 @@ public class PrisonManager {
 			String rank = main.getDatabaseManager().getPrisonRankName(player.getUniqueId().toString());
 			PrisonRank prank = PrisonRank.getPrisonRank(rank);
 			player.setRank(prank);
+			
+			player.updateScoreboard();
+			player.showScoreboard();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

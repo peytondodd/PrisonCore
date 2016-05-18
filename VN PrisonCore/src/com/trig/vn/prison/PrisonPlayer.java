@@ -55,12 +55,9 @@ public class PrisonPlayer extends CraftPlayer {
 		obj = scoreboard.registerNewObjective("gui", "dummy");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 		obj.setDisplayName("§cVitality §fNetwork");
-		
-		showScoreboard();
-		updateScoreboard();
 	}
 	
-	public void updateScoreboard() {
+	public void updateScoreboard() { //Must always be called after all variables are initialized
 		currentRank = obj.getScore("§6§lRank: §b§l" + rank.getName());
 		currentRank.setScore(40);
 		money = obj.getScore("§6§lMoney: §b§l$" + moneyFormat.format(Prison.getEco().getBalance(this)));
