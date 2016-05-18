@@ -56,7 +56,9 @@ public class PrisonPlayer extends CraftPlayer {
 	}
 	
 	public void updateScoreboard() { //Must always be called after all variables are initialized
-		obj.unregister();
+		if(obj != null) {			
+			obj.unregister();
+		}
 		obj = scoreboard.registerNewObjective("gui", "dummy");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 		obj.setDisplayName("§cVitality §fNetwork");
