@@ -64,13 +64,13 @@ public class PrisonPlayer extends CraftPlayer {
 		currentRank.setScore(40);
 		PrisonRank next = PrisonRank.getNextRank(rank);
 		if(next != null) {
-			Score nextRank = obj.getScore("§5Next Rank: §b" + next.getName());
+			Score nextRank = obj.getScore("§6Next Rank: §b" + next.getName());
 			nextRank.setScore(39);
 			
 			Score progress = obj.getScore("§6Progress to rankup: §b" + moneyFormat.format(((Prison.getEco().getBalance(this) / next.getValue()) * 100)) + "%");
 			progress.setScore(38);
 		} else {
-			Score nextRank = obj.getScore("§5Next Rank: §bNone");
+			Score nextRank = obj.getScore("§6Next Rank: §bNone");
 			nextRank.setScore(39);
 			
 			Score progress = obj.getScore("§6Progress to rankup: §b100%");
