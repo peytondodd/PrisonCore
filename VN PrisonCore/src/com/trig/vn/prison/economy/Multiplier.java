@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 public class Multiplier {
 
-	private static double multiplier = 0.0;
+	private static double multiplier = 1.0;
 	private static long multiplierDuration = 0L;
 	private static long startTime = 0L;
 	
@@ -24,7 +24,7 @@ public class Multiplier {
 	
 	public static void checkMultiplier() {
 		if(System.currentTimeMillis() > startTime + multiplierDuration) {
-			multiplier = 0.0;
+			multiplier = 1.0;
 			multiplierDuration = 0L;
 		}
 	}
