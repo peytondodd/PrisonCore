@@ -60,38 +60,47 @@ public class PrisonPlayer extends CraftPlayer {
 		}
 		obj = scoreboard.registerNewObjective("gui", "dummy");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-		obj.setDisplayName("§c§lVitality §fNetwork");
-		Score currentRank = obj.getScore("§elRank");
+		obj.setDisplayName("§c§lVitality §6§lPrison");
+		Score currentRank = obj.getScore("§e§lRank");
 		currentRank.setScore(40);
 		Score currentRankVal = obj.getScore("§f" + getRank().getName());
 		currentRankVal.setScore(39);
+		Score spacer1 = obj.getScore(" ");
+		spacer1.setScore(38);
 		PrisonRank next = PrisonRank.getNextRank(rank);
 		if(next != null) {
 			Score nextRank = obj.getScore("§b§lProgress to " + next.getName());
-			nextRank.setScore(38);
+			nextRank.setScore(37);
 			Score nextRankVal = obj.getScore("§f" + moneyFormat.format(((Prison.getEco().getBalance(this) / next.getValue()) * 100)) + "%");
-			nextRankVal.setScore(37);
+			nextRankVal.setScore(36);
 		} else {
 			Score nextRank = obj.getScore("§b§lNext Rank: §bNone");
-			nextRank.setScore(38);
+			nextRank.setScore(37);
 		}
-		
+		Score spacer2 = obj.getScore("  ");
+		spacer2.setScore(35);
 		Score money = obj.getScore("§a§lBalance");
-		money.setScore(36);
-		Score moneyVal = obj.getScore("§f" + moneyFormat.format(Prison.getEco().getBalance(this)));
-		moneyVal.setScore(35);
+		money.setScore(34);
+		Score moneyVal = obj.getScore("§f$" + moneyFormat.format(Prison.getEco().getBalance(this)));
+		moneyVal.setScore(33);
+		Score spacer3 = obj.getScore("   ");
+		spacer3.setScore(32);
 		
 		if(Multiplier.getMultiplier() > 1.0) {
 			Score mult = obj.getScore("§6§lMultiplier");
-			mult.setScore(32);
+			mult.setScore(31);
 			Score multVal = obj.getScore("§f" + Multiplier.getMultiplier() + "x");
-			multVal.setScore(31);
+			multVal.setScore(30);
 		}
-		
+		Score spacer4 = obj.getScore("    ");
+		spacer4.setScore(29);
 		Score onlineStaff = obj.getScore("§c§lOnline Staff");
-		onlineStaff.setScore(30);
+		onlineStaff.setScore(28);
 		Score onlineStaffVal = obj.getScore("§4Insert scrolling shit here");
-		onlineStaffVal.setScore(29);
+		onlineStaffVal.setScore(27);
+		
+		Score spacer5 = obj.getScore("     ");
+		spacer5.setScore(26);
 		
 		Score website = obj.getScore("§d§lWebsite");
 		website.setScore(2);
