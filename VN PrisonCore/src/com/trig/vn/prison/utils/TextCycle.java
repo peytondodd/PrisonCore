@@ -19,10 +19,15 @@ public class TextCycle {
 	}
 	
 	public String next() {
+		if(cycles.size() == 0) {
+			return "None";
+		}
+		
 		index++;
 		if(index > cycles.size() - 1) {
 			index = 0;
 		}
+		
 		return cycles.get(index);
 	}
 	
