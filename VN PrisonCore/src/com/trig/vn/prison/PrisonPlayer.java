@@ -60,7 +60,7 @@ public class PrisonPlayer extends CraftPlayer {
 		}
 		obj = scoreboard.registerNewObjective("gui", "dummy");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
-		obj.setDisplayName("§c§lVitality §6§lPrison");
+		obj.setDisplayName("§c§lVitality");
 		Score currentRank = obj.getScore("§e§lRank");
 		currentRank.setScore(40);
 		Score currentRankVal = obj.getScore("§f" + getRank().getName());
@@ -86,10 +86,14 @@ public class PrisonPlayer extends CraftPlayer {
 		Score spacer3 = obj.getScore("   ");
 		spacer3.setScore(32);
 		
+		Score mult = obj.getScore("§6§lMultiplier");
+		mult.setScore(31);
+		
 		if(Multiplier.getMultiplier() > 1.0) {
-			Score mult = obj.getScore("§6§lMultiplier");
-			mult.setScore(31);
 			Score multVal = obj.getScore("§f" + Multiplier.getMultiplier() + "x");
+			multVal.setScore(30);
+		} else {
+			Score multVal = obj.getScore("§fNone");
 			multVal.setScore(30);
 		}
 		Score spacer4 = obj.getScore("    ");
