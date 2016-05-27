@@ -100,16 +100,8 @@ public class PrisonPlayer extends CraftPlayer {
 		spacer4.setScore(29);
 		Score onlineStaff = obj.getScore("§c§lOnline Staff");
 		onlineStaff.setScore(28);
-		Score onlineStaffVal = obj.getScore("§4Insert scrolling shit here");
+		Score onlineStaffVal = obj.getScore("§f" + Prison.getStaffOnline().next());
 		onlineStaffVal.setScore(27);
-		
-		Score spacer5 = obj.getScore("     ");
-		spacer5.setScore(26);
-		
-		Score website = obj.getScore("§d§lWebsite");
-		website.setScore(2);
-		Score websiteVal = obj.getScore("§fwww.vitalitymc.net");
-		websiteVal.setScore(1);
 	}
 	
 	public void showScoreboard() {

@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.earth2me.essentials.Essentials;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.trig.npchandler.NPCHandler;
+import com.trig.playerutils.PlayerUtils;
 import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.achievements.PrisonAchievements;
 import com.trig.vn.prison.commands.CommandAchievement;
@@ -43,7 +43,7 @@ import com.trig.vn.prison.managers.RegionManager;
 import com.trig.vn.prison.objects.PrisonWarp;
 import com.trig.vn.prison.ranks.PrisonRank;
 import com.trig.vn.prison.utils.Constant;
-import com.trig.vn.prison.utils.ItemLoader;
+import com.trig.vn.prison.utils.TextCycle;
 import com.vn.core.Core;
 import com.vn.core.sql.MySQL;
 import com.vn.core.utils.Region;
@@ -63,6 +63,8 @@ public class Prison extends JavaPlugin {
 	private WorldEditPlugin worldEdit;
 	
 	private Core core;
+	private static PlayerUtils playerUtils;
+	private static TextCycle staffOnline = new TextCycle();
 	
 	private MySQL sql;
 	private Connection c;
@@ -90,6 +92,7 @@ public class Prison extends JavaPlugin {
 		RegisteredServiceProvider<Economy> rsp = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
 		eco = rsp.getProvider();
 		core = (Core) Bukkit.getServer().getPluginManager().getPlugin("VNCore");
+		playerUtils = (PlayerUtils) Bukkit.getServer().getPluginManager().getPlugin("PlayerUtils");
 		essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 		worldEdit = (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
 		setupSQL();
@@ -366,6 +369,10 @@ public class Prison extends JavaPlugin {
 		return dbm;
 	}
 	
+	public static TextCycle getStaffOnline() {
+		return staffOnline;
+	}
+	
 	public static Essentials getEssentials() {
 		return essentials;
 	}
@@ -389,5 +396,9 @@ public class Prison extends JavaPlugin {
 	
 	public static Prison instance() {
 		return instance;
+	}
+	
+	public static PlayerUtils getPlayerUtils() {
+		return playerUtils;
 	}
 }

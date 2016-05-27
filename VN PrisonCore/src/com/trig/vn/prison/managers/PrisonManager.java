@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.economy.Multiplier;
 import com.trig.vn.prison.listeners.BloatChatEvent;
 import com.trig.vn.prison.ranks.PrisonRank;
 
@@ -52,6 +53,7 @@ public class PrisonManager {
 	public void scoreboardLoop() {
 		Bukkit.getServer().getScheduler().runTaskTimer(main, new Runnable() {
 			public void run() {
+				Multiplier.checkMultiplier();
 				for(PrisonPlayer p : prisonPlayers) {
 					if(p.isUseScoreboard()) {
 						p.updateScoreboard();
