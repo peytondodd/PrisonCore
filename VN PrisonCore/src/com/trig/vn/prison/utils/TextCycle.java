@@ -31,4 +31,8 @@ public class TextCycle {
 		return cycles.get(index);
 	}
 	
+	public String getCurrent() {
+		return cycles.get(index);
+	}
+	
 }

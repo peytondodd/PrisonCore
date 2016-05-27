@@ -54,6 +54,7 @@ public class PrisonManager {
 		Bukkit.getServer().getScheduler().runTaskTimer(main, new Runnable() {
 			public void run() {
 				Multiplier.checkMultiplier();
+				Prison.getStaffOnline().next();
 				for(PrisonPlayer p : prisonPlayers) {
 					if(p.isUseScoreboard()) {
 						p.updateScoreboard();
