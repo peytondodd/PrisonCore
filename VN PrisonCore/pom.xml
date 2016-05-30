@@ -61,6 +61,12 @@
     </dependency>
     
     <dependency>
+           <groupId>vn</groupId>
+           <artifactId>VNEssentials</artifactId>
+           <version>1.0.0</version>
+    </dependency>
+    
+    <dependency>
            <groupId>com.sk89q</groupId>
            <artifactId>worldedit</artifactId>
            <version>5.6.3</version>

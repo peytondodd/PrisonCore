@@ -50,7 +50,7 @@ public class CaravanDriver implements Listener {
 			String warpName = e.getCurrentItem().getItemMeta().getDisplayName();
 			warpName = warpName.substring(4, warpName.length()); //Should trim §a§l
 			try {
-				p.teleport(main.getEssentials().getWarps().getWarp(warpName));
+				p.teleport(Prison.getVNEssentials().getWarp(warpName).getLocation());
 			} catch (Exception exc) {
 				p.sendMessage(ChatColor.DARK_RED + "Error warping to: " + warpName);
 				exc.printStackTrace();

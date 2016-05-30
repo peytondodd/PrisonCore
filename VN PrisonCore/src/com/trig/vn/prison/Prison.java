@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.earth2me.essentials.Essentials;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.trig.essentials.VNEssentials;
 import com.trig.playerutils.PlayerUtils;
 import com.trig.vn.db.DatabaseConfig;
 import com.trig.vn.prison.achievements.PrisonAchievements;
@@ -60,6 +61,7 @@ public class Prison extends JavaPlugin {
 	private DatabaseManager dbm;
 	
 	private static Essentials essentials;
+	private static VNEssentials vnessentials;
 	private WorldEditPlugin worldEdit;
 	
 	private Core core;
@@ -93,6 +95,7 @@ public class Prison extends JavaPlugin {
 		eco = rsp.getProvider();
 		core = (Core) Bukkit.getServer().getPluginManager().getPlugin("VNCore");
 		playerUtils = (PlayerUtils) Bukkit.getServer().getPluginManager().getPlugin("PlayerUtils");
+		vnessentials = (VNEssentials) Bukkit.getServer().getPluginManager().getPlugin("VNEssentials");
 		essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 		worldEdit = (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
 		setupSQL();
@@ -375,6 +378,10 @@ public class Prison extends JavaPlugin {
 	
 	public static Essentials getEssentials() {
 		return essentials;
+	}
+	
+	public static VNEssentials getVNEssentials() {
+		return vnessentials;
 	}
 	
 	public WorldEditPlugin getWorldEdit() {
