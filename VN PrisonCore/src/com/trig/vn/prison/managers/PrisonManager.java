@@ -61,7 +61,7 @@ public class PrisonManager {
 					}
 				}
 			}
-		}, 20, 20);
+		}, 20 * 2, 20 * 2);
 	}
 	
 	public PrisonPlayer getPrisonPlayer(Player p) {
