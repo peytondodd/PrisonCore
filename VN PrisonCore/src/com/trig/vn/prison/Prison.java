@@ -56,7 +56,7 @@ public class Prison extends JavaPlugin {
 	
 	private static Economy eco;
 	private static Prison instance;
-	private PrisonManager manager;
+	private static PrisonManager manager;
 	private KingdomManager kingdom;
 	private DatabaseManager dbm;
 	
@@ -360,7 +360,7 @@ public class Prison extends JavaPlugin {
 		return mineShops;
 	}
 	
-	public PrisonManager getPrisonManager() {
+	public static PrisonManager getPrisonManager() {
 		return manager;
 	}
 	
