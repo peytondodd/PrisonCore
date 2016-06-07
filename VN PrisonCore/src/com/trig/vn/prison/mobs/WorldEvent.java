@@ -40,7 +40,7 @@ public class WorldEvent {
 		//cleanup();
 		startTime = System.currentTimeMillis();
 		Random rand = new Random();
-		int n = rand.nextInt(2) + 1;
+		int n = rand.nextInt(1) + 1;
 		switch(n) {
 		case 1:
 			loc = WorldEventLocation.CEMETARY;

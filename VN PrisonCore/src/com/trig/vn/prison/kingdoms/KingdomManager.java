@@ -20,6 +20,6 @@ public class KingdomManager {
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
 		Date start = c.getTime();
-		timer.schedule(new WorldEventTask(), start, TimeUnit.HOURS.toMillis(1)); //Will run at every hour of the day.
+		//timer.schedule(new WorldEventTask(), start, TimeUnit.HOURS.toMillis(1)); //Will run at every hour of the day.
 	}
 }
