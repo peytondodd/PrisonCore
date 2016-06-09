@@ -13,6 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
 
@@ -32,9 +33,13 @@ public class BlockToInventoryEvent implements Listener {
 		blockConversions.put(Material.COAL_ORE, new ItemStack(Material.COAL));
 	}
 	
-	@EventHandler (ignoreCancelled = false)
+	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		if(e.getPlayer().getGameMode() != GameMode.SURVIVAL) {
+			return;
+		}
+		if(e.isCancelled()) { return; }
+		if(!WorldGuardPlugin.inst().canBuild(e.getPlayer(), e.getBlock())) {
 			return;
 		}
 		if(main.getBlockToInventoryWorlds().contains(e.getBlock().getWorld().getName())) {

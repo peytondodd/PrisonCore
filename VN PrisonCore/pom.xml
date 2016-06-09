@@ -71,5 +71,11 @@
            <artifactId>PermissionsEx</artifactId>
            <version>1.23.4</version>
     </dependency>
+    
+    <dependency>
+           <groupId>com.sk89q</groupId>
+           <artifactId>WorldGuard</artifactId>
+           <version>6.1</version>
+    </dependency>
   </dependencies>
 </project>
