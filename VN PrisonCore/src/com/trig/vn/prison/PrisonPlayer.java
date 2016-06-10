@@ -75,7 +75,7 @@ public class PrisonPlayer extends CraftPlayer {
 			if(percent > 100) {
 				percent = 100;
 			}
-			Score nextRankVal = obj.getScore("§f" + (percent + "%"));
+			Score nextRankVal = obj.getScore("§f" + ((int)percent + "%"));
 			nextRankVal.setScore(36);
 		} else {
 			Score nextRank = obj.getScore("§b§lNext Rank");
