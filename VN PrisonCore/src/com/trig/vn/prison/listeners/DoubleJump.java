@@ -20,7 +20,7 @@ public class DoubleJump implements Listener {
 				Vector v = p.getEyeLocation().getDirection();
 				v.multiply(1.3F);
 				p.setVelocity(v);
-				p.playSound(p.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, 1F, 1F);
+				p.playSound(p.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, 0.25F, 0.25F);
 			}
 		}
 		

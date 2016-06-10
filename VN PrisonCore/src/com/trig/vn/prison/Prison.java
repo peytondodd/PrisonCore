@@ -25,6 +25,7 @@ import com.trig.vn.prison.commands.CommandBackpack;
 import com.trig.vn.prison.commands.CommandBloat;
 import com.trig.vn.prison.commands.CommandPrison;
 import com.trig.vn.prison.commands.CommandRankup;
+import com.trig.vn.prison.commands.CommandSell;
 import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.eggs.ClickEggEvent;
 import com.trig.vn.prison.eggs.EasterEgg;
@@ -138,6 +139,7 @@ public class Prison extends JavaPlugin {
 		this.getCommand("backpack").setExecutor(new CommandBackpack(this));
 		this.getCommand("prison").setExecutor(new CommandPrison(this));
 		this.getCommand("bloat").setExecutor(new CommandBloat());
+		this.getCommand("sell").setExecutor(new CommandSell());
 	}
 	
 	private void setupPlayers() {
