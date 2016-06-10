@@ -17,7 +17,7 @@ public class DoubleJump implements Listener {
 				p.setFlying(false);
 				p.setAllowFlight(false);
 				Vector v = p.getEyeLocation().getDirection();
-				v.multiply(1.1F);
+				v.multiply(1.3F);
 				p.setVelocity(v);
 			}
 		}
