@@ -15,7 +15,7 @@ public class DoubleJump implements Listener {
 		if(p.getGameMode() != GameMode.CREATIVE) {
 			if(p.isFlying()) {
 				p.setFlying(false);
-				Vector v = p.getEyeLocation().toVector();
+				Vector v = p.getEyeLocation().getDirection();
 				v.multiply(1.1F);
 				p.setVelocity(v);
 			}
