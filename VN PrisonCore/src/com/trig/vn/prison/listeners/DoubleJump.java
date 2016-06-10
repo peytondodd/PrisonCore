@@ -1,6 +1,7 @@
 package com.trig.vn.prison.listeners;
 
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,6 +20,7 @@ public class DoubleJump implements Listener {
 				Vector v = p.getEyeLocation().getDirection();
 				v.multiply(1.3F);
 				p.setVelocity(v);
+				p.playSound(p.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, 1F, 1F);
 			}
 		}
 		
