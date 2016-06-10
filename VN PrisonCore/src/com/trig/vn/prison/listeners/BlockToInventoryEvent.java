@@ -44,7 +44,7 @@ public class BlockToInventoryEvent implements Listener {
 		}
 		if(main.getBlockToInventoryWorlds().contains(e.getBlock().getWorld().getName())) {
 			Player p = e.getPlayer();
-			PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
+			PrisonPlayer pp = Prison.getPrisonManager().getPrisonPlayer(p);
 			Inventory inv = p.getInventory();
 			e.setCancelled(true);
 			//We need to find out which inventory to place the block in.

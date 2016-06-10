@@ -35,6 +35,7 @@ import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.listeners.CaravanDriver;
 import com.trig.vn.prison.listeners.ChangeWorld;
 import com.trig.vn.prison.listeners.ClickSellSignEvent;
+import com.trig.vn.prison.listeners.DoubleJump;
 import com.trig.vn.prison.listeners.PlayerJoin;
 import com.trig.vn.prison.listeners.PlayerLinkEvent;
 import com.trig.vn.prison.managers.LocationManager;
@@ -128,6 +129,7 @@ public class Prison extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new ChangeWorld(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new BloatChatEvent(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new BlockAchievementGUI(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new DoubleJump(), this);
 	}
 	
 	private void registerCommands() {
