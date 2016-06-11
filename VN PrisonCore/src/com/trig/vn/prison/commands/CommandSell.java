@@ -17,11 +17,27 @@ public class CommandSell implements CommandExecutor {
 			Player p = (Player) sender;
 			PrisonPlayer player = Prison.getPrisonManager().getPrisonPlayer(p);
 			PrisonRank rank = player.getRank();
-			//We'll attempt to sell at every shop they have access to.
-			while(rank != null) {
-				MineShop shop = Prison.instance().getMineShop(rank.getName());
-				shop.sell(player);
-				rank = PrisonRank.getPreviousRank(rank);
+			if(args.length == 0) {				
+				//We'll attempt to sell at every shop they have access to.
+				while(rank != null) {
+					MineShop shop = Prison.instance().getMineShop(rank.getName());
+					shop.sell(player);
+					rank = PrisonRank.getPreviousRank(rank);
+				}
+			} else {
+				String mineshop = args[0];
+				MineShop shop = Prison.instance().getMineShop(mineshop);
+				//Check if they can sell to that shop
+				PrisonRank attempt = PrisonRank.getPrisonRank(mineshop);
+				if(attempt != null) {
+					if(attempt.isAheadOf(rank)) {
+						p.sendMessage("§4You cannot sell to this shop!");
+						return true;
+					} else {
+						shop.sell(player);
+						return true;
+					}
+				}
 			}
 		}
 		return true;
