@@ -1,6 +1,7 @@
 package com.trig.vn.prison.listeners;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
@@ -10,10 +11,10 @@ import com.trig.vn.prison.ranks.PrisonRank;
 
 public class FormatChatEvent implements Listener {
 
-	@EventHandler
+	@EventHandler (priority = EventPriority.HIGHEST)
 	public void onChat(AsyncPlayerChatEvent e) {
 		PrisonPlayer p = Prison.getPrisonManager().getPrisonPlayer(e.getPlayer());
-		e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " " + p.getDisplayName() + "§7: " + e.getMessage());
+		e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " " + p.getDisplayName() + "§7: &f" + e.getMessage());
 	}
 	
 	private String getColourForRank(PrisonRank rank) {
