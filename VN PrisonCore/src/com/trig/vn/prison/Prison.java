@@ -166,6 +166,10 @@ public class Prison extends JavaPlugin {
 				Location min = new Location(w, minX, minY, minZ);
 				Location max = new Location(w, maxX, maxY, maxZ);
 				Region r = new Region(min, max);
+				if(getConfig().contains("regions." + s + ".flags")) {
+					List<String> flags = getConfig().getStringList("regions." + s + ".flags");
+					r.getFlags().addAll(flags);
+				}
 				RegionManager.addRegion(s, r);
 			}	
 		} catch (Exception e) {
@@ -315,6 +319,8 @@ public class Prison extends JavaPlugin {
 		getConfig().set("regions." + name + ".max.x", region.getMax().getBlockX());
 		getConfig().set("regions." + name + ".max.y", region.getMax().getBlockY());
 		getConfig().set("regions." + name + ".max.z", region.getMax().getBlockZ());
+		
+		getConfig().set("regions." + name + ".flags", region.getFlags());
 		saveConfig();
 		reloadConfig();
 		

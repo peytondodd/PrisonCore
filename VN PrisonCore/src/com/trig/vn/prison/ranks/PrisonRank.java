@@ -107,4 +107,9 @@ public class PrisonRank {
 	public static List<PrisonRank> getPrisonRanks() {
 		return prisonRanks;
 	}
+	
+	@Override
+	public String toString() {
+		return rankName;
+	}
 }

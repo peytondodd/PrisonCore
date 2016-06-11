@@ -146,8 +146,22 @@ public class CommandPrison implements CommandExecutor {
 					p.sendMessage("§6§lMIN: §7X: " + r.getMin().getX() + "  Y: " + r.getMin().getY() + "  Z: " + r.getMin().getZ());
 					p.sendMessage("§6§lMAX: §7X: " + r.getMax().getX() + "  Y: " + r.getMax().getY() + "  Z: " + r.getMax().getZ());
 					return true;
+				} else if(args.length == 3) {
+					if(args[1].equalsIgnoreCase("addflag")) {
+						String flag = args[2];
+						String rg = args[3];
+						Region r = RegionManager.getRegion(rg);
+						if(r != null) {
+							r.addFlag(flag);
+							main.saveRegion(rg, r);
+							p.sendMessage("§7Sucessfully added flag §4" + flag + "§7to the region §4" + rg);
+						} else {
+							p.sendMessage("§4Could not find region with the name §6" + rg);
+							return true;
+						}
+					}
 				} else {
-					p.sendMessage("§4Invalid usage! Use §6/prison region <name>");
+					p.sendMessage("§4Invalid usage! Use §6/prison region <name> §4or §6/prison region addflag <flag> <region>");
 					return true;
 				}
 			}
