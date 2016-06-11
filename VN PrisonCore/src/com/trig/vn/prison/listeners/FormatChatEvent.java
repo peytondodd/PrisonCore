@@ -12,6 +12,6 @@ public class FormatChatEvent implements Listener {
 	@EventHandler
 	public void onChat(AsyncPlayerChatEvent e) {
 		PrisonPlayer p = Prison.getPrisonManager().getPrisonPlayer(e.getPlayer());
-		e.setFormat("§8[§6" + p.getRank().getName() + "§8] " + p.getDisplayName() + "§7: ");
+		e.setFormat("§6" + p.getRank().getName() + " " + p.getDisplayName() + "§7: ");
 	}
 }
