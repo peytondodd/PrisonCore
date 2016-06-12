@@ -32,6 +32,7 @@ public class PrisonPlayer extends CraftPlayer {
 	private KingdomRank kingdomRank;
 	private Inventory altInv;
 	private int backpackSize = 9;
+	private double kingdomReputation = 0.0;
 	private PrisonAchievements achievements = new PrisonAchievements();
 	
 	private Scoreboard scoreboard;
@@ -123,9 +124,17 @@ public class PrisonPlayer extends CraftPlayer {
 	public void openAchievements() {
 		openInventory(achievements.getGUI());
 	}
+	
+	public void setAlternateInventory(Inventory altInventory) {
+		this.altInv = altInventory;
+	}
 
 	public PrisonRank getRank() {
 		return rank;
+	}
+	
+	public double getKingdomReputation() {
+		return kingdomReputation;
 	}
 
 	public void setRank(PrisonRank rank) {

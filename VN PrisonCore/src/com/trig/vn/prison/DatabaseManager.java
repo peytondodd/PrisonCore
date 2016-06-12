@@ -71,6 +71,18 @@ public class DatabaseManager {
 		return 9;
 	}
 	
+	public void updateBackpack(PrisonPlayer p) {
+		try {
+			PreparedStatement statement = c.prepareStatement("UPDATE t_players SET backpack=? WHERE uuid=?");
+			statement.setInt(1, p.getAlternativeInventory().getSize());
+			statement.setString(2, p.getPlayer().getUniqueId().toString());
+			statement.executeUpdate();
+			statement.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void updateRank(PrisonPlayer p) {
 		try {
 			PreparedStatement statement = c.prepareStatement("UPDATE t_players SET rank=? WHERE uuid=?");

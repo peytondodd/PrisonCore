@@ -13,7 +13,7 @@ public class ChangeWorld implements Listener {
 	@EventHandler
 	public void onEnterSpawn(PlayerChangedWorldEvent e) {
 		if(e.getPlayer().getWorld().getName().equalsIgnoreCase("prison")) {
-			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1, Integer.MAX_VALUE));
+			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
 			if(WorldEvent.inProgress()) {
 				WorldEvent.givePlayerBar(e.getPlayer());
 			}

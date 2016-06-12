@@ -30,6 +30,7 @@ import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.eggs.ClickEggEvent;
 import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.kingdoms.KingdomManager;
+import com.trig.vn.prison.listeners.BackpackUpgrade;
 import com.trig.vn.prison.listeners.BloatChatEvent;
 import com.trig.vn.prison.listeners.BlockAchievementGUI;
 import com.trig.vn.prison.listeners.BlockToInventoryEvent;
@@ -111,6 +112,7 @@ public class Prison extends JavaPlugin {
 		BloatChatEvent.clear();
 		loadBlockToInventoryWorlds();
 		loadMineShops();
+		loadKingdoms();
 		loadRanks();
 		loadRegions();
 		loadLocations();
@@ -133,6 +135,7 @@ public class Prison extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new BlockAchievementGUI(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new DoubleJump(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new FormatChatEvent(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new BackpackUpgrade(this), this);
 	}
 	
 	private void registerCommands() {
@@ -222,6 +225,11 @@ public class Prison extends JavaPlugin {
 			PrisonRank.addPrisonRank(pr);
 			System.out.println("Loaded rank [" + rank + "] $" + value);
 		}
+	}
+	
+	private void loadKingdoms() {
+		if(!getDataFolder().exists()) { return; }
+		
 	}
 	
 	private void loadEasterEggs() {
