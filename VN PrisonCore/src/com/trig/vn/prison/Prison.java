@@ -238,6 +238,7 @@ public class Prison extends JavaPlugin {
 			try {				
 				for(String s : getConfig().getConfigurationSection("eggs").getKeys(false)) {
 					String name = getConfig().getString("eggs." + s + ".name");
+					name = name.replaceAll("&", "§");
 					String worldName = getConfig().getString("eggs." + s + ".location.world");
 					int x = getConfig().getInt("eggs." + s + ".location.x");
 					int y = getConfig().getInt("eggs." + s + ".location.y");
