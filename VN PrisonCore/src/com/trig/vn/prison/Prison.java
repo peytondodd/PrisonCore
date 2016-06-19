@@ -80,7 +80,7 @@ public class Prison extends JavaPlugin {
 	private final String DB_USER = DatabaseConfig.getValueFromConfig("DB_USER");
 	private final String DB_PASSWORD = DatabaseConfig.getValueFromConfig("DB_PASSWORD");
 	
-	public void onEnable() {
+	public void onEnable() { //Test
 		instance = this;
 		setup();
 		manager = new PrisonManager(this);
