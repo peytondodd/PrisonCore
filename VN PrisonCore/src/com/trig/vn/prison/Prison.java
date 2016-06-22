@@ -110,6 +110,7 @@ public class Prison extends JavaPlugin {
 		RegionManager.cleanup();
 		PrisonLinks.cleanup();
 		BloatChatEvent.clear();
+		getPrisonManager().cleanup();
 		loadBlockToInventoryWorlds();
 		loadMineShops();
 		loadKingdoms();
