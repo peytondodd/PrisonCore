@@ -158,6 +158,7 @@ public class Prison extends JavaPlugin {
 	private void loadConfig() {
 		Config.MINING_KEY_RATE = getConfig().getInt("miningKeyRate");
 		Config.MESSAGE_PREFIX = getConfig().getString("message-prefix").replaceAll("&", "§");
+		Config.MINE_WORLDS = getConfig().getStringList("blocksToInventoryWorlds");
 	}
 	
 	private void loadRegions() {
@@ -279,7 +280,6 @@ public class Prison extends JavaPlugin {
 		resetEasterEggs();
 		resetAchievements();
 		loadMineShops();
-		loadBlockToInventoryWorlds();
 		loadEasterEggs();
 		loadLinks();
 		loadLocations();
@@ -295,11 +295,6 @@ public class Prison extends JavaPlugin {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private void loadBlockToInventoryWorlds() {
-		Config.MINE_WORLDS.clear();
-		Config.MINE_WORLDS = getConfig().getStringList("blocksToInventoryWorlds");
 	}
 	
 	private void loadMineShops() {
