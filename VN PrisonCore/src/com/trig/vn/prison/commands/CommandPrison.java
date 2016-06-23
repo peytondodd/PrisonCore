@@ -47,6 +47,10 @@ public class CommandPrison implements CommandExecutor {
 				sender.sendMessage(Config.MESSAGE_PREFIX + "Command not available from console.");
 				return true;
 			}
+			if(args.length == 0) {
+				showCommandHelp(sender);
+				return true;
+			}
 			if(args[0].equalsIgnoreCase("titles")) {
 				Player p = (Player) sender;
 				PrisonPlayer pp = Prison.getPrisonManager().getPrisonPlayer(p);
@@ -246,5 +250,10 @@ public class CommandPrison implements CommandExecutor {
 			}
 		}
 		return true;
+	}
+
+	private void showCommandHelp(CommandSender sender) {
+		sender.sendMessage("§6/prison §ctitles    §8Disable or enable title notifications.");
+		sender.sendMessage("§6/prison §cscoreboard    §8Disable or enable the scoreboard.");
 	}
 }
