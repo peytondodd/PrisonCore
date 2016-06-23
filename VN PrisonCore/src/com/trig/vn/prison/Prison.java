@@ -82,9 +82,6 @@ public class Prison extends JavaPlugin {
 	
 	public void onEnable() { //Test
 		instance = this;
-		manager = new PrisonManager(this);
-		kingdom = new KingdomManager(this);
-		dbm = new DatabaseManager(this);
 		setup();
 		
 		manager.scoreboardLoop();
@@ -103,6 +100,9 @@ public class Prison extends JavaPlugin {
 		essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 		worldEdit = (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
 		setupSQL();
+		manager = new PrisonManager(this);
+		kingdom = new KingdomManager(this);
+		dbm = new DatabaseManager(this);
 		core.registerSQLConnection(c);
 		Constant.init();
 		//In case of a reload, we don't want to have double values
