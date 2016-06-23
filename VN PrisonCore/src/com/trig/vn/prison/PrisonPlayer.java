@@ -197,7 +197,7 @@ public class PrisonPlayer extends CraftPlayer {
 			Prison.instance().getDatabaseManager().updateRank(this);
 			updateRank();
 			KeyData data = Crates.getKeyData(getPlayer());
-			data.setRankup(data.getRankup());
+			data.setRankup(data.getRankup() + 1); //I'm a dumbass
 			Crates.instance().updateKeys(getPlayer(), data);
 			sendMessage(Config.MESSAGE_PREFIX + "§f§lYou have received a §6§lkey §f§lfor ranking up!");
 //			PermissionsEx.getUser(this).removeGroup(current.getName());
