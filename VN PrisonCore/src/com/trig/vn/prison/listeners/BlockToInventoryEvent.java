@@ -66,6 +66,13 @@ public class BlockToInventoryEvent implements Listener {
 				}
 			}
 			rollForKey(p);
+			p.getItemInHand().setDurability((short)0);
+			
+			//To avoid making the player's inventory update every block, we'll do it around every 200 blocks
+			if(new Random().nextInt(200) == 0) {
+				p.updateInventory();
+			}
+			
 			Material type = e.getBlock().getType();
 			byte magic = e.getBlock().getData();
 			e.getBlock().setType(Material.AIR);
