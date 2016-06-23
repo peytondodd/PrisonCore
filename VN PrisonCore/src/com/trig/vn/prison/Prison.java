@@ -82,10 +82,10 @@ public class Prison extends JavaPlugin {
 	
 	public void onEnable() { //Test
 		instance = this;
-		setup();
 		manager = new PrisonManager(this);
 		kingdom = new KingdomManager(this);
 		dbm = new DatabaseManager(this);
+		setup();
 		
 		manager.scoreboardLoop();
 	}
