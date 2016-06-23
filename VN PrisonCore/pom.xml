@@ -38,6 +38,12 @@
     
     <dependency>
       <groupId>vn</groupId>
+      <artifactId>Crates</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>vn</groupId>
       <artifactId>DatabaseConfig</artifactId>
       <version>1.0.0</version>
     </dependency>

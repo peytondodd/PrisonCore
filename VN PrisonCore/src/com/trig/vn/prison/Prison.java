@@ -26,6 +26,7 @@ import com.trig.vn.prison.commands.CommandBloat;
 import com.trig.vn.prison.commands.CommandPrison;
 import com.trig.vn.prison.commands.CommandRankup;
 import com.trig.vn.prison.commands.CommandSell;
+import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.eggs.ClickEggEvent;
 import com.trig.vn.prison.eggs.EasterEgg;
@@ -112,6 +113,7 @@ public class Prison extends JavaPlugin {
 		BloatChatEvent.clear();
 		getPrisonManager().cleanup();
 		loadBlockToInventoryWorlds();
+		loadConfig();
 		loadMineShops();
 		loadKingdoms();
 		loadRanks();
@@ -152,6 +154,11 @@ public class Prison extends JavaPlugin {
 		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 			getPrisonManager().setupPlayer(p);
 		}
+	}
+	
+	private void loadConfig() {
+		Config.MINING_KEY_RATE = getConfig().getInt("miningKeyRate");
+		Config.MESSAGE_PREFIX = getConfig().getString("message-prefix").replaceAll("&", "§");
 	}
 	
 	private void loadRegions() {
