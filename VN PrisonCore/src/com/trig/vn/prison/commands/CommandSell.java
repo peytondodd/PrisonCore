@@ -16,7 +16,7 @@ public class CommandSell implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("sell")) {
 			Player p = (Player) sender;
-			if(!Prison.instance().getBlockToInventoryWorlds().contains(p.getWorld().getName())) {
+			if(!Config.MINE_WORLDS.contains(p.getWorld().getName())) {
 				p.sendMessage(Config.MESSAGE_PREFIX + "§4You can only use this command in a prison world.");
 				return true;
 			}

@@ -46,7 +46,7 @@ public class BlockToInventoryEvent implements Listener {
 		if(!WorldGuardPlugin.inst().canBuild(e.getPlayer(), e.getBlock())) {
 			return;
 		}
-		if(main.getBlockToInventoryWorlds().contains(e.getBlock().getWorld().getName())) {
+		if(Config.MINE_WORLDS.contains(e.getBlock().getWorld().getName())) {
 			Player p = e.getPlayer();
 			PrisonPlayer pp = Prison.getPrisonManager().getPrisonPlayer(p);
 			Inventory inv = p.getInventory();

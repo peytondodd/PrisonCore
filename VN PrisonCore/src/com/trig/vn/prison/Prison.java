@@ -56,7 +56,6 @@ import com.vn.core.utils.Region;
 
 public class Prison extends JavaPlugin {
 
-	private List<String> blockToInventoryWorlds = new ArrayList<String>();
 	private List<MineShop> mineShops = new ArrayList<MineShop>();
 	
 	private static Economy eco;
@@ -299,8 +298,8 @@ public class Prison extends JavaPlugin {
 	}
 	
 	private void loadBlockToInventoryWorlds() {
-		blockToInventoryWorlds.clear();
-		blockToInventoryWorlds = getConfig().getStringList("blocksToInventoryWorlds");
+		Config.MINE_WORLDS.clear();
+		Config.MINE_WORLDS = getConfig().getStringList("blocksToInventoryWorlds");
 	}
 	
 	private void loadMineShops() {
@@ -376,10 +375,6 @@ public class Prison extends JavaPlugin {
 		getConfig().set("eggs." + egg.getId() + ".lore", egg.getLore());
 		saveConfig();
 		reloadConfig();
-	}
-	
-	public List<String> getBlockToInventoryWorlds() {
-		return blockToInventoryWorlds;
 	}
 	
 	public static Economy getEco() {
