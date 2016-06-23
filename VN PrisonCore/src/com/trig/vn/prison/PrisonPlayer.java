@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_9_R2.CraftServer;
 import org.bukkit.craftbukkit.v1_9_R2.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -195,9 +196,9 @@ public class PrisonPlayer extends CraftPlayer {
 			Bukkit.getServer().broadcastMessage("§e" + this.getName() + " §7has ranked up to §e§l" + this.getRank().getName() + "§7!");
 			Prison.instance().getDatabaseManager().updateRank(this);
 			updateRank();
-			KeyData data = Crates.getKeyData(this);
+			KeyData data = Crates.getKeyData(getPlayer());
 			data.setRankup(data.getRankup());
-			Crates.instance().updateKeys(this, data);
+			Crates.instance().updateKeys(getPlayer(), data);
 			sendMessage(Config.MESSAGE_PREFIX + "§f§lYou have received a §6§lkey §f§lfor ranking up!");
 //			PermissionsEx.getUser(this).removeGroup(current.getName());
 //			PermissionsEx.getUser(this).addGroup(getRank().getName());
@@ -248,6 +249,10 @@ public class PrisonPlayer extends CraftPlayer {
 	public void openWarpGUI() {
 		updateWarps();
 		this.openInventory(warpGui);
+	}
+	
+	public Player getPlayer() {
+		return Bukkit.getServer().getPlayer(getName());
 	}
 	
 }
