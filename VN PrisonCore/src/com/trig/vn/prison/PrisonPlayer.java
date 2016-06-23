@@ -19,6 +19,8 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
+import com.trig.vn.crates.Crates;
+import com.trig.vn.crates.api.KeyData;
 import com.trig.vn.prison.achievements.PrisonAchievements;
 import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.economy.Multiplier;
@@ -193,6 +195,10 @@ public class PrisonPlayer extends CraftPlayer {
 			Bukkit.getServer().broadcastMessage("§e" + this.getName() + " §7has ranked up to §e§l" + this.getRank().getName() + "§7!");
 			Prison.instance().getDatabaseManager().updateRank(this);
 			updateRank();
+			KeyData data = Crates.getKeyData(this);
+			data.setRankup(data.getRankup());
+			Crates.instance().updateKeys(this, data);
+			sendMessage(Config.MESSAGE_PREFIX + "§f§lYou have received a §6§lkey §f§lfor ranking up!");
 //			PermissionsEx.getUser(this).removeGroup(current.getName());
 //			PermissionsEx.getUser(this).addGroup(getRank().getName());
 		} else {
