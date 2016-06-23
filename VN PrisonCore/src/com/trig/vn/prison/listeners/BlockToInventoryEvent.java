@@ -1,6 +1,7 @@
 package com.trig.vn.prison.listeners;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -14,8 +15,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.trig.vn.crates.Crates;
+import com.trig.vn.crates.api.KeyData;
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.config.Config;
 
 public class BlockToInventoryEvent implements Listener {
 
@@ -61,6 +65,7 @@ public class BlockToInventoryEvent implements Listener {
 					inv = pp.getAlternativeInventory();
 				}
 			}
+			rollForKey(p);
 			Material type = e.getBlock().getType();
 			byte magic = e.getBlock().getData();
 			e.getBlock().setType(Material.AIR);
@@ -81,6 +86,16 @@ public class BlockToInventoryEvent implements Listener {
 			} 
 			inv.addItem(new ItemStack(type, amount, magic));
 			return;
+		}
+	}
+	
+	private void rollForKey(Player p) {
+		int r = new Random().nextInt(Config.MINING_KEY_RATE);
+		if(r == 0) {
+			KeyData data = Crates.getKeyData(p);
+			data.setMining(data.getMining() + 1);
+			Crates.instance().updateKeys(p, data);
+			p.sendMessage("§f§lYou have found a §6§lkey §f§lfrom mining!");
 		}
 	}
 }
