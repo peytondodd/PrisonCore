@@ -20,6 +20,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import com.trig.vn.prison.achievements.PrisonAchievements;
+import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.economy.Multiplier;
 import com.trig.vn.prison.kingdoms.KingdomRank;
 import com.trig.vn.prison.ranks.PrisonRank;
@@ -195,7 +196,7 @@ public class PrisonPlayer extends CraftPlayer {
 //			PermissionsEx.getUser(this).removeGroup(current.getName());
 //			PermissionsEx.getUser(this).addGroup(getRank().getName());
 		} else {
-			this.sendMessage(ChatColor.RED + "You do not have enough money to rankup!");
+			this.sendMessage(Config.MESSAGE_PREFIX + ChatColor.RED + "You do not have enough money to rankup!");
 			return;
 		}
 	}

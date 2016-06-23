@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.listeners.BloatChatEvent;
 
 public class CommandBloat implements CommandExecutor {
@@ -15,15 +16,15 @@ public class CommandBloat implements CommandExecutor {
 				Player p = (Player) sender;
 				if(p.hasPermission("vn.bloat")) {
 					if(BloatChatEvent.toggleBloat(p)) {
-						p.sendMessage("§7Your chat is now §lbloated");
+						p.sendMessage(Config.MESSAGE_PREFIX + "§7Your chat is now §lbloated");
 						return true;
 					} else {
-						p.sendMessage("§7You chat has returned to normal.");
+						p.sendMessage(Config.MESSAGE_PREFIX + "§7You chat has returned to normal.");
 						return true;
 					}
 				}
 			} else {
-				sender.sendMessage("§4This command is not available from console.");
+				sender.sendMessage(Config.MESSAGE_PREFIX + "§4This command is not available from console.");
 				return true;
 			}
 		}

@@ -95,7 +95,7 @@ public class BlockToInventoryEvent implements Listener {
 			KeyData data = Crates.getKeyData(p);
 			data.setMining(data.getMining() + 1);
 			Crates.instance().updateKeys(p, data);
-			p.sendMessage("§f§lYou have found a §6§lkey §f§lfrom mining!");
+			p.sendMessage(Config.MESSAGE_PREFIX + "§f§lYou have found a §6§lkey §f§lfrom mining!");
 		}
 	}
 }

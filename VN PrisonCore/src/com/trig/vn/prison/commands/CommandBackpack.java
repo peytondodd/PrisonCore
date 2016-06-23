@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.config.Config;
 
 public class CommandBackpack implements CommandExecutor {
 
@@ -20,12 +21,12 @@ public class CommandBackpack implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("backpack")) {			
 			if(!(sender instanceof Player)) {
-				sender.sendMessage("Cannot use this command from console!");
+				sender.sendMessage(Config.MESSAGE_PREFIX + "Cannot use this command from console!");
 				return true;
 			}
 			if(args.length == 0) { //Open their own backpack
 				Player player = (Player) sender;
-				PrisonPlayer p = main.getPrisonManager().getPrisonPlayer(player);
+				PrisonPlayer p = Prison.getPrisonManager().getPrisonPlayer(player);
 				player.openInventory(p.getAlternativeInventory());
 				return true;
 			}
@@ -34,7 +35,7 @@ public class CommandBackpack implements CommandExecutor {
 				String playerName = args[0];
 				Player self = (Player) sender;
 				Player other = Bukkit.getServer().getPlayer(playerName);
-				PrisonPlayer o = main.getPrisonManager().getPrisonPlayer(other);
+				PrisonPlayer o = Prison.getPrisonManager().getPrisonPlayer(other);
 				self.openInventory(o.getAlternativeInventory());
 				return true;
 			}

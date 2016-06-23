@@ -8,6 +8,7 @@ import org.bukkit.material.MaterialData;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.config.Config;
 
 public class MineShop {
 
@@ -57,7 +58,7 @@ public class MineShop {
 				
 				Prison.getEco().depositPlayer(p, total);
 				//p.sendMessage("§a$" + total + " §7was added to your account for selling " + item.getType());
-				p.sendMessage("§7Sold " + a + " " + Prison.getEssentials().getItemDb().name(item) + " @ $" + value + "ea. for a total of §a$" + total);
+				p.sendMessage(Config.MESSAGE_PREFIX + "§7Sold " + a + " " + Prison.getEssentials().getItemDb().name(item) + " @ $" + value + "ea. for a total of §a$" + total);
 				
 			}
 		}

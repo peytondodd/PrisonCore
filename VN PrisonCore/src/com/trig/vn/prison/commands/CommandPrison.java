@@ -21,6 +21,7 @@ import com.trig.ct.ClockTimer;
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
 import com.trig.vn.prison.achievements.PrisonAchievements;
+import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.economy.Multiplier;
 import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.managers.LocationManager;
@@ -43,34 +44,34 @@ public class CommandPrison implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(cmd.getName().equalsIgnoreCase("prison")) {
 			if(!(sender instanceof Player)) {
-				sender.sendMessage("Command not available from console.");
+				sender.sendMessage(Config.MESSAGE_PREFIX + "Command not available from console.");
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("titles")) {
 				Player p = (Player) sender;
-				PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
+				PrisonPlayer pp = Prison.getPrisonManager().getPrisonPlayer(p);
 				pp.toggleTitles();
 				if(pp.canSeeTitles()) {					
-					pp.sendMessage("§7Titles are now §6on!");
+					pp.sendMessage(Config.MESSAGE_PREFIX + "§7Titles are now §6on!");
 				} else {
-					pp.sendMessage("§7Titles are now §6off!");
+					pp.sendMessage(Config.MESSAGE_PREFIX + "§7Titles are now §6off!");
 				}
 				return true;
 			}
 			
 			if(args[0].equalsIgnoreCase("scoreboard")) {
 				Player p = (Player) sender;
-				PrisonPlayer pp = main.getPrisonManager().getPrisonPlayer(p);
+				PrisonPlayer pp = Prison.getPrisonManager().getPrisonPlayer(p);
 				pp.toggleScoreboard();
 				if(pp.isUseScoreboard()) {					
-					pp.sendMessage("§7Scoreboards are now §6on!");
+					pp.sendMessage(Config.MESSAGE_PREFIX + "§7Scoreboards are now §6on!");
 				} else {
-					pp.sendMessage("§7Scoreboards are now §6off!");
+					pp.sendMessage(Config.MESSAGE_PREFIX + "§7Scoreboards are now §6off!");
 				}
 			}
 			
 			if(!sender.hasPermission("vn.admin")) {
-				sender.sendMessage(ChatColor.RED + "This command is for admins only.");
+				sender.sendMessage(Config.MESSAGE_PREFIX + ChatColor.RED + "This command is for admins only.");
 				return true;
 			}
 			
@@ -87,13 +88,13 @@ public class CommandPrison implements CommandExecutor {
 			Player p = (Player) sender;
 			
 			if(args.length == 0) {
-				p.sendMessage(ChatColor.RED + "No arguments specified.");
+				p.sendMessage(Config.MESSAGE_PREFIX + ChatColor.RED + "No arguments specified.");
 				return true;
 			}
 			
 			if(args[0].equalsIgnoreCase("reload")) {
 				main.refreshConfig();
-				p.sendMessage("§6Config reloaded.");
+				p.sendMessage(Config.MESSAGE_PREFIX + "§6Config reloaded.");
 				return true;
 			}
 			
@@ -102,7 +103,7 @@ public class CommandPrison implements CommandExecutor {
 				v.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 133));
 				v.setCustomName(Constant.CARAVAN_DRIVER);
 				v.setCustomNameVisible(true);
-				p.sendMessage("§6Spawned caravan driver at your location.");
+				p.sendMessage(Config.MESSAGE_PREFIX + "§6Spawned caravan driver at your location.");
 				return true;
 			}
 			
@@ -119,19 +120,19 @@ public class CommandPrison implements CommandExecutor {
 								po.setRank(r);
 								main.getDatabaseManager().updateRank(po);
 								po.updateRank();
-								p.sendMessage("§7Changed §6" + other.getName() + "§7's rank to §6" + r.getName());
-								po.sendMessage("§7Your rank was set to §6" + r.getName() + " §7by §6" + p.getName());
+								p.sendMessage(Config.MESSAGE_PREFIX + "§7Changed §6" + other.getName() + "§7's rank to §6" + r.getName());
+								po.sendMessage(Config.MESSAGE_PREFIX + "§7Your rank was set to §6" + r.getName() + " §7by §6" + p.getName());
 								return true;
 							} else {
-								p.sendMessage("§cCould not find PrisonPlayer for " + other.getName());
+								p.sendMessage(Config.MESSAGE_PREFIX + "§cCould not find PrisonPlayer for " + other.getName());
 								return true;
 							}
 						} else {
-							p.sendMessage("§cThere is no rank with the name §6" + rank);
+							p.sendMessage(Config.MESSAGE_PREFIX + "§cThere is no rank with the name §6" + rank);
 							return true;
 						}
 					} else {
-						p.sendMessage("§cCould not find " + playerName);
+						p.sendMessage(Config.MESSAGE_PREFIX + "§cCould not find " + playerName);
 						return true;
 					}
 				}
@@ -142,7 +143,7 @@ public class CommandPrison implements CommandExecutor {
 					String rg = args[1];
 					Region r = RegionConverter.getRegionFromSelection(main.getWorldEdit().getSelection(p));
 					main.saveRegion(rg, r);
-					p.sendMessage("§aCreated region §6" + rg);
+					p.sendMessage(Config.MESSAGE_PREFIX + "§aCreated region §6" + rg);
 					p.sendMessage("§6§lMIN: §7X: " + r.getMin().getX() + "  Y: " + r.getMin().getY() + "  Z: " + r.getMin().getZ());
 					p.sendMessage("§6§lMAX: §7X: " + r.getMax().getX() + "  Y: " + r.getMax().getY() + "  Z: " + r.getMax().getZ());
 					return true;
@@ -154,14 +155,14 @@ public class CommandPrison implements CommandExecutor {
 						if(r != null) {
 							r.addFlag(flag);
 							main.saveRegion(rg, r);
-							p.sendMessage("§7Sucessfully added flag §4" + flag + "§7to the region §4" + rg);
+							p.sendMessage(Config.MESSAGE_PREFIX + "§7Sucessfully added flag §4" + flag + "§7to the region §4" + rg);
 						} else {
-							p.sendMessage("§4Could not find region with the name §6" + rg);
+							p.sendMessage(Config.MESSAGE_PREFIX + "§4Could not find region with the name §6" + rg);
 							return true;
 						}
 					}
 				} else {
-					p.sendMessage("§4Invalid usage! Use §6/prison region <name> §4or §6/prison region addflag <flag> <region>");
+					p.sendMessage(Config.MESSAGE_PREFIX + "§4Invalid usage! Use §6/prison region <name> §4or §6/prison region addflag <flag> <region>");
 					return true;
 				}
 			}
@@ -170,10 +171,10 @@ public class CommandPrison implements CommandExecutor {
 					String rg = args[1];
 					Location loc = p.getLocation();
 					main.saveLocation(rg, loc);
-					p.sendMessage("§aCreated location at your current position.");
+					p.sendMessage(Config.MESSAGE_PREFIX + "§aCreated location at your current position.");
 					return true;
 				} else {
-					p.sendMessage("§4Invalid usage! Use §6/prison location <name>");
+					p.sendMessage(Config.MESSAGE_PREFIX + "§4Invalid usage! Use §6/prison location <name>");
 					return true;
 				}
 			}
@@ -187,18 +188,18 @@ public class CommandPrison implements CommandExecutor {
 						if(LocationManager.getLocation(location) != null) {
 							PrisonWarp warp = new PrisonWarp(region, location);
 							main.saveLink(name, warp);
-							p.sendMessage("§aSaved link §6" + name + " §7[" + region + "->" + location + "]");
+							p.sendMessage(Config.MESSAGE_PREFIX + "§aSaved link §6" + name + " §7[" + region + "->" + location + "]");
 							return true;
 						} else {
-							p.sendMessage("§4The location §6" + location + " §4could not be found.");
+							p.sendMessage(Config.MESSAGE_PREFIX + "§4The location §6" + location + " §4could not be found.");
 							return true;
 						}
 					} else {
-						p.sendMessage("§4The region §6" + region + " §4could not be found.");
+						p.sendMessage(Config.MESSAGE_PREFIX + "§4The region §6" + region + " §4could not be found.");
 						return true;
 					}
 				} else {
-					p.sendMessage("§4Invalid usage! Use §6/prison link <name> <region-name> <location-name>");
+					p.sendMessage(Config.MESSAGE_PREFIX + "§4Invalid usage! Use §6/prison link <name> <region-name> <location-name>");
 					return true;
 				}
 			}
@@ -207,7 +208,7 @@ public class CommandPrison implements CommandExecutor {
 					String name = args[1];
 					Block b = p.getTargetBlock((Set<Material>)null, 3);
 					if(b == null || b.getType() == Material.AIR) {
-						p.sendMessage("§cCould not find a block within 3m.");
+						p.sendMessage(Config.MESSAGE_PREFIX + "§cCould not find a block within 3m.");
 						return true;
 					}
 					
@@ -216,15 +217,15 @@ public class CommandPrison implements CommandExecutor {
 						EasterEgg egg = new EasterEgg(name, Arrays.asList(""), loc, PrisonAchievements.nextAvailableAchievementId());
 						main.saveEasterEgg(egg);
 						EasterEgg.addEasterEgg(egg);
-						p.sendMessage("§7Created easter egg with name §6" + name);
+						p.sendMessage(Config.MESSAGE_PREFIX + "§7Created easter egg with name §6" + name);
 						p.sendMessage("§7Lore must be set in config.");
 						return true;
 					} else {
-						p.sendMessage("§cSelected block is not a dragon egg!");
+						p.sendMessage(Config.MESSAGE_PREFIX + "§cSelected block is not a dragon egg!");
 						return true;
 					}
 				} else {
-					p.sendMessage("§4Invalid usage! §6Use /prison egg <name>");
+					p.sendMessage(Config.MESSAGE_PREFIX + "§4Invalid usage! §6Use /prison egg <name>");
 					return true;
 				}
 			}
@@ -234,12 +235,12 @@ public class CommandPrison implements CommandExecutor {
 				p.sendMessage("Executed test");
 			}
 			if(args[0].equalsIgnoreCase("startevent")) {
-				p.sendMessage("§5Starting World Event...");
+				p.sendMessage(Config.MESSAGE_PREFIX + "§5Starting World Event...");
 				WorldEvent.init();
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("stopevent")) {
-				p.sendMessage("§5Stopping World Event...");
+				p.sendMessage(Config.MESSAGE_PREFIX + "§5Stopping World Event...");
 				WorldEvent.stop();
 				return true;
 			}

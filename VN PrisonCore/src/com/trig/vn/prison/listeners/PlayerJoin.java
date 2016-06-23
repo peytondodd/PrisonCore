@@ -21,7 +21,7 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Prison.getStaffOnline().update();
-		main.getPrisonManager().setupPlayer(e.getPlayer());
+		Prison.getPrisonManager().setupPlayer(e.getPlayer());
 		if(WorldEvent.inProgress() && e.getPlayer().getLocation().getWorld().getName().equalsIgnoreCase("prison")) {
 			WorldEvent.givePlayerBar(e.getPlayer());
 			e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1, Integer.MAX_VALUE));
@@ -31,7 +31,7 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
 		Prison.getStaffOnline().update();
-		main.getPrisonManager().unregisterPlayer(e.getPlayer());
+		Prison.getPrisonManager().unregisterPlayer(e.getPlayer());
 		System.out.println("Unregistered " + e.getPlayer().getName());
 	}
 }

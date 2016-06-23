@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.config.Config;
 
 public class ClickEggEvent implements Listener {
 
@@ -28,10 +29,10 @@ public class ClickEggEvent implements Listener {
 				e.setCancelled(true);
 				if(EasterEgg.isEasterEgg(e.getClickedBlock().getLocation())) {
 					EasterEgg egg = EasterEgg.getEasterEgg(e.getClickedBlock().getLocation());
-					PrisonPlayer player = main.getPrisonManager().getPrisonPlayer(e.getPlayer());
+					PrisonPlayer player = Prison.getPrisonManager().getPrisonPlayer(e.getPlayer());
 					if(!player.getAchievements().hasAchievement(egg)) {
 						player.getAchievements().unlockAchievement(egg);
-						player.sendMessage("§a§lYou have unlocked the achievement: §6§l" + egg.getName());
+						player.sendMessage(Config.MESSAGE_PREFIX + "§a§lYou have unlocked the achievement: §6§l" + egg.getName());
 					}
 				}
 			}

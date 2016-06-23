@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.utils.InventoryCopy;
 
 public class BackpackUpgrade implements Listener {
@@ -42,11 +43,11 @@ public class BackpackUpgrade implements Listener {
 					int tokens = Integer.parseInt(tc[0]);
 					
 					if(player.getAlternativeInventory().getSize() >= slots) {
-						p.sendMessage("§4This backpack is smaller than your current one!");
+						p.sendMessage(Config.MESSAGE_PREFIX + "§4This backpack is smaller than your current one!");
 						return;
 					}
 					if(Prison.getPlayerUtils().getTokens().getTokens(p) < tokens) {
-						p.sendMessage("§4You do not have enough tokens to make this purchase!");
+						p.sendMessage(Config.MESSAGE_PREFIX + "§4You do not have enough tokens to make this purchase!");
 						p.sendMessage("§7You can earn more tokens by voting!");
 						return;
 					}
@@ -54,7 +55,7 @@ public class BackpackUpgrade implements Listener {
 					InventoryCopy.copy(player.getAlternativeInventory(), newInv);
 					player.setAlternateInventory(newInv);
 					main.getDatabaseManager().updateBackpack(player);
-					player.sendMessage("§6Your inventory has been upgraded!");
+					player.sendMessage(Config.MESSAGE_PREFIX + "§6Your inventory has been upgraded!");
 					return;
 				}
 			}

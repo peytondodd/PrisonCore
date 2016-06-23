@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.ranks.PrisonRank;
 
 public class CommandRankup implements CommandExecutor {
@@ -24,7 +25,7 @@ public class CommandRankup implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("rankup")) {
 			if(sender instanceof Player) {
 				Player p = (Player) sender;
-				PrisonPlayer player = main.getPrisonManager().getPrisonPlayer(p);	
+				PrisonPlayer player = Prison.getPrisonManager().getPrisonPlayer(p);	
 				if(PrisonRank.canRankup(player)) {
 					player.rankup();
 				} else {
@@ -32,7 +33,7 @@ public class CommandRankup implements CommandExecutor {
 						return true;
 					}
 					PrisonRank next = PrisonRank.getNextRank(player.getRank());
-					player.sendMessage("§7Your next rank §6[§8" + next.getName() + "§6] §7costs §a$" + format.format(next.getValue()));
+					player.sendMessage(Config.MESSAGE_PREFIX + "§7Your next rank §6[§8" + next.getName() + "§6] §7costs §a$" + format.format(next.getValue()));
 					return true;
 				}
 			}

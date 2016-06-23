@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.ranks.PrisonRank;
 
@@ -16,7 +17,7 @@ public class CommandSell implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("sell")) {
 			Player p = (Player) sender;
 			if(!Prison.instance().getBlockToInventoryWorlds().contains(p.getWorld().getName())) {
-				p.sendMessage("§4You can only use this command in a prison world.");
+				p.sendMessage(Config.MESSAGE_PREFIX + "§4You can only use this command in a prison world.");
 				return true;
 			}
 			PrisonPlayer player = Prison.getPrisonManager().getPrisonPlayer(p);
@@ -35,7 +36,7 @@ public class CommandSell implements CommandExecutor {
 				PrisonRank attempt = PrisonRank.getPrisonRank(mineshop);
 				if(attempt != null) {
 					if(attempt.isAheadOf(rank)) {
-						p.sendMessage("§4You cannot sell to this shop!");
+						p.sendMessage(Config.MESSAGE_PREFIX + "§4You cannot sell to this shop!");
 						return true;
 					} else {
 						shop.sell(player);
