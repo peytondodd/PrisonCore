@@ -3,10 +3,8 @@ package com.trig.vn.prison.kingdoms;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 import com.trig.vn.prison.Prison;
-import com.trig.vn.prison.kingdoms.tasks.WorldEventTask;
 
 public class KingdomManager {
 
