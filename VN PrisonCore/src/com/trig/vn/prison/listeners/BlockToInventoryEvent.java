@@ -12,7 +12,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.trig.vn.crates.Crates;
@@ -66,7 +68,15 @@ public class BlockToInventoryEvent implements Listener {
 				}
 			}
 			rollForKey(p);
-			p.getItemInHand().setDurability((short)0);
+			if(isPickaxe(p.getItemInHand().getType())) {
+				if(!p.getItemInHand().getItemMeta().spigot().isUnbreakable()) {
+					p.getItemInHand().setDurability((short) 0);
+					ItemMeta meta = p.getItemInHand().getItemMeta();
+					meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+					meta.spigot().setUnbreakable(true);
+					p.getItemInHand().setItemMeta(meta);
+				}
+			}
 			
 			//To avoid making the player's inventory update every block, we'll do it around every 200 blocks
 			if(new Random().nextInt(200) == 0) {
@@ -103,6 +113,14 @@ public class BlockToInventoryEvent implements Listener {
 			data.setMining(data.getMining() + 1);
 			Crates.instance().updateKeys(p, data);
 			p.sendMessage(Config.MESSAGE_PREFIX + "§f§lYou have found a §6§lkey §f§lfrom mining!");
+		}
+	}
+	
+	private boolean isPickaxe(Material mat) {
+		if(mat == Material.WOOD_PICKAXE || mat == Material.STONE_PICKAXE || mat == Material.IRON_PICKAXE || mat == Material.GOLD_PICKAXE || mat == Material.DIAMOND_PICKAXE) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }
