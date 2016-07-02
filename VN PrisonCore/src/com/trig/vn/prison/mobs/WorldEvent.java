@@ -25,7 +25,7 @@ public class WorldEvent {
 	private static Prison main = Prison.instance();
 	private static List<Entity> entities = new ArrayList<Entity>(); //We'll need to keep track of everything so we can cleanup later
 	private static long startTime = 0L;
-	private static final long RUNTIME = 60000 * 10; //10 Minutes
+	private static final long RUNTIME = 60000 * 5; //10 Minutes
 	private static WorldEventLocation loc;
 	private static Location center;
 	private static Location bossLoc;

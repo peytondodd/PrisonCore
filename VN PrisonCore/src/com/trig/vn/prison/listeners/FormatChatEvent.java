@@ -17,7 +17,12 @@ public class FormatChatEvent implements Listener {
 	public void onChat(AsyncPlayerChatEvent e) {
 		PrisonPlayer p = Prison.getPrisonManager().getPrisonPlayer(e.getPlayer()); //
 		//e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " §a" + p.getDisplayName() + " §f" + e.getMessage());
-		e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " " + PermissionsEx.getUser(e.getPlayer()).getPrefix().replaceAll("&", "§") + " §a" + p.getName() + " §f%s");
+		String prefix = PermissionsEx.getUser(e.getPlayer()).getPrefix();
+		if(prefix == null || prefix.equalsIgnoreCase("")) {
+			e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " §a" + p.getName() + " §f%s");
+		} else {
+			e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " " + prefix.replaceAll("&", "§") + " §a" + p.getName() + " §f%s");
+		}
 	}
 	
 	private String getColourForRank(PrisonRank rank) {
