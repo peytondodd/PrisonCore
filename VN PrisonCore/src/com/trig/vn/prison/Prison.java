@@ -40,6 +40,7 @@ import com.trig.vn.prison.listeners.ChangeWorld;
 import com.trig.vn.prison.listeners.ClickSellSignEvent;
 import com.trig.vn.prison.listeners.DoubleJump;
 import com.trig.vn.prison.listeners.FormatChatEvent;
+import com.trig.vn.prison.listeners.HungerChange;
 import com.trig.vn.prison.listeners.PlayerJoin;
 import com.trig.vn.prison.listeners.PlayerLinkEvent;
 import com.trig.vn.prison.managers.LocationManager;
@@ -137,6 +138,7 @@ public class Prison extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new DoubleJump(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new FormatChatEvent(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new BackpackUpgrade(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new HungerChange(), this);
 	}
 	
 	private void registerCommands() {
