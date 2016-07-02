@@ -22,9 +22,11 @@ public class PlayerLinkEvent implements Listener {
 		String rg = null;
 		if((rg = RegionManager.getPlayerRegion(e.getPlayer())) != null) {
 			if(PrisonLinks.linkValid(rg)) {
-				PrisonLinks.link(rg, e.getPlayer());
-				//System.out.println("Linking " + e.getPlayer().getName() + " [" + rg + "->" + PrisonLinks.getLinkForRegion(rg).getLocation() + "]");
-				return;
+				if(RegionManager.getRegion(rg).compareWorld(e.getPlayer().getWorld())) {					
+					PrisonLinks.link(rg, e.getPlayer());
+					//System.out.println("Linking " + e.getPlayer().getName() + " [" + rg + "->" + PrisonLinks.getLinkForRegion(rg).getLocation() + "]");
+					return;
+				}
 			}
 		}
 	}
