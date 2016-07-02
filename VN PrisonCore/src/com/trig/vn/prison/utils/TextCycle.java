@@ -32,6 +32,9 @@ public class TextCycle {
 	}
 	
 	public String getCurrent() {
+		if(cycles.size() == 0) {
+			return "None";
+		}
 		return cycles.get(index);
 	}
 	
