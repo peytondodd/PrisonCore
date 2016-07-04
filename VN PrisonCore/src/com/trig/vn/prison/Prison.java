@@ -278,8 +278,8 @@ public class Prison extends JavaPlugin {
 	public void refreshConfig() {
 		reloadConfig();
 		loadConfig();
-		resetEasterEggs();
 		resetAchievements();
+		resetEasterEggs();
 		loadMineShops();
 		loadEasterEggs();
 		loadLinks();
