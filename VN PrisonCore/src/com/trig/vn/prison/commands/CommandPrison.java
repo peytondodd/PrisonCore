@@ -83,8 +83,8 @@ public class CommandPrison implements CommandExecutor {
 			if(args[0].equalsIgnoreCase("startmultiplier")) {
 				double value = Double.parseDouble(args[1]);
 				long duration = Long.parseLong(args[2]);
-				Multiplier.setMultiplier(value, duration);
-				Bukkit.getServer().broadcastMessage("§6§lA sell multiplier of §a§l" + value + "x §6§lhas been activated for §a§l" + ClockTimer.formatTimeMillis(duration, false));
+				Multiplier.setMultiplier(value, duration, (Player) sender);
+				//Bukkit.getServer().broadcastMessage("§6§lA sell multiplier of §a§l" + value + "x §6§lhas been activated for §a§l" + ClockTimer.formatTimeMillis(duration, false));
 				return true;
 			}
 			
