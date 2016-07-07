@@ -56,6 +56,7 @@ public class PrisonPlayer extends CraftPlayer {
 		
 		lastTitle = System.currentTimeMillis();
 		scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
+		this.getPlayer().spigot().setCollidesWithEntities(false);
 
 	}
 	
