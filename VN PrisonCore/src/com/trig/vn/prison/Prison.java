@@ -282,10 +282,10 @@ public class Prison extends JavaPlugin {
 		resetEasterEggs();
 		loadMineShops();
 		loadEasterEggs();
-		loadLinks();
-		loadLocations();
-		loadRanks();
 		loadRegions();
+		loadLocations();
+		loadLinks();
+		loadRanks();
 	}
 	
 	private void setupSQL() {
