@@ -19,9 +19,9 @@ public class FormatChatEvent implements Listener {
 		//e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " §a" + p.getDisplayName() + " §f" + e.getMessage());
 		String prefix = PermissionsEx.getUser(e.getPlayer()).getPrefix();
 		if(prefix == null || prefix.equalsIgnoreCase("")) {
-			e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " §a" + p.getName() + " §f" + e.getMessage().replaceAll("\\%", ""));
+			e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " §a" + p.getName() + " §f%2$s");
 		} else {
-			e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " " + prefix.replaceAll("&", "§") + " §a" + p.getName() + " §f" + e.getMessage().replaceAll("\\%", "percent"));
+			e.setFormat(getColourForRank(p.getRank()) + p.getRank().getName() + " " + prefix.replaceAll("&", "§") + " §a" + p.getName() + " §f%2$s");
 		}
 	}
 	
