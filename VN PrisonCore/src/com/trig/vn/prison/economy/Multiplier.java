@@ -11,6 +11,8 @@ public class Multiplier {
 	private static long multiplierDuration = 0L;
 	private static long startTime = 0L;
 	
+	private static boolean lastMinuteWarning = false;
+	
 	public static void setMultiplier(double multiplierX, long duration, Player p) {
 		multiplier = multiplierX;
 		startTime = System.currentTimeMillis();
@@ -30,7 +32,17 @@ public class Multiplier {
 		if(System.currentTimeMillis() > startTime + multiplierDuration) {
 			multiplier = 1.0;
 			multiplierDuration = 0L;
+			lastMinuteWarning = false;
+		} else {
+			if(getTimeLeft() <= 60000 && !lastMinuteWarning) {
+				lastMinuteWarning = true;
+				Bukkit.getServer().broadcastMessage("§6§lThere is 1 minute remaining on the active multiplier.");
+			}
 		}
+	}
+	
+	public static long getTimeLeft() {
+		return ((startTime + multiplierDuration) - System.currentTimeMillis());
 	}
 //	public static double getMultiplier(Player p) {
 //		if(p.hasPermission("vn.prison.multiplier.1.8")) {
