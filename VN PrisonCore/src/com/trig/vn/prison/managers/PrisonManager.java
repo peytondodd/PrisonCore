@@ -12,6 +12,8 @@ import org.bukkit.entity.Player;
 
 import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.PrisonPlayer;
+import com.trig.vn.prison.config.Config;
+import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.economy.Multiplier;
 import com.trig.vn.prison.listeners.BloatChatEvent;
 import com.trig.vn.prison.ranks.PrisonRank;
@@ -71,6 +73,32 @@ public class PrisonManager {
 			}
 		}
 		return null;
+	}
+	
+	public static void sell(PrisonPlayer player, String[] args) {
+		PrisonRank rank = player.getRank();
+		if(args.length == 0) {				
+			//We'll attempt to sell at every shop they have access to.
+			while(rank != null) {
+				MineShop shop = Prison.instance().getMineShop(rank.getName());
+				shop.sell(player);
+				rank = PrisonRank.getPreviousRank(rank);
+			}
+		} else {
+			String mineshop = args[0];
+			MineShop shop = Prison.instance().getMineShop(mineshop);
+			//Check if they can sell to that shop
+			PrisonRank attempt = PrisonRank.getPrisonRank(mineshop);
+			if(attempt != null) {
+				if(attempt.isAheadOf(rank)) {
+					player.sendMessage(Config.MESSAGE_PREFIX + "§4You cannot sell to this shop!");
+					return;
+				} else {
+					shop.sell(player);
+					return;
+				}
+			}
+		}
 	}
 	
 	public PrisonPlayer getPrisonPlayer(String uuid) {

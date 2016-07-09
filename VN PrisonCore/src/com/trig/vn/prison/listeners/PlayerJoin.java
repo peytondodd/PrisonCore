@@ -8,6 +8,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.trig.vn.prison.Prison;
+import com.trig.vn.prison.mobs.Hell;
 import com.trig.vn.prison.mobs.WorldEvent;
 
 public class PlayerJoin implements Listener {
@@ -32,6 +33,7 @@ public class PlayerJoin implements Listener {
 	public void onQuit(PlayerQuitEvent e) {
 		Prison.getStaffOnline().update();
 		Prison.getPrisonManager().unregisterPlayer(e.getPlayer());
+		Hell.unregister(e.getPlayer());
 		System.out.println("Unregistered " + e.getPlayer().getName());
 	}
 }

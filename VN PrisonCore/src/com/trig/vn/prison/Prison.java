@@ -38,6 +38,7 @@ import com.trig.vn.prison.listeners.BlockToInventoryEvent;
 import com.trig.vn.prison.listeners.CaravanDriver;
 import com.trig.vn.prison.listeners.ChangeWorld;
 import com.trig.vn.prison.listeners.ClickSellSignEvent;
+import com.trig.vn.prison.listeners.CombatListener;
 import com.trig.vn.prison.listeners.DoubleJump;
 import com.trig.vn.prison.listeners.FormatChatEvent;
 import com.trig.vn.prison.listeners.HungerChange;
@@ -47,6 +48,7 @@ import com.trig.vn.prison.managers.LocationManager;
 import com.trig.vn.prison.managers.PrisonLinks;
 import com.trig.vn.prison.managers.PrisonManager;
 import com.trig.vn.prison.managers.RegionManager;
+import com.trig.vn.prison.mobs.Hell;
 import com.trig.vn.prison.objects.PrisonWarp;
 import com.trig.vn.prison.ranks.PrisonRank;
 import com.trig.vn.prison.utils.Constant;
@@ -123,6 +125,8 @@ public class Prison extends JavaPlugin {
 		registerEvents();
 		registerCommands();
 		setupPlayers(); //In case of /reload, we need to pretend players just logged in.
+		
+		Hell.init();
 	}
 	
 	private void registerEvents() {
@@ -139,6 +143,7 @@ public class Prison extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new FormatChatEvent(), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new BackpackUpgrade(this), this);
 		Bukkit.getServer().getPluginManager().registerEvents(new HungerChange(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new CombatListener(), this);
 	}
 	
 	private void registerCommands() {
