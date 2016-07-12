@@ -11,7 +11,7 @@ import com.trig.vn.prison.PrisonPlayer;
 import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.economy.MineShop;
 import com.trig.vn.prison.managers.PrisonManager;
-import com.trig.vn.prison.mobs.Hell;
+import com.trig.vn.prison.mobs.PrisonPVP;
 import com.trig.vn.prison.ranks.PrisonRank;
 
 public class CommandSell implements CommandExecutor {
@@ -24,15 +24,15 @@ public class CommandSell implements CommandExecutor {
 				return true;
 			}
 			final PrisonPlayer player = Prison.getPrisonManager().getPrisonPlayer(p);
-			if(Hell.getPlayers().contains(p)) {
-				p.sendMessage("§7Command will execute in §4" + Hell.getCombatCooldown() + " seconds §7if you are not in combat.");
+			if(PrisonPVP.getPlayers().contains(p)) {
+				p.sendMessage("§7Command will execute in §4" + PrisonPVP.getCombatCooldown() + " seconds §7if you are not in combat.");
 				Bukkit.getServer().getScheduler().runTaskLaterAsynchronously(Prison.instance(), new Runnable() {
 					public void run() {
-						if(Hell.isOutOfCombat(player)) {							
+						if(PrisonPVP.isOutOfCombat(player)) {							
 							PrisonManager.sell(player, args);
 						}
 					}
-				}, 20 * Hell.getCombatCooldown());
+				}, 20 * PrisonPVP.getCombatCooldown());
 				return true;
 			}
 			

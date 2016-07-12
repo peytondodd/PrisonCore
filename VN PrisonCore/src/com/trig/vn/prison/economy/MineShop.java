@@ -64,7 +64,7 @@ public class MineShop {
 		}
 	}
 	
-	private int getAmountOfItem(ItemStack item, Inventory inv) {
+	public static int getAmountOfItem(ItemStack item, Inventory inv) {
 		int a = 0;
 		for(ItemStack itemstack : inv.getContents()) {
 			if(itemstack == null) { continue; }

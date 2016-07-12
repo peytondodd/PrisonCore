@@ -83,5 +83,11 @@
            <artifactId>WorldGuard</artifactId>
            <version>6.1</version>
     </dependency>
+    
+    <dependency>
+           <groupId>com.nametagedit</groupId>
+           <artifactId>NametagEdit</artifactId>
+           <version>4.1.0</version>
+    </dependency>
   </dependencies>
 </project>

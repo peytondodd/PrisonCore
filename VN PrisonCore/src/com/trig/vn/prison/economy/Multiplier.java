@@ -36,7 +36,7 @@ public class Multiplier {
 		} else {
 			if(getTimeLeft() <= 60000 && !lastMinuteWarning) {
 				lastMinuteWarning = true;
-				Bukkit.getServer().broadcastMessage("§6§lThere is 1 minute remaining on the active multiplier.");
+				Bukkit.getServer().broadcastMessage("§6§lThere is less than 1 minute remaining on the active multiplier.");
 			}
 		}
 	}

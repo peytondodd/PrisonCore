@@ -48,7 +48,7 @@ import com.trig.vn.prison.managers.LocationManager;
 import com.trig.vn.prison.managers.PrisonLinks;
 import com.trig.vn.prison.managers.PrisonManager;
 import com.trig.vn.prison.managers.RegionManager;
-import com.trig.vn.prison.mobs.Hell;
+import com.trig.vn.prison.mobs.PrisonPVP;
 import com.trig.vn.prison.objects.PrisonWarp;
 import com.trig.vn.prison.ranks.PrisonRank;
 import com.trig.vn.prison.utils.Constant;
@@ -126,7 +126,7 @@ public class Prison extends JavaPlugin {
 		registerCommands();
 		setupPlayers(); //In case of /reload, we need to pretend players just logged in.
 		
-		Hell.init();
+		PrisonPVP.init();
 	}
 	
 	private void registerEvents() {

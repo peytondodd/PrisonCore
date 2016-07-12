@@ -26,6 +26,7 @@ import com.trig.vn.prison.achievements.PrisonAchievements;
 import com.trig.vn.prison.config.Config;
 import com.trig.vn.prison.economy.Multiplier;
 import com.trig.vn.prison.kingdoms.KingdomRank;
+import com.trig.vn.prison.mobs.PrisonPVP;
 import com.trig.vn.prison.ranks.PrisonRank;
 
 public class PrisonPlayer extends CraftPlayer {
@@ -56,7 +57,7 @@ public class PrisonPlayer extends CraftPlayer {
 		
 		lastTitle = System.currentTimeMillis();
 		scoreboard = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
-		this.getPlayer().spigot().setCollidesWithEntities(false);
+		this.getPlayer().setCollidable(false);
 
 	}
 	
@@ -114,6 +115,10 @@ public class PrisonPlayer extends CraftPlayer {
 		onlineStaff.setScore(28);
 		Score onlineStaffVal = obj.getScore("§f" + Prison.getStaffOnline().getCurrent());
 		onlineStaffVal.setScore(27);
+		
+		if(PrisonPVP.contains(this.getPlayer())) {
+			PrisonPVP.updateNametag(this.getPlayer());
+		}
 	}
 	
 	public void showScoreboard() {

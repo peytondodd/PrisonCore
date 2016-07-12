@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-import com.trig.vn.prison.mobs.Hell;
+import com.trig.vn.prison.mobs.PrisonPVP;
 
 public class CombatListener implements Listener {
 
@@ -14,8 +14,8 @@ public class CombatListener implements Listener {
 	public void onHurt(EntityDamageEvent e) {
 		if(e.getEntity() instanceof Player) {
 			Player p = (Player) e.getEntity();
-			if(Hell.contains(p)) {
-				Hell.tagCombat(p);
+			if(PrisonPVP.contains(p)) {
+				PrisonPVP.tagCombat(p);
 			}
 		}
 	}
@@ -24,8 +24,8 @@ public class CombatListener implements Listener {
 	public void onDealDamage(EntityDamageByEntityEvent e) {
 		if(e.getDamager() instanceof Player) {
 			Player p = (Player) e.getDamager();
-			if(Hell.contains(p)) {
-				Hell.tagCombat(p);
+			if(PrisonPVP.contains(p)) {
+				PrisonPVP.tagCombat(p);
 			}
 		}
 	}

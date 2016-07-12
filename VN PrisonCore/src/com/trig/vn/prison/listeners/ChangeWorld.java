@@ -6,6 +6,8 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.nametagedit.plugin.NametagEdit;
+import com.trig.vn.prison.mobs.PrisonPVP;
 import com.trig.vn.prison.mobs.WorldEvent;
 
 public class ChangeWorld implements Listener {
@@ -20,6 +22,10 @@ public class ChangeWorld implements Listener {
 		} else {
 			WorldEvent.removePlayerBar(e.getPlayer()); //Try to remove the bar
 			e.getPlayer().removePotionEffect(PotionEffectType.SPEED);
+		}
+		
+		if(PrisonPVP.getHellWorld().getName().equalsIgnoreCase(e.getFrom().getName())) {
+			NametagEdit.getApi().clearNametag(e.getPlayer());
 		}
 	}
 }
