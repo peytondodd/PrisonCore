@@ -151,7 +151,7 @@ public class CommandPrison implements CommandExecutor {
 					p.sendMessage("§6§lMIN: §7X: " + r.getMin().getX() + "  Y: " + r.getMin().getY() + "  Z: " + r.getMin().getZ());
 					p.sendMessage("§6§lMAX: §7X: " + r.getMax().getX() + "  Y: " + r.getMax().getY() + "  Z: " + r.getMax().getZ());
 					return true;
-				} else if(args.length == 3) {
+				} else if(args.length >= 3) {
 					if(args[1].equalsIgnoreCase("addflag")) {
 						String flag = args[2];
 						String rg = args[3];
