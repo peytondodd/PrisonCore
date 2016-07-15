@@ -20,6 +20,8 @@ public class DoubleJump implements Listener {
 		if(p.getGameMode() != GameMode.CREATIVE) {
 			Region rg = RegionManager.getRegion(RegionManager.getPlayerRegion(p));
 			if(rg != null && rg.hasFlag(RegionFlag.DENY_DOUBLE_JUMP.getFlag())) {
+				p.setFlying(false);
+				p.setAllowFlight(false);
 				return;
 			}
 			if(p.isFlying()) {
