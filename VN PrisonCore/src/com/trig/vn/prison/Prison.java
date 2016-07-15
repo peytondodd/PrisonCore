@@ -187,6 +187,7 @@ public class Prison extends JavaPlugin {
 					List<String> flags = getConfig().getStringList("regions." + s + ".flags");
 					r.getFlags().addAll(flags);
 				}
+				r.setWorld(w);
 				RegionManager.addRegion(s, r);
 			}	
 		} catch (Exception e) {
