@@ -92,6 +92,7 @@ public class Prison extends JavaPlugin {
 	
 	public void onDisable(){
 		manager.cleanup();
+		PrisonPVP.stopNameThread();
 	}
 	
 	private void setup() {

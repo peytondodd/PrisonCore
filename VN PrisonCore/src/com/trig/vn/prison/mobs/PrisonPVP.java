@@ -10,9 +10,11 @@ import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.Scoreboard;
 
 import com.nametagedit.plugin.NametagEdit;
+import com.trig.vn.prison.Prison;
 import com.trig.vn.prison.economy.MineShop;
 
 public class PrisonPVP {
@@ -21,6 +23,7 @@ public class PrisonPVP {
 	private static HashMap<Player, Long> lastCombat = new HashMap<Player, Long>();
 	private static final long combatCooldown = 45;
 	private static Scoreboard board;
+	private static BukkitTask nameThread;
 	
 	private static final String SKULL = "\u2620";
 	
@@ -29,6 +32,8 @@ public class PrisonPVP {
 		pvpWorld.setPVP(true);
 		pvpWorld.setDifficulty(Difficulty.HARD);
 		pvpWorld.setGameRuleValue("keepInventory", "false");
+		
+		startNameThread();
 	}
 	
 	public static World getHellWorld() {
@@ -81,6 +86,20 @@ public class PrisonPVP {
 			builder.append(SKULL);
 		}
 		return builder.toString();
+	}
+	
+	public static void startNameThread() {
+		nameThread = Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(Prison.instance(), new Runnable() {
+			public void run() {
+				for(Player p : getPlayers()) {
+					updateNametag(p);
+				}
+			}
+		}, 20 * 6, 20 * 6);
+	}
+	
+	public static void stopNameThread() {
+		nameThread.cancel();
 	}
 	
 	public static int getWealth(Player p) {

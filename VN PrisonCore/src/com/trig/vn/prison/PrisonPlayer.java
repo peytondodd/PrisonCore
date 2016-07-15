@@ -115,10 +115,6 @@ public class PrisonPlayer extends CraftPlayer {
 		onlineStaff.setScore(28);
 		Score onlineStaffVal = obj.getScore("§f" + Prison.getStaffOnline().getCurrent());
 		onlineStaffVal.setScore(27);
-		
-		if(PrisonPVP.contains(this.getPlayer())) {
-			PrisonPVP.updateNametag(this.getPlayer());
-		}
 	}
 	
 	public void showScoreboard() {
