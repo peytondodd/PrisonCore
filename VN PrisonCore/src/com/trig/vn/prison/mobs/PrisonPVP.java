@@ -72,7 +72,7 @@ public class PrisonPVP {
 		int skulls = getWealth(p);
 		NametagEdit.getApi().setPrefix(p, getStringForSkulls(skulls / 2));
 		NametagEdit.getApi().setSuffix(p, getStringForSkulls(skulls % 2));
-		System.out.println("Updating skulls for " + p.getName() + " [" + skulls + "]");
+		//System.out.println("Updating skulls for " + p.getName() + " [" + skulls + "]");
 	}
 	
 	private static String getStringForSkulls(int a) {
