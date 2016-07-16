@@ -23,18 +23,22 @@ public class CommandSell implements CommandExecutor {
 				p.sendMessage(Config.MESSAGE_PREFIX + "§4You can only use this command in a prison world.");
 				return true;
 			}
-			final PrisonPlayer player = Prison.getPrisonManager().getPrisonPlayer(p);
-			if(PrisonPVP.getPlayers().contains(p)) {
-				p.sendMessage("§7Command will execute in §4" + PrisonPVP.getCombatCooldown() + " seconds §7if you are not in combat.");
-				Bukkit.getServer().getScheduler().runTaskLaterAsynchronously(Prison.instance(), new Runnable() {
-					public void run() {
-						if(PrisonPVP.isOutOfCombat(player)) {							
-							PrisonManager.sell(player, args);
-						}
-					}
-				}, 20 * PrisonPVP.getCombatCooldown());
+			if(PrisonPVP.contains(p)) {
+				p.sendMessage("§4You must leave this world before you can sell.");
 				return true;
 			}
+			final PrisonPlayer player = Prison.getPrisonManager().getPrisonPlayer(p);
+//			if(PrisonPVP.getPlayers().contains(p)) {
+//				p.sendMessage("§7Command will execute in §4" + PrisonPVP.getCombatCooldown() + " seconds §7if you are not in combat.");
+//				Bukkit.getServer().getScheduler().runTaskLaterAsynchronously(Prison.instance(), new Runnable() {
+//					public void run() {
+//						if(PrisonPVP.isOutOfCombat(player)) {							
+//							PrisonManager.sell(player, args);
+//						}
+//					}
+//				}, 20 * PrisonPVP.getCombatCooldown());
+//				return true;
+//			}
 			
 			PrisonManager.sell(player, args);
 			return true;
