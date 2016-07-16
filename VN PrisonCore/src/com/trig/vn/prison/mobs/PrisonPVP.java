@@ -78,7 +78,7 @@ public class PrisonPVP {
 		double leftSkulls = (double) skulls / 2D;
 		double rightSkulls = leftSkulls;
 		leftSkulls = Math.round(leftSkulls);
-		NametagEdit.getApi().setPrefix(p, getStringForSkulls((int)leftSkulls));
+		NametagEdit.getApi().setPrefix(p, getStringForSkulls((int) leftSkulls));
 		NametagEdit.getApi().setSuffix(p, getStringForSkulls((int) rightSkulls));
 		//System.out.println("Updating skulls for " + p.getName() + " [" + skulls + "]");
 	}

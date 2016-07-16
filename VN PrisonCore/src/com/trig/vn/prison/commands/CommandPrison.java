@@ -26,6 +26,7 @@ import com.trig.vn.prison.economy.Multiplier;
 import com.trig.vn.prison.eggs.EasterEgg;
 import com.trig.vn.prison.managers.LocationManager;
 import com.trig.vn.prison.managers.RegionManager;
+import com.trig.vn.prison.mobs.PrisonPVP;
 import com.trig.vn.prison.mobs.WorldEvent;
 import com.trig.vn.prison.objects.PrisonWarp;
 import com.trig.vn.prison.ranks.PrisonRank;
@@ -234,9 +235,14 @@ public class CommandPrison implements CommandExecutor {
 				}
 			}
 			
-			if(args[0].equalsIgnoreCase("test")) {
+			if(args[0].equalsIgnoreCase("skulls")) {
 				
-				p.sendMessage("Executed test");
+				p.sendMessage("Skulls: " + PrisonPVP.getWealth(p));
+				double leftSkulls = (double) PrisonPVP.getWealth(p) / 2D;
+				double rightSkulls = leftSkulls;
+				leftSkulls = Math.round(leftSkulls);
+				p.sendMessage("Left Side: " + leftSkulls + "  Right Side: " + rightSkulls);
+				return true;
 			}
 			if(args[0].equalsIgnoreCase("startevent")) {
 				p.sendMessage(Config.MESSAGE_PREFIX + "§5Starting World Event...");
