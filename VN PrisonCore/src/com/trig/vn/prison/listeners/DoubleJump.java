@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 
 import com.trig.vn.prison.managers.RegionManager;
+import com.trig.vn.prison.mobs.PrisonPVP;
 import com.vn.core.utils.Region;
 import com.vn.core.utils.Region.RegionFlag;
 
@@ -19,7 +20,12 @@ public class DoubleJump implements Listener {
 		Player p = e.getPlayer();
 		if(p.getGameMode() != GameMode.CREATIVE) {
 			Region rg = RegionManager.getRegion(RegionManager.getPlayerRegion(p));
-			if(rg != null && rg.hasFlag(RegionFlag.DENY_DOUBLE_JUMP.getFlag()) && rg.compareWorld(p.getWorld())) {
+			if(rg != null && rg.hasFlag(RegionFlag.DENY_DOUBLE_JUMP.getFlag()) && rg.getMin().getWorld().getName().equalsIgnoreCase(p.getWorld().getName())) {
+				p.setFlying(false);
+				p.setAllowFlight(false);
+				return;
+			}
+			if(PrisonPVP.contains(p)) {
 				p.setFlying(false);
 				p.setAllowFlight(false);
 				return;
